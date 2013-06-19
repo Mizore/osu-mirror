@@ -47,7 +47,6 @@ namespace Beatmap_Mirror.Code.Api
 
             sock.Send(rheaders);
 
-            int len = 0;
             int i = 0;
             byte[] recbuff = new byte[1024];
             while((i = sock.Receive(recbuff, recbuff.Length, SocketFlags.None)) > 0)
