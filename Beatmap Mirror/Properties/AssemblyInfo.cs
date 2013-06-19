@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Beatmap Mirror")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Osu! Beatmap mirror")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Hexide")]
 [assembly: AssemblyProduct("Beatmap Mirror")]
 [assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]

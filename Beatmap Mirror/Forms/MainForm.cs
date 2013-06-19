@@ -20,7 +20,8 @@ namespace Beatmap_Mirror.Forms
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            this.Text = "Beatmap Mirror - by Hexide ( a.k.a. Miz )";
+            this.Text = "Beatmap Mirror";
+
             this.Icon = global::Beatmap_Mirror.Resources.Resource._1366037159_111093;
 
             this.informationToolStripMenuItem.Image = Resources.Resource.information;

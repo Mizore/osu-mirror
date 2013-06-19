@@ -1,4 +1,6 @@
-﻿using Beatmap_Mirror.Code.Tools;
+﻿using Beatmap_Mirror.Code.Api;
+using Beatmap_Mirror.Code.Api.Requests;
+using Beatmap_Mirror.Code.Tools;
 using Beatmap_Mirror.Forms;
 using System;
 using System.Collections.Generic;
@@ -34,7 +36,12 @@ namespace Beatmap_Mirror
         {
             Tools.CommandParser.Parse(arguments);
 
-            if (!Tools.CommandParser.Get<bool>("form"))
+            if (Tools.CommandParser.Get<int>("download") != default(int))
+            {
+                ApiRequestBeatmaps a = ApiBase.Create<ApiRequestBeatmaps>();
+                a.SendRequest();
+            }
+            else
             {
                 Console.Write("Opening up MainForm... ");
                 this.Form = new MainForm();

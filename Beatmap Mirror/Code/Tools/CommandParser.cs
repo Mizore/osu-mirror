@@ -22,7 +22,7 @@ namespace Beatmap_Mirror.Code.Tools
 
 
                     Match match2 = Regex.Match(arg, @"\-([a-z]+)");
-                    if (match2.Success)
+                    if (match2.Success && !Data.ContainsKey(match2.Groups[1].Value))
                         Data.Add(match2.Groups[1].Value, "");
                 }
             }
@@ -36,7 +36,7 @@ namespace Beatmap_Mirror.Code.Tools
 
                 switch (typeof(T).Name)
                 {
-                    case "Int":
+                    case "Int32":
                         try { return (T)(object)int.Parse(val); }
                         catch { return (T)(object)default(int); }
 
