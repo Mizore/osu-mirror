@@ -37,7 +37,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\Icons\1366037159_111093.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Icons\1371743613_104015.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -55,7 +55,19 @@
     <Compile Include="Code\Api\Requests\ApiRequestBeatmapDownload.cs" />
     <Compile Include="Code\Api\Requests\ApiRequestBeatmaps.cs" />
     <Compile Include="Code\Configuration.cs" />
+    <Compile Include="Code\Elements\CNumberBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Code\Elements\CTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Code\Tools\CommandParser.cs" />
+    <Compile Include="Forms\Information.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Information.Designer.cs">
+      <DependentUpon>Information.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -74,8 +86,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="Skins\ctlModernBlack.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Skins\ctlModernBlack.designer.cs">
+      <DependentUpon>ctlModernBlack.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Code\Elements\CNumberBox.resx">
+      <DependentUpon>CNumberBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Code\Elements\CTextBox.resx">
+      <DependentUpon>CTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Information.resx">
+      <DependentUpon>Information.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -88,12 +115,18 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Skins\ctlModernBlack.resx">
+      <DependentUpon>ctlModernBlack.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Icons\1366037159_111093.ico" />
+    <Content Include="Resources\Icons\1371743613_104015.ico" />
     <Content Include="Resources\Images\door_out.png" />
+    <Content Include="Resources\Images\information-banner.png" />
     <Content Include="Resources\Images\information.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -5,6 +5,7 @@ using Beatmap_Mirror.Code.Tools;
 using Beatmap_Mirror.Forms;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -41,9 +42,7 @@ namespace Beatmap_Mirror
 
             if (Tools.CommandParser.Get<int>("download") != default(int))
             {
-                ApiRequestBeatmapDetail a = ApiBase.Create<ApiRequestBeatmapDetail>();
-                a.SetParams(new string[] { "666" });
-                string aasd = a.SendRequest();
+                /* maybe implement console downloading? And possibly even more */
             }
             else
             {
