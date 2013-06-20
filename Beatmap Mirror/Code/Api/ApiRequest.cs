@@ -23,13 +23,9 @@ namespace Beatmap_Mirror.Code.Api
         protected string Request { get; set; }
         protected List<string> Params { get; set; }
 
-        protected HttpTrafficData TrafficData;
-        protected HttpParser HttpParser;
 
         public ApiRequest()
         {
-            this.TrafficData = new HttpTrafficData();
-            this.HttpParser = new HttpParser(this.TrafficData);
         }
 
         public void SendRequest()
@@ -51,9 +47,8 @@ namespace Beatmap_Mirror.Code.Api
             byte[] recbuff = new byte[1024];
             while((i = sock.Receive(recbuff, recbuff.Length, SocketFlags.None)) > 0)
             {
-                this.HttpParser.Execute(new ArraySegment<byte>(recbuff, 0, i));
+
             }
-            this.HttpParser.Execute(default(ArraySegment<byte>));
         }
     }
 }
