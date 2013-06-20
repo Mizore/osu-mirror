@@ -50,12 +50,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\Api\ApiRequest.cs" />
-    <Compile Include="Code\Api\HttpTrafficData.cs" />
-    <Compile Include="Code\Api\KeepAliveSocketManager.cs" />
+    <Compile Include="Code\Api\ApiRequestMethod.cs" />
+    <Compile Include="Code\Api\Requests\ApiRequestBeatmapDetail.cs" />
+    <Compile Include="Code\Api\Requests\ApiRequestBeatmapDownload.cs" />
     <Compile Include="Code\Api\Requests\ApiRequestBeatmaps.cs" />
     <Compile Include="Code\Configuration.cs" />
-    <Compile Include="Code\HttpMachine\HttpParser.cs" />
-    <Compile Include="Code\HttpMachine\IHttpParserDelegate.cs" />
     <Compile Include="Code\Tools\CommandParser.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -94,11 +93,6 @@
     <Content Include="Resources\Icons\1366037159_111093.ico" />
     <Content Include="Resources\Images\door_out.png" />
     <Content Include="Resources\Images\information.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Code\HttpMachine\rl\http.rl" />
-    <None Include="Code\HttpMachine\rl\HttpParser.cs.rl" />
-    <None Include="Code\HttpMachine\rl\uri.rl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

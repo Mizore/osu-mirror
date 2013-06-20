@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Beatmap_Mirror.Code.Api.Requests
 {
-    public class ApiRequestBeatmaps : ApiRequest
+    public class ApiRequestBeatmapDetail : ApiRequest
     {
-        public ApiRequestBeatmaps()
+        public ApiRequestBeatmapDetail()
         {
-            base.Request = "beatmaps";
+            base.Request = "beatmaps/{0}";
             base.RequestMethod = ApiRequestMethod.Text;
         }
     }

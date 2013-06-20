@@ -1,8 +1,10 @@
 ﻿using Beatmap_Mirror.Code.Api.Requests;
-using HttpMachine;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
@@ -23,32 +25,61 @@ namespace Beatmap_Mirror.Code.Api
         protected string Request { get; set; }
         protected List<string> Params { get; set; }
 
+        protected ApiRequestMethod RequestMethod { get; set; }
+
+        protected string[] Parameters { get; set; }
+
+        public delegate void DDownloadProgress(long Downloaded, long Total);
+        public delegate void DDownloadComplete(byte[] Buffer);
+
+        public event DDownloadProgress EOnDownloadUpdate;
+        public event DDownloadComplete EOnDownloadComplete;
 
         public ApiRequest()
         {
+            this.Parameters = new string[] { };
         }
 
-        public void SendRequest()
+        public void SetParams(string[] pars)
         {
-            Socket sock = KeepAliveSocketManager.GetSocket();
+            this.Parameters = pars;
+        }
 
-            StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("GET /{0} HTTP/1.1\r\n", this.Request);
-            sb.AppendFormat("Host: {0}\r\n", Configuration.ApiHost);
-            sb.AppendFormat("User-Agent: {0}\r\n", "Osu!Mirror~");
-            sb.AppendFormat("Accept: {0}\r\n", "*/*");
-            sb.AppendFormat("\r\n");
+        public void SetParams(List<string> pars)
+        {
+            this.Parameters = pars.ToArray();
+        }
 
-            byte[] rheaders = Encoding.ASCII.GetBytes(sb.ToString());
+        public string SendRequest()
+        {
+            WebClient wc = new WebClient();
+            wc.Proxy = null;
+            wc.Headers.Add(HttpRequestHeader.UserAgent, "Osu!Mirror");
 
-            sock.Send(rheaders);
-
-            int i = 0;
-            byte[] recbuff = new byte[1024];
-            while((i = sock.Receive(recbuff, recbuff.Length, SocketFlags.None)) > 0)
+            if (this.RequestMethod == ApiRequestMethod.Text)
             {
-
+                return wc.DownloadString(string.Format("{0}{1}", Configuration.ApiLocation, string.Format(this.Request, this.Parameters)));
             }
+            else if (this.RequestMethod == ApiRequestMethod.Download)
+            {
+                MemoryStream ms = new MemoryStream();
+
+                wc.DownloadDataCompleted += (object sender, DownloadDataCompletedEventArgs e) =>
+                {
+                    try { EOnDownloadComplete(e.Result); }
+                    catch { }
+                };
+
+                wc.DownloadProgressChanged += (object sender, DownloadProgressChangedEventArgs e) =>
+                {
+                    try { EOnDownloadUpdate(e.BytesReceived, e.TotalBytesToReceive); }
+                    catch { }
+                };
+
+                wc.DownloadDataAsync(new Uri(string.Format("{0}{1}", Configuration.ApiLocation, string.Format(this.Request, this.Parameters))));
+            }
+
+            return null;
         }
     }
 }

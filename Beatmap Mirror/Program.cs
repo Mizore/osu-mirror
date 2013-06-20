@@ -1,4 +1,5 @@
-﻿using Beatmap_Mirror.Code.Api;
+﻿using Beatmap_Mirror.Code;
+using Beatmap_Mirror.Code.Api;
 using Beatmap_Mirror.Code.Api.Requests;
 using Beatmap_Mirror.Code.Tools;
 using Beatmap_Mirror.Forms;
@@ -20,6 +21,8 @@ namespace Beatmap_Mirror
 
         static void Main(string[] args)
         {
+            Configuration.Innit();
+
 #if DEBUG
             AllocConsole();
 #endif
@@ -38,8 +41,9 @@ namespace Beatmap_Mirror
 
             if (Tools.CommandParser.Get<int>("download") != default(int))
             {
-                ApiRequestBeatmaps a = ApiBase.Create<ApiRequestBeatmaps>();
-                a.SendRequest();
+                ApiRequestBeatmapDetail a = ApiBase.Create<ApiRequestBeatmapDetail>();
+                a.SetParams(new string[] { "666" });
+                string aasd = a.SendRequest();
             }
             else
             {
