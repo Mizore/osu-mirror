@@ -53,6 +53,7 @@ namespace Beatmap_Mirror.Code.Api
             {
                 this.HttpParser.Execute(new ArraySegment<byte>(recbuff, 0, i));
             }
+            this.HttpParser.Execute(default(ArraySegment<byte>));
         }
     }
 }
