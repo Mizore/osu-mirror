@@ -22,8 +22,6 @@ namespace Beatmap_Mirror.Forms
         {
             this.Text = "Beatmap Mirror";
             this.Icon = global::Beatmap_Mirror.Resources.Resource._1371743613_104015;
-
-
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)

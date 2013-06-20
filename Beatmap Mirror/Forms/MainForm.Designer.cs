@@ -34,13 +34,16 @@ namespace Beatmap_Mirror.Forms
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cNumberBox1 = new Beatmap_Mirror.Code.Elements.CNumberBox();
-            this.cTextBox6 = new Beatmap_Mirror.Code.Elements.CTextBox();
-            this.cTextBox5 = new Beatmap_Mirror.Code.Elements.CTextBox();
-            this.cTextBox4 = new Beatmap_Mirror.Code.Elements.CTextBox();
-            this.cTextBox3 = new Beatmap_Mirror.Code.Elements.CTextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.cTextBox1 = new Beatmap_Mirror.Code.Elements.CTextBox();
-            this.cTextBox2 = new Beatmap_Mirror.Code.Elements.CTextBox();
+            this.tSizeMax = new Beatmap_Mirror.Code.Elements.CNumberBox();
+            this.tSizeMin = new Beatmap_Mirror.Code.Elements.CNumberBox();
+            this.tTags = new Beatmap_Mirror.Code.Elements.CTextBox();
+            this.tSource = new Beatmap_Mirror.Code.Elements.CTextBox();
+            this.tCreator = new Beatmap_Mirror.Code.Elements.CTextBox();
+            this.tArtist = new Beatmap_Mirror.Code.Elements.CTextBox();
+            this.tTitle = new Beatmap_Mirror.Code.Elements.CTextBox();
+            this.tFileName = new Beatmap_Mirror.Code.Elements.CTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lSize = new System.Windows.Forms.Label();
@@ -50,7 +53,6 @@ namespace Beatmap_Mirror.Forms
             this.lArtist = new System.Windows.Forms.Label();
             this.lTitle = new System.Windows.Forms.Label();
             this.lFileName = new System.Windows.Forms.Label();
-            this.cNumberBox2 = new Beatmap_Mirror.Code.Elements.CNumberBox();
             this.ctlModernBlack1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -83,9 +85,9 @@ namespace Beatmap_Mirror.Forms
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 192);
+            this.panel3.Location = new System.Drawing.Point(0, 210);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(725, 478);
+            this.panel3.Size = new System.Drawing.Size(725, 460);
             this.panel3.TabIndex = 1;
             // 
             // panel2
@@ -94,19 +96,21 @@ namespace Beatmap_Mirror.Forms
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(725, 192);
+            this.panel2.Size = new System.Drawing.Size(725, 210);
             this.panel2.TabIndex = 0;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cNumberBox2);
-            this.groupBox1.Controls.Add(this.cNumberBox1);
-            this.groupBox1.Controls.Add(this.cTextBox6);
-            this.groupBox1.Controls.Add(this.cTextBox5);
-            this.groupBox1.Controls.Add(this.cTextBox4);
-            this.groupBox1.Controls.Add(this.cTextBox3);
+            this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.cTextBox1);
-            this.groupBox1.Controls.Add(this.cTextBox2);
+            this.groupBox1.Controls.Add(this.tSizeMax);
+            this.groupBox1.Controls.Add(this.tSizeMin);
+            this.groupBox1.Controls.Add(this.tTags);
+            this.groupBox1.Controls.Add(this.tSource);
+            this.groupBox1.Controls.Add(this.tCreator);
+            this.groupBox1.Controls.Add(this.tArtist);
+            this.groupBox1.Controls.Add(this.tTitle);
+            this.groupBox1.Controls.Add(this.tFileName);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.lSize);
@@ -119,59 +123,82 @@ namespace Beatmap_Mirror.Forms
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(725, 192);
+            this.groupBox1.Size = new System.Drawing.Size(725, 210);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Beatmap search";
             // 
-            // cNumberBox1
+            // label3
             // 
-            this.cNumberBox1.Location = new System.Drawing.Point(387, 24);
-            this.cNumberBox1.Name = "cNumberBox1";
-            this.cNumberBox1.Size = new System.Drawing.Size(71, 18);
-            this.cNumberBox1.TabIndex = 30;
-            // 
-            // cTextBox6
-            // 
-            this.cTextBox6.Location = new System.Drawing.Point(74, 154);
-            this.cTextBox6.Name = "cTextBox6";
-            this.cTextBox6.Size = new System.Drawing.Size(184, 18);
-            this.cTextBox6.TabIndex = 29;
-            // 
-            // cTextBox5
-            // 
-            this.cTextBox5.Location = new System.Drawing.Point(74, 128);
-            this.cTextBox5.Name = "cTextBox5";
-            this.cTextBox5.Size = new System.Drawing.Size(184, 18);
-            this.cTextBox5.TabIndex = 28;
-            // 
-            // cTextBox4
-            // 
-            this.cTextBox4.Location = new System.Drawing.Point(74, 102);
-            this.cTextBox4.Name = "cTextBox4";
-            this.cTextBox4.Size = new System.Drawing.Size(184, 18);
-            this.cTextBox4.TabIndex = 27;
-            // 
-            // cTextBox3
-            // 
-            this.cTextBox3.Location = new System.Drawing.Point(74, 76);
-            this.cTextBox3.Name = "cTextBox3";
-            this.cTextBox3.Size = new System.Drawing.Size(184, 18);
-            this.cTextBox3.TabIndex = 26;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(16, 76);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 13);
+            this.label3.TabIndex = 33;
+            this.label3.Text = "Difficulty";
             // 
             // cTextBox1
             // 
-            this.cTextBox1.Location = new System.Drawing.Point(74, 50);
+            this.cTextBox1.Location = new System.Drawing.Point(74, 74);
             this.cTextBox1.Name = "cTextBox1";
             this.cTextBox1.Size = new System.Drawing.Size(184, 18);
-            this.cTextBox1.TabIndex = 25;
+            this.cTextBox1.TabIndex = 3;
             // 
-            // cTextBox2
+            // tSizeMax
             // 
-            this.cTextBox2.Location = new System.Drawing.Point(74, 24);
-            this.cTextBox2.Name = "cTextBox2";
-            this.cTextBox2.Size = new System.Drawing.Size(184, 18);
-            this.cTextBox2.TabIndex = 24;
+            this.tSizeMax.Location = new System.Drawing.Point(487, 24);
+            this.tSizeMax.Name = "tSizeMax";
+            this.tSizeMax.Size = new System.Drawing.Size(72, 18);
+            this.tSizeMax.TabIndex = 9;
+            // 
+            // tSizeMin
+            // 
+            this.tSizeMin.Location = new System.Drawing.Point(387, 24);
+            this.tSizeMin.Name = "tSizeMin";
+            this.tSizeMin.Size = new System.Drawing.Size(71, 18);
+            this.tSizeMin.TabIndex = 8;
+            // 
+            // tTags
+            // 
+            this.tTags.Location = new System.Drawing.Point(74, 176);
+            this.tTags.Name = "tTags";
+            this.tTags.Size = new System.Drawing.Size(184, 18);
+            this.tTags.TabIndex = 7;
+            // 
+            // tSource
+            // 
+            this.tSource.Location = new System.Drawing.Point(74, 150);
+            this.tSource.Name = "tSource";
+            this.tSource.Size = new System.Drawing.Size(184, 18);
+            this.tSource.TabIndex = 6;
+            // 
+            // tCreator
+            // 
+            this.tCreator.Location = new System.Drawing.Point(74, 124);
+            this.tCreator.Name = "tCreator";
+            this.tCreator.Size = new System.Drawing.Size(184, 18);
+            this.tCreator.TabIndex = 5;
+            // 
+            // tArtist
+            // 
+            this.tArtist.Location = new System.Drawing.Point(74, 98);
+            this.tArtist.Name = "tArtist";
+            this.tArtist.Size = new System.Drawing.Size(184, 18);
+            this.tArtist.TabIndex = 4;
+            // 
+            // tTitle
+            // 
+            this.tTitle.Location = new System.Drawing.Point(74, 50);
+            this.tTitle.Name = "tTitle";
+            this.tTitle.Size = new System.Drawing.Size(184, 18);
+            this.tTitle.TabIndex = 2;
+            // 
+            // tFileName
+            // 
+            this.tFileName.Location = new System.Drawing.Point(74, 24);
+            this.tFileName.Name = "tFileName";
+            this.tFileName.Size = new System.Drawing.Size(184, 18);
+            this.tFileName.TabIndex = 1;
             // 
             // label2
             // 
@@ -203,7 +230,7 @@ namespace Beatmap_Mirror.Forms
             // lTags
             // 
             this.lTags.AutoSize = true;
-            this.lTags.Location = new System.Drawing.Point(16, 156);
+            this.lTags.Location = new System.Drawing.Point(16, 178);
             this.lTags.Name = "lTags";
             this.lTags.Size = new System.Drawing.Size(31, 13);
             this.lTags.TabIndex = 9;
@@ -212,7 +239,7 @@ namespace Beatmap_Mirror.Forms
             // lSource
             // 
             this.lSource.AutoSize = true;
-            this.lSource.Location = new System.Drawing.Point(16, 130);
+            this.lSource.Location = new System.Drawing.Point(16, 152);
             this.lSource.Name = "lSource";
             this.lSource.Size = new System.Drawing.Size(41, 13);
             this.lSource.TabIndex = 8;
@@ -221,7 +248,7 @@ namespace Beatmap_Mirror.Forms
             // lCreator
             // 
             this.lCreator.AutoSize = true;
-            this.lCreator.Location = new System.Drawing.Point(16, 104);
+            this.lCreator.Location = new System.Drawing.Point(16, 126);
             this.lCreator.Name = "lCreator";
             this.lCreator.Size = new System.Drawing.Size(41, 13);
             this.lCreator.TabIndex = 5;
@@ -230,7 +257,7 @@ namespace Beatmap_Mirror.Forms
             // lArtist
             // 
             this.lArtist.AutoSize = true;
-            this.lArtist.Location = new System.Drawing.Point(16, 78);
+            this.lArtist.Location = new System.Drawing.Point(16, 100);
             this.lArtist.Name = "lArtist";
             this.lArtist.Size = new System.Drawing.Size(30, 13);
             this.lArtist.TabIndex = 4;
@@ -253,13 +280,6 @@ namespace Beatmap_Mirror.Forms
             this.lFileName.Size = new System.Drawing.Size(52, 13);
             this.lFileName.TabIndex = 0;
             this.lFileName.Text = "File name";
-            // 
-            // cNumberBox2
-            // 
-            this.cNumberBox2.Location = new System.Drawing.Point(487, 24);
-            this.cNumberBox2.Name = "cNumberBox2";
-            this.cNumberBox2.Size = new System.Drawing.Size(72, 18);
-            this.cNumberBox2.TabIndex = 31;
             // 
             // MainForm
             // 
@@ -297,14 +317,16 @@ namespace Beatmap_Mirror.Forms
         private System.Windows.Forms.Label lSize;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private CTextBox cTextBox2;
-        private CTextBox cTextBox6;
-        private CTextBox cTextBox5;
-        private CTextBox cTextBox4;
-        private CTextBox cTextBox3;
+        private CTextBox tFileName;
+        private CTextBox tTags;
+        private CTextBox tSource;
+        private CTextBox tCreator;
+        private CTextBox tArtist;
+        private CTextBox tTitle;
+        private CNumberBox tSizeMin;
+        private CNumberBox tSizeMax;
+        private System.Windows.Forms.Label label3;
         private CTextBox cTextBox1;
-        private CNumberBox cNumberBox1;
-        private CNumberBox cNumberBox2;
 
     }
 }

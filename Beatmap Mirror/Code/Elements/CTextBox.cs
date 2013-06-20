@@ -18,6 +18,16 @@ namespace Beatmap_Mirror.Code.Elements
             this.InitializeComponent();
             this._TextBox.BorderStyle = BorderStyle.None;
 
+            this._TextBox.KeyDown += (object sender, KeyEventArgs e) =>
+            {
+                if (e.Control && e.KeyCode == Keys.A)
+                {
+                    this._TextBox.Select(0, this._TextBox.Text.Length);
+                    e.SuppressKeyPress = true;
+                    e.Handled = true;
+                }
+            };
+
             this._TextBox.GotFocus += (object sender, EventArgs e) =>
             {
                 this.BorderColor = Color.Orange;

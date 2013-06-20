@@ -9,6 +9,8 @@ namespace Beatmap_Mirror.Code.Elements
 {
     public class CNumberBox : CTextBox
     {
+        public int Value { get; private set; }
+
         public CNumberBox() :
             base()
         {
@@ -43,7 +45,15 @@ namespace Beatmap_Mirror.Code.Elements
 
             this._TextBox.LostFocus += (object sender, EventArgs e) =>
             {
-                this._TextBox.Text = string.Format("{0:#,##0}", int.Parse(this._TextBox.Text));
+                try
+                {
+                    this.Value = int.Parse(this._TextBox.Text);
+                }
+                catch
+                {
+                    this.Value = 0;
+                }
+                this._TextBox.Text = string.Format("{0:#,##0}", this.Value);
             };
         }
 
