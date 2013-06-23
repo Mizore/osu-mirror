@@ -45,7 +45,6 @@ namespace jSkin
     [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))] //ControlContainer
     public partial class ctlModernBlack : UserControl
     {
-
         #region - Property -
         bool _Stretch = false;
         [Category("Stretch"), Description("Runtime Form Resizing")]
