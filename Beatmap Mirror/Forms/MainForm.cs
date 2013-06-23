@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Beatmap_Mirror.Code.Elements;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +23,8 @@ namespace Beatmap_Mirror.Forms
         {
             this.Text = "Beatmap Mirror";
             this.Icon = global::Beatmap_Mirror.Resources.Resource._1371743613_104015;
+
+            this.cDetailView1.Columns.Add(new CColumnHeader(){Text = "ass"});
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)

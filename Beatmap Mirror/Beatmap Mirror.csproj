@@ -58,6 +58,12 @@
     <Compile Include="Code\Elements\CButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Code\Elements\CColumnHeader.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Code\Elements\CDetailView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Code\Elements\CNumberBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,7 +135,6 @@
     <Content Include="Resources\Images\information-banner.png" />
     <Content Include="Resources\Images\information.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -32,8 +32,12 @@ namespace Beatmap_Mirror.Forms
             this.ctlModernBlack1 = new jSkin.ctlModernBlack();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cButton1 = new Beatmap_Mirror.Code.Elements.CButton();
             this.label3 = new System.Windows.Forms.Label();
             this.cTextBox1 = new Beatmap_Mirror.Code.Elements.CTextBox();
             this.tSizeMax = new Beatmap_Mirror.Code.Elements.CNumberBox();
@@ -53,9 +57,12 @@ namespace Beatmap_Mirror.Forms
             this.lArtist = new System.Windows.Forms.Label();
             this.lTitle = new System.Windows.Forms.Label();
             this.lFileName = new System.Windows.Forms.Label();
-            this.cButton1 = new Beatmap_Mirror.Code.Elements.CButton();
+            this.cDetailView1 = new Beatmap_Mirror.Code.Elements.CDetailView();
             this.ctlModernBlack1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -85,11 +92,43 @@ namespace Beatmap_Mirror.Forms
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.groupBox3);
+            this.panel3.Controls.Add(this.panel4);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 210);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(725, 460);
             this.panel3.TabIndex = 1;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cDetailView1);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(725, 325);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Search results";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.groupBox2);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 325);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(725, 135);
+            this.panel4.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(725, 135);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Active downloads";
             // 
             // panel2
             // 
@@ -129,6 +168,14 @@ namespace Beatmap_Mirror.Forms
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Beatmap search";
+            // 
+            // cButton1
+            // 
+            this.cButton1.Location = new System.Drawing.Point(644, 178);
+            this.cButton1.Name = "cButton1";
+            this.cButton1.Size = new System.Drawing.Size(75, 23);
+            this.cButton1.TabIndex = 34;
+            this.cButton1.Text = "Search";
             // 
             // label3
             // 
@@ -283,13 +330,14 @@ namespace Beatmap_Mirror.Forms
             this.lFileName.TabIndex = 0;
             this.lFileName.Text = "File name";
             // 
-            // cButton1
+            // cDetailView1
             // 
-            this.cButton1.Location = new System.Drawing.Point(644, 178);
-            this.cButton1.Name = "cButton1";
-            this.cButton1.Size = new System.Drawing.Size(75, 23);
-            this.cButton1.TabIndex = 34;
-            this.cButton1.Text = "Search";
+            this.cDetailView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cDetailView1.Location = new System.Drawing.Point(3, 16);
+            this.cDetailView1.Name = "cDetailView1";
+            this.cDetailView1.Size = new System.Drawing.Size(719, 306);
+            this.cDetailView1.TabIndex = 0;
+            this.cDetailView1.Text = "cDetailView1";
             // 
             // MainForm
             // 
@@ -304,6 +352,9 @@ namespace Beatmap_Mirror.Forms
             this.ctlModernBlack1.ResumeLayout(false);
             this.ctlModernBlack1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -338,6 +389,10 @@ namespace Beatmap_Mirror.Forms
         private System.Windows.Forms.Label label3;
         private CTextBox cTextBox1;
         private CButton cButton1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private CDetailView cDetailView1;
 
     }
 }
