@@ -53,6 +53,7 @@ namespace Beatmap_Mirror.Forms
             this.lArtist = new System.Windows.Forms.Label();
             this.lTitle = new System.Windows.Forms.Label();
             this.lFileName = new System.Windows.Forms.Label();
+            this.cButton1 = new Beatmap_Mirror.Code.Elements.CButton();
             this.ctlModernBlack1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -101,6 +102,7 @@ namespace Beatmap_Mirror.Forms
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cButton1);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.cTextBox1);
             this.groupBox1.Controls.Add(this.tSizeMax);
@@ -281,6 +283,14 @@ namespace Beatmap_Mirror.Forms
             this.lFileName.TabIndex = 0;
             this.lFileName.Text = "File name";
             // 
+            // cButton1
+            // 
+            this.cButton1.Location = new System.Drawing.Point(644, 178);
+            this.cButton1.Name = "cButton1";
+            this.cButton1.Size = new System.Drawing.Size(75, 23);
+            this.cButton1.TabIndex = 34;
+            this.cButton1.Text = "Search";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -327,6 +337,7 @@ namespace Beatmap_Mirror.Forms
         private CNumberBox tSizeMax;
         private System.Windows.Forms.Label label3;
         private CTextBox cTextBox1;
+        private CButton cButton1;
 
     }
 }
