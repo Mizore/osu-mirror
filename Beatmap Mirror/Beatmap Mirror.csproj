@@ -251,7 +251,11 @@
     <Compile Include="Code\Newtonsoft.Json\Utilities\TypeExtensions.cs" />
     <Compile Include="Code\Newtonsoft.Json\Utilities\ValidationUtils.cs" />
     <Compile Include="Code\Newtonsoft.Json\WriteState.cs" />
+    <Compile Include="Code\Structures\ApiBeatmap.cs" />
+    <Compile Include="Code\Structures\ApiBeatmapDifficulty.cs" />
+    <Compile Include="Code\Structures\ApiBeatmapType.cs" />
     <Compile Include="Code\Structures\ApiSearch.cs" />
+    <Compile Include="Code\Structures\ApiStatus.cs" />
     <Compile Include="Code\Tools\CommandParser.cs" />
     <Compile Include="Forms\Information.cs">
       <SubType>Form</SubType>
