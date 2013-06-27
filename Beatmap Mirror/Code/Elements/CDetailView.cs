@@ -9,8 +9,6 @@ namespace Beatmap_Mirror.Code.Elements
 {
     public class CDetailView : ListView
     {
-        public ColumnHeaderCollection Columns { get; set; }
-
         public CDetailView()
             : base()
         {
@@ -28,8 +26,6 @@ namespace Beatmap_Mirror.Code.Elements
             this.Paint += (object sender, PaintEventArgs e) =>
             {
             };
-
-            this.Columns = new ColumnHeaderCollection(this);
         }
     }
 }

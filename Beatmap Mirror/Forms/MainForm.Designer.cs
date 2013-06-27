@@ -33,6 +33,7 @@ namespace Beatmap_Mirror.Forms
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cDetailView1 = new Beatmap_Mirror.Code.Elements.CDetailView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -57,7 +58,6 @@ namespace Beatmap_Mirror.Forms
             this.lArtist = new System.Windows.Forms.Label();
             this.lTitle = new System.Windows.Forms.Label();
             this.lFileName = new System.Windows.Forms.Label();
-            this.cDetailView1 = new Beatmap_Mirror.Code.Elements.CDetailView();
             this.ctlModernBlack1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -110,6 +110,20 @@ namespace Beatmap_Mirror.Forms
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Search results";
+            // 
+            // cDetailView1
+            // 
+            this.cDetailView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cDetailView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cDetailView1.FullRowSelect = true;
+            this.cDetailView1.GridLines = true;
+            this.cDetailView1.Location = new System.Drawing.Point(3, 16);
+            this.cDetailView1.Name = "cDetailView1";
+            this.cDetailView1.Size = new System.Drawing.Size(719, 306);
+            this.cDetailView1.TabIndex = 0;
+            this.cDetailView1.Text = "cDetailView1";
+            this.cDetailView1.UseCompatibleStateImageBehavior = false;
+            this.cDetailView1.View = System.Windows.Forms.View.Details;
             // 
             // panel4
             // 
@@ -176,6 +190,7 @@ namespace Beatmap_Mirror.Forms
             this.cButton1.Size = new System.Drawing.Size(75, 23);
             this.cButton1.TabIndex = 34;
             this.cButton1.Text = "Search";
+            this.cButton1.Click += new System.EventHandler(this.cButton1_Click);
             // 
             // label3
             // 
@@ -329,15 +344,6 @@ namespace Beatmap_Mirror.Forms
             this.lFileName.Size = new System.Drawing.Size(52, 13);
             this.lFileName.TabIndex = 0;
             this.lFileName.Text = "File name";
-            // 
-            // cDetailView1
-            // 
-            this.cDetailView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cDetailView1.Location = new System.Drawing.Point(3, 16);
-            this.cDetailView1.Name = "cDetailView1";
-            this.cDetailView1.Size = new System.Drawing.Size(719, 306);
-            this.cDetailView1.TabIndex = 0;
-            this.cDetailView1.Text = "cDetailView1";
             // 
             // MainForm
             // 

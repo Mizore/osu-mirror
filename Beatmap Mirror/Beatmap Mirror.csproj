@@ -54,6 +54,7 @@
     <Compile Include="Code\Api\Requests\ApiRequestBeatmapDetail.cs" />
     <Compile Include="Code\Api\Requests\ApiRequestBeatmapDownload.cs" />
     <Compile Include="Code\Api\Requests\ApiRequestBeatmaps.cs" />
+    <Compile Include="Code\Api\Requests\ApiRequestSearch.cs" />
     <Compile Include="Code\Configuration.cs" />
     <Compile Include="Code\Elements\CButton.cs">
       <SubType>Component</SubType>

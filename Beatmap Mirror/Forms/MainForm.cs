@@ -1,4 +1,6 @@
-﻿using Beatmap_Mirror.Code.Elements;
+﻿using Beatmap_Mirror.Code.Api;
+using Beatmap_Mirror.Code.Api.Requests;
+using Beatmap_Mirror.Code.Elements;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,12 +26,24 @@ namespace Beatmap_Mirror.Forms
             this.Text = "Beatmap Mirror";
             this.Icon = global::Beatmap_Mirror.Resources.Resource._1371743613_104015;
 
-            this.cDetailView1.Columns.Add(new CColumnHeader(){Text = "ass"});
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Process.GetCurrentProcess().Kill();
+        }
+
+        private void cButton1_Click(object sender, EventArgs e)
+        {
+            /*
+            ApiRequestSearch s = ApiBase.Create<ApiRequestSearch>();
+            s.SetParams(new List<string>()
+            {
+                "maps.title.like.ass"
+            });
+            string data = s.SendRequest();
+            Console.WriteLine(data);
+            */
         }
     }
 }
