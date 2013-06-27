@@ -36,7 +36,7 @@
             // 
             // pButtons
             // 
-            this.pButtons.Image = ((System.Drawing.Image)(resources.GetObject("v1.pButtons.Image")));
+            this.pButtons.Image = ((System.Drawing.Image)(resources.GetObject("v2.pButtons.Image")));
             this.pButtons.Location = new System.Drawing.Point(82, 0);
             this.pButtons.Name = "pButtons";
             this.pButtons.Size = new System.Drawing.Size(105, 105);
@@ -47,7 +47,7 @@
             // 
             // pLayout
             // 
-            this.pLayout.Image = ((System.Drawing.Image)(resources.GetObject("v1.pLayout.Image")));
+            this.pLayout.Image = ((System.Drawing.Image)(resources.GetObject("v2.pLayout.Image")));
             this.pLayout.Location = new System.Drawing.Point(0, 0);
             this.pLayout.Name = "pLayout";
             this.pLayout.Size = new System.Drawing.Size(64, 64);
