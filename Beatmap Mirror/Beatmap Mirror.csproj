@@ -252,11 +252,19 @@
     <Compile Include="Code\Newtonsoft.Json\Utilities\ValidationUtils.cs" />
     <Compile Include="Code\Newtonsoft.Json\WriteState.cs" />
     <Compile Include="Code\Structures\ApiBeatmap.cs" />
-    <Compile Include="Code\Structures\ApiBeatmapDifficulty.cs" />
-    <Compile Include="Code\Structures\ApiBeatmapType.cs" />
+    <Compile Include="Code\Structures\Beatmap.cs" />
+    <Compile Include="Code\Structures\BeatmapDifficulty.cs" />
+    <Compile Include="Code\Structures\BeatmapType.cs" />
     <Compile Include="Code\Structures\ApiSearch.cs" />
     <Compile Include="Code\Structures\ApiStatus.cs" />
     <Compile Include="Code\Tools\CommandParser.cs" />
+    <Compile Include="Code\Tools\Threaded.cs" />
+    <Compile Include="Forms\BeatmapDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\BeatmapDetails.Designer.cs">
+      <DependentUpon>BeatmapDetails.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Information.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -294,6 +302,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Code\Elements\CTextBox.resx">
       <DependentUpon>CTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\BeatmapDetails.resx">
+      <DependentUpon>BeatmapDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Information.resx">
       <DependentUpon>Information.cs</DependentUpon>

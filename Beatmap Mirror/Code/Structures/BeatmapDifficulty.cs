@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Beatmap_Mirror.Code.Structures
 {
-    public class ApiBeatmapDifficulty
+    public class BeatmapDifficulty
     {
         [JsonProperty(PropertyName = "id")]
         public int ID { get; set; }
@@ -36,7 +36,7 @@ namespace Beatmap_Mirror.Code.Structures
         public string Creator { get; set; }
 
         [JsonProperty(PropertyName = "m_version")]
-        public string Difficulty { get; set; }
+        public string DifficultyName { get; set; }
 
         [JsonProperty(PropertyName = "m_source")]
         public string Source { get; set; }
@@ -48,6 +48,18 @@ namespace Beatmap_Mirror.Code.Structures
         public double DrainRate { get; set; }
 
         [JsonProperty(PropertyName = "d_size")]
-        public double 
+        public double NoteSize { get; set; }
+
+        [JsonProperty(PropertyName = "d_diff")]
+        public double Difficulty { get; set; }
+
+        [JsonProperty(PropertyName = "d_mult")]
+        public double SliderScoreMultiplier { get; set; }
+
+        [JsonProperty(PropertyName = "d_srate")]
+        public double SliterTickRate { get; set; }
+
+        [JsonProperty(PropertyName = "version")]
+        public byte Version { get; set; }
     }
 }

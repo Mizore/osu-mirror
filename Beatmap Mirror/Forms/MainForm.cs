@@ -1,6 +1,7 @@
 ﻿using Beatmap_Mirror.Code.Api;
 using Beatmap_Mirror.Code.Api.Requests;
 using Beatmap_Mirror.Code.Elements;
+using Beatmap_Mirror.Code.Structures;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -35,6 +36,8 @@ namespace Beatmap_Mirror.Forms
 
         private void cButton1_Click(object sender, EventArgs e)
         {
+            new BeatmapDetails(59055).Show();
+
             /*
             ApiRequestSearch s = ApiBase.Create<ApiRequestSearch>();
             s.SetParams(new List<string>()
@@ -42,8 +45,12 @@ namespace Beatmap_Mirror.Forms
                 "maps.title.like.ass"
             });
             string data = s.SendRequest();
+            //Console.WriteLine(data);
+
+            ApiSearch search = ApiRequestParser.Parse<ApiSearch>(data);
+
             Console.WriteLine(data);
-            */
+             */
         }
     }
 }

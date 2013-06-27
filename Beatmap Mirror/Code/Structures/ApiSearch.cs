@@ -11,6 +11,6 @@ namespace Beatmap_Mirror.Code.Structures
         [JsonProperty(PropertyName = "status")]
         public ApiStatus Status { get; set; }
         [JsonProperty(PropertyName = "beatmaps")]
-        public List<ApiBeatmap> Beatmaps { get; set; }
+        public List<Beatmap> Beatmaps { get; set; }
     }
 }

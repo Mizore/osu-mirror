@@ -10,12 +10,21 @@ using System.Text;
 
 namespace Beatmap_Mirror.Code.Api
 {
-    public static class ApiBase 
+    public static class ApiBase
     {
         public static T Create<T>()
             where T : ApiRequest, new()
         {
             T instance = (T)Activator.CreateInstance<T>();
+            return instance;
+        }
+
+        public static T Create<T>(params string []param)
+            where T : ApiRequest, new()
+        {
+            T instance = (T)Activator.CreateInstance<T>();
+            instance.SetParams(param);
+
             return instance;
         }
     }
@@ -82,9 +91,14 @@ namespace Beatmap_Mirror.Code.Api
             return null;
         }
 
+        public T GetData<T>()
+        {
+            return ApiRequestParser.Parse<T>(this.SendRequest());
+        }
+
         protected virtual string BuildQuery()
         {
-            return this.Request;
+            return string.Format(this.Request, string.Join("/", this.Parameters));
         }
     }
 }

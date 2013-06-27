@@ -8,31 +8,9 @@ namespace Beatmap_Mirror.Code.Structures
 {
     public class ApiBeatmap
     {
-        [JsonProperty(PropertyName = "id")]
-        public int ID { get; set; }
-
-        [JsonProperty(PropertyName = "ranked_id")]
-        public int? Ranked_ID { get; set; }
-
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
-
-        [JsonProperty(PropertyName = "type")]
-        public ApiBeatmapType Type { get; set; }
-
-        [JsonProperty(PropertyName = "size")]
-        public int Size { get; set; }
-
-        [JsonProperty(PropertyName = "hash_md5")]
-        public string HashMD5 { get; set; }
-
-        [JsonProperty(PropertyName = "hash_sha1")]
-        public string HashSha1 { get; set; }
-
-        [JsonProperty(PropertyName = "versions")]
-        public List<ApiBeatmapDifficulty> Difficulties { get; set; }
+        [JsonProperty(PropertyName = "status")]
+        public ApiStatus Status { get; set; }
+        [JsonProperty(PropertyName = "beatmap")]
+        public Beatmap Beatmap { get; set; }
     }
 }

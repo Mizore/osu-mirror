@@ -9,11 +9,15 @@ using System.Text;
 namespace Beatmap_Mirror.Code.Structures
 {
     [JsonConverter(typeof(StringEnumConverter))]
-    public enum ApiStatus
+    public enum BeatmapType
     {
-        [EnumMember(Value = "ok")]
-        Ok,
-        [EnumMember(Value = "fail")]
-        Fail
+        [EnumMember(Value = "osz2")]
+        Osz2,
+        [EnumMember(Value = "osz")]
+        Osz,
+        [EnumMember(Value = "rar")]
+        Rar,
+        [EnumMember(Value = "zip")]
+        Zip
     }
 }
