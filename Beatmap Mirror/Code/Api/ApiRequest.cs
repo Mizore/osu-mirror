@@ -58,7 +58,7 @@ namespace Beatmap_Mirror.Code.Api
 
             if (this.RequestMethod == ApiRequestMethod.Text)
             {
-                return wc.DownloadString(string.Format("{0}{1}", Configuration.ApiLocation, string.Format(this.Request, this.Parameters)));
+                return wc.DownloadString(string.Format("{0}{1}", Configuration.ApiLocation, this.BuildQuery()));
             }
             else if (this.RequestMethod == ApiRequestMethod.Download)
             {
@@ -80,6 +80,11 @@ namespace Beatmap_Mirror.Code.Api
             }
 
             return null;
+        }
+
+        protected virtual string BuildQuery()
+        {
+            return this.Request;
         }
     }
 }
