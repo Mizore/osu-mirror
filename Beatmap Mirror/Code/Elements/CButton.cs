@@ -47,6 +47,11 @@ namespace Beatmap_Mirror.Code.Elements
                 this.Invalidate();
             };
 
+            this._Button.Click += (object sender, EventArgs e) =>
+            {
+                base.OnClick(e);
+            };
+
             this.Controls.Add(this._Button);
             this.UpdateSize();
         }
