@@ -1,0 +1,13 @@
+V:\Projects\Beatmap Mirror\Beatmap Mirror WPF\bin\Debug\Beatmap Mirror WPF.exe.config
+V:\Projects\Beatmap Mirror\Beatmap Mirror WPF\bin\Debug\Beatmap Mirror WPF.exe
+V:\Projects\Beatmap Mirror\Beatmap Mirror WPF\bin\Debug\Beatmap Mirror WPF.pdb
+V:\Projects\Beatmap Mirror\Beatmap Mirror WPF\obj\Debug\Beatmap Mirror WPF.csprojResolveAssemblyReference.cache
+V:\Projects\Beatmap Mirror\Beatmap Mirror WPF\obj\Debug\App.g.cs
+V:\Projects\Beatmap Mirror\Beatmap Mirror WPF\obj\Debug\Beatmap Mirror WPF_MarkupCompile.cache
+V:\Projects\Beatmap Mirror\Beatmap Mirror WPF\obj\Debug\Beatmap Mirror WPF.g.resources
+V:\Projects\Beatmap Mirror\Beatmap Mirror WPF\obj\Debug\Beatmap_Mirror_WPF.Properties.Resources.resources
+V:\Projects\Beatmap Mirror\Beatmap Mirror WPF\obj\Debug\Beatmap Mirror WPF.csproj.GenerateResource.Cache
+V:\Projects\Beatmap Mirror\Beatmap Mirror WPF\obj\Debug\Beatmap Mirror WPF.exe
+V:\Projects\Beatmap Mirror\Beatmap Mirror WPF\obj\Debug\Beatmap Mirror WPF.pdb
+V:\Projects\Beatmap Mirror\Beatmap Mirror WPF\obj\Debug\Windows\MainWindow.baml
+V:\Projects\Beatmap Mirror\Beatmap Mirror WPF\obj\Debug\Windows\MainWindow.g.cs
