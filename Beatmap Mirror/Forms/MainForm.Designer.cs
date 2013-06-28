@@ -1,4 +1,4 @@
-﻿using Beatmap_Mirror.Code.Elements;
+﻿
 namespace Beatmap_Mirror.Forms
 {
     partial class MainForm
@@ -42,17 +42,6 @@ namespace Beatmap_Mirror.Forms
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cButton1 = new Beatmap_Mirror.Code.Elements.CButton();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tDifficulty = new Beatmap_Mirror.Code.Elements.CTextBox();
-            this.tSizeMax = new Beatmap_Mirror.Code.Elements.CNumberBox();
-            this.tSizeMin = new Beatmap_Mirror.Code.Elements.CNumberBox();
-            this.tTags = new Beatmap_Mirror.Code.Elements.CTextBox();
-            this.tSource = new Beatmap_Mirror.Code.Elements.CTextBox();
-            this.tCreator = new Beatmap_Mirror.Code.Elements.CTextBox();
-            this.tArtist = new Beatmap_Mirror.Code.Elements.CTextBox();
-            this.tTitle = new Beatmap_Mirror.Code.Elements.CTextBox();
-            this.tFileName = new Beatmap_Mirror.Code.Elements.CTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lSize = new System.Windows.Forms.Label();
@@ -62,11 +51,20 @@ namespace Beatmap_Mirror.Forms
             this.lArtist = new System.Windows.Forms.Label();
             this.lTitle = new System.Windows.Forms.Label();
             this.lFileName = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SearchContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.viewDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.downloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadMP3sToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tName = new System.Windows.Forms.TextBox();
+            this.tTitle = new System.Windows.Forms.TextBox();
+            this.tDifficulty = new System.Windows.Forms.TextBox();
+            this.lDifficulty = new System.Windows.Forms.Label();
+            this.tArtist = new System.Windows.Forms.TextBox();
+            this.tCreator = new System.Windows.Forms.TextBox();
+            this.tSource = new System.Windows.Forms.TextBox();
+            this.tTags = new System.Windows.Forms.TextBox();
             this.ctlModernBlack1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -188,17 +186,14 @@ namespace Beatmap_Mirror.Forms
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cButton1);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.tDifficulty);
-            this.groupBox1.Controls.Add(this.tSizeMax);
-            this.groupBox1.Controls.Add(this.tSizeMin);
             this.groupBox1.Controls.Add(this.tTags);
             this.groupBox1.Controls.Add(this.tSource);
             this.groupBox1.Controls.Add(this.tCreator);
             this.groupBox1.Controls.Add(this.tArtist);
+            this.groupBox1.Controls.Add(this.lDifficulty);
+            this.groupBox1.Controls.Add(this.tDifficulty);
             this.groupBox1.Controls.Add(this.tTitle);
-            this.groupBox1.Controls.Add(this.tFileName);
+            this.groupBox1.Controls.Add(this.tName);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.lSize);
@@ -215,87 +210,6 @@ namespace Beatmap_Mirror.Forms
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Beatmap search";
-            // 
-            // cButton1
-            // 
-            this.cButton1.Location = new System.Drawing.Point(644, 178);
-            this.cButton1.Name = "cButton1";
-            this.cButton1.Size = new System.Drawing.Size(75, 23);
-            this.cButton1.TabIndex = 34;
-            this.cButton1.Text = "Search";
-            this.cButton1.Click += new System.EventHandler(this.cButton1_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 76);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 13);
-            this.label3.TabIndex = 33;
-            this.label3.Text = "Difficulty";
-            // 
-            // tDifficulty
-            // 
-            this.tDifficulty.Location = new System.Drawing.Point(74, 74);
-            this.tDifficulty.Name = "tDifficulty";
-            this.tDifficulty.Size = new System.Drawing.Size(184, 18);
-            this.tDifficulty.TabIndex = 3;
-            // 
-            // tSizeMax
-            // 
-            this.tSizeMax.Location = new System.Drawing.Point(487, 24);
-            this.tSizeMax.Name = "tSizeMax";
-            this.tSizeMax.Size = new System.Drawing.Size(72, 18);
-            this.tSizeMax.TabIndex = 9;
-            // 
-            // tSizeMin
-            // 
-            this.tSizeMin.Location = new System.Drawing.Point(387, 24);
-            this.tSizeMin.Name = "tSizeMin";
-            this.tSizeMin.Size = new System.Drawing.Size(71, 18);
-            this.tSizeMin.TabIndex = 8;
-            // 
-            // tTags
-            // 
-            this.tTags.Location = new System.Drawing.Point(74, 176);
-            this.tTags.Name = "tTags";
-            this.tTags.Size = new System.Drawing.Size(184, 18);
-            this.tTags.TabIndex = 7;
-            // 
-            // tSource
-            // 
-            this.tSource.Location = new System.Drawing.Point(74, 150);
-            this.tSource.Name = "tSource";
-            this.tSource.Size = new System.Drawing.Size(184, 18);
-            this.tSource.TabIndex = 6;
-            // 
-            // tCreator
-            // 
-            this.tCreator.Location = new System.Drawing.Point(74, 124);
-            this.tCreator.Name = "tCreator";
-            this.tCreator.Size = new System.Drawing.Size(184, 18);
-            this.tCreator.TabIndex = 5;
-            // 
-            // tArtist
-            // 
-            this.tArtist.Location = new System.Drawing.Point(74, 98);
-            this.tArtist.Name = "tArtist";
-            this.tArtist.Size = new System.Drawing.Size(184, 18);
-            this.tArtist.TabIndex = 4;
-            // 
-            // tTitle
-            // 
-            this.tTitle.Location = new System.Drawing.Point(74, 50);
-            this.tTitle.Name = "tTitle";
-            this.tTitle.Size = new System.Drawing.Size(184, 18);
-            this.tTitle.TabIndex = 2;
-            // 
-            // tFileName
-            // 
-            this.tFileName.Location = new System.Drawing.Point(74, 24);
-            this.tFileName.Name = "tFileName";
-            this.tFileName.Size = new System.Drawing.Size(184, 18);
-            this.tFileName.TabIndex = 1;
             // 
             // label2
             // 
@@ -327,7 +241,7 @@ namespace Beatmap_Mirror.Forms
             // lTags
             // 
             this.lTags.AutoSize = true;
-            this.lTags.Location = new System.Drawing.Point(16, 178);
+            this.lTags.Location = new System.Drawing.Point(16, 182);
             this.lTags.Name = "lTags";
             this.lTags.Size = new System.Drawing.Size(31, 13);
             this.lTags.TabIndex = 9;
@@ -336,7 +250,7 @@ namespace Beatmap_Mirror.Forms
             // lSource
             // 
             this.lSource.AutoSize = true;
-            this.lSource.Location = new System.Drawing.Point(16, 152);
+            this.lSource.Location = new System.Drawing.Point(16, 156);
             this.lSource.Name = "lSource";
             this.lSource.Size = new System.Drawing.Size(41, 13);
             this.lSource.TabIndex = 8;
@@ -345,7 +259,7 @@ namespace Beatmap_Mirror.Forms
             // lCreator
             // 
             this.lCreator.AutoSize = true;
-            this.lCreator.Location = new System.Drawing.Point(16, 126);
+            this.lCreator.Location = new System.Drawing.Point(16, 130);
             this.lCreator.Name = "lCreator";
             this.lCreator.Size = new System.Drawing.Size(41, 13);
             this.lCreator.TabIndex = 5;
@@ -354,7 +268,7 @@ namespace Beatmap_Mirror.Forms
             // lArtist
             // 
             this.lArtist.AutoSize = true;
-            this.lArtist.Location = new System.Drawing.Point(16, 100);
+            this.lArtist.Location = new System.Drawing.Point(16, 104);
             this.lArtist.Name = "lArtist";
             this.lArtist.Size = new System.Drawing.Size(30, 13);
             this.lArtist.TabIndex = 4;
@@ -378,6 +292,13 @@ namespace Beatmap_Mirror.Forms
             this.lFileName.TabIndex = 0;
             this.lFileName.Text = "File name";
             // 
+            // label3
+            // 
+            this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 23);
+            this.label3.TabIndex = 0;
+            // 
             // SearchContext
             // 
             this.SearchContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -386,7 +307,7 @@ namespace Beatmap_Mirror.Forms
             this.downloadToolStripMenuItem,
             this.downloadMP3sToolStripMenuItem});
             this.SearchContext.Name = "SearchContext";
-            this.SearchContext.Size = new System.Drawing.Size(184, 98);
+            this.SearchContext.Size = new System.Drawing.Size(184, 76);
             // 
             // viewDetailsToolStripMenuItem
             // 
@@ -410,6 +331,64 @@ namespace Beatmap_Mirror.Forms
             this.downloadMP3sToolStripMenuItem.Name = "downloadMP3sToolStripMenuItem";
             this.downloadMP3sToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.downloadMP3sToolStripMenuItem.Text = "Download MP3s";
+            // 
+            // tName
+            // 
+            this.tName.Location = new System.Drawing.Point(74, 23);
+            this.tName.Name = "tName";
+            this.tName.Size = new System.Drawing.Size(212, 20);
+            this.tName.TabIndex = 23;
+            // 
+            // tTitle
+            // 
+            this.tTitle.Location = new System.Drawing.Point(74, 49);
+            this.tTitle.Name = "tTitle";
+            this.tTitle.Size = new System.Drawing.Size(212, 20);
+            this.tTitle.TabIndex = 24;
+            // 
+            // tDifficulty
+            // 
+            this.tDifficulty.Location = new System.Drawing.Point(74, 75);
+            this.tDifficulty.Name = "tDifficulty";
+            this.tDifficulty.Size = new System.Drawing.Size(212, 20);
+            this.tDifficulty.TabIndex = 25;
+            // 
+            // lDifficulty
+            // 
+            this.lDifficulty.AutoSize = true;
+            this.lDifficulty.Location = new System.Drawing.Point(16, 78);
+            this.lDifficulty.Name = "lDifficulty";
+            this.lDifficulty.Size = new System.Drawing.Size(47, 13);
+            this.lDifficulty.TabIndex = 26;
+            this.lDifficulty.Text = "Difficulty";
+            // 
+            // tArtist
+            // 
+            this.tArtist.Location = new System.Drawing.Point(74, 101);
+            this.tArtist.Name = "tArtist";
+            this.tArtist.Size = new System.Drawing.Size(212, 20);
+            this.tArtist.TabIndex = 27;
+            // 
+            // tCreator
+            // 
+            this.tCreator.Location = new System.Drawing.Point(74, 127);
+            this.tCreator.Name = "tCreator";
+            this.tCreator.Size = new System.Drawing.Size(212, 20);
+            this.tCreator.TabIndex = 28;
+            // 
+            // tSource
+            // 
+            this.tSource.Location = new System.Drawing.Point(74, 153);
+            this.tSource.Name = "tSource";
+            this.tSource.Size = new System.Drawing.Size(212, 20);
+            this.tSource.TabIndex = 29;
+            // 
+            // tTags
+            // 
+            this.tTags.Location = new System.Drawing.Point(74, 179);
+            this.tTags.Name = "tTags";
+            this.tTags.Size = new System.Drawing.Size(212, 20);
+            this.tTags.TabIndex = 30;
             // 
             // MainForm
             // 
@@ -451,17 +430,7 @@ namespace Beatmap_Mirror.Forms
         private System.Windows.Forms.Label lSize;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private CTextBox tFileName;
-        private CTextBox tTags;
-        private CTextBox tSource;
-        private CTextBox tCreator;
-        private CTextBox tArtist;
-        private CTextBox tTitle;
-        private CNumberBox tSizeMin;
-        private CNumberBox tSizeMax;
         private System.Windows.Forms.Label label3;
-        private CTextBox tDifficulty;
-        private CButton cButton1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -474,6 +443,14 @@ namespace Beatmap_Mirror.Forms
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem downloadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadMP3sToolStripMenuItem;
+        private System.Windows.Forms.TextBox tDifficulty;
+        private System.Windows.Forms.TextBox tTitle;
+        private System.Windows.Forms.TextBox tName;
+        private System.Windows.Forms.TextBox tTags;
+        private System.Windows.Forms.TextBox tSource;
+        private System.Windows.Forms.TextBox tCreator;
+        private System.Windows.Forms.TextBox tArtist;
+        private System.Windows.Forms.Label lDifficulty;
 
     }
 }

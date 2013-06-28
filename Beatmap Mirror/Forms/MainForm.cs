@@ -1,6 +1,5 @@
 ﻿using Beatmap_Mirror.Code.Api;
 using Beatmap_Mirror.Code.Api.Requests;
-using Beatmap_Mirror.Code.Elements;
 using Beatmap_Mirror.Code.Structures;
 using Beatmap_Mirror.Code.Tools;
 using System;
@@ -40,9 +39,9 @@ namespace Beatmap_Mirror.Forms
         private void cButton1_Click(object sender, EventArgs e)
         {
             List<string> filters = new List<string>();
-
-            if (!string.IsNullOrEmpty(this.tFileName.Text))
-                filters.Add("maps.name.like." + this.tFileName.Text);
+            
+            if (!string.IsNullOrEmpty(this.tName.Text))
+                filters.Add("maps.name.like." + this.tName.Text);
 
             if (!string.IsNullOrEmpty(this.tTitle.Text))
                 filters.Add("maps.title.like." + this.tTitle.Text);
@@ -61,7 +60,7 @@ namespace Beatmap_Mirror.Forms
 
             if (!string.IsNullOrEmpty(this.tTags.Text))
                 filters.Add("metadata.m_tags.like." + this.tTags.Text);
-
+            
             Threaded.Add(() =>
             {
                 ApiRequestSearch s = ApiBase.Create<ApiRequestSearch>(filters.ToArray());

@@ -22,6 +22,9 @@ namespace Beatmap_Mirror
 
         static void Main(string[] args)
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(true);
+
             Configuration.Innit();
 
 #if DEBUG

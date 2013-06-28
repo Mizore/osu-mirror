@@ -60,21 +60,6 @@
     <Compile Include="Code\Api\Requests\ApiRequestBeatmaps.cs" />
     <Compile Include="Code\Api\Requests\ApiRequestSearch.cs" />
     <Compile Include="Code\Configuration.cs" />
-    <Compile Include="Code\Elements\CButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Code\Elements\CColumnHeader.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Code\Elements\CDetailView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Code\Elements\CNumberBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Code\Elements\CTextBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Code\Newtonsoft.Json\Bson\BsonBinaryType.cs" />
     <Compile Include="Code\Newtonsoft.Json\Bson\BsonBinaryWriter.cs" />
     <Compile Include="Code\Newtonsoft.Json\Bson\BsonObjectId.cs" />
@@ -258,12 +243,19 @@
     <Compile Include="Code\Structures\ApiSearch.cs" />
     <Compile Include="Code\Structures\ApiStatus.cs" />
     <Compile Include="Code\Tools\CommandParser.cs" />
+    <Compile Include="Code\Tools\DownloadQueueManager.cs" />
     <Compile Include="Code\Tools\Threaded.cs" />
     <Compile Include="Forms\BeatmapDetails.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\BeatmapDetails.Designer.cs">
       <DependentUpon>BeatmapDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DownloadLocationSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DownloadLocationSelection.Designer.cs">
+      <DependentUpon>DownloadLocationSelection.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Information.cs">
       <SubType>Form</SubType>
@@ -297,14 +289,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Code\Elements\CNumberBox.resx">
-      <DependentUpon>CNumberBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Code\Elements\CTextBox.resx">
-      <DependentUpon>CTextBox.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\BeatmapDetails.resx">
       <DependentUpon>BeatmapDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DownloadLocationSelection.resx">
+      <DependentUpon>DownloadLocationSelection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Information.resx">
       <DependentUpon>Information.cs</DependentUpon>

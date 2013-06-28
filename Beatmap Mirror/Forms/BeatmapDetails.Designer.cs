@@ -32,7 +32,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.BeatmapArtist = new System.Windows.Forms.Label();
             this.BeatmapTitle = new System.Windows.Forms.Label();
-            this.cButton1 = new Beatmap_Mirror.Code.Elements.CButton();
             this.BeatmapIcon = new System.Windows.Forms.PictureBox();
             this.ctlModernBlack1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -57,7 +56,6 @@
             this.panel1.BackColor = System.Drawing.Color.White;
             this.panel1.Controls.Add(this.BeatmapArtist);
             this.panel1.Controls.Add(this.BeatmapTitle);
-            this.panel1.Controls.Add(this.cButton1);
             this.panel1.Controls.Add(this.BeatmapIcon);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(10, 32);
@@ -84,15 +82,6 @@
             this.BeatmapTitle.Size = new System.Drawing.Size(66, 31);
             this.BeatmapTitle.TabIndex = 2;
             this.BeatmapTitle.Text = "Title";
-            // 
-            // cButton1
-            // 
-            this.cButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cButton1.Location = new System.Drawing.Point(767, 310);
-            this.cButton1.Name = "cButton1";
-            this.cButton1.Size = new System.Drawing.Size(75, 23);
-            this.cButton1.TabIndex = 1;
-            this.cButton1.Text = "cButton1";
             // 
             // BeatmapIcon
             // 
@@ -127,7 +116,6 @@
 
         private jSkin.ctlModernBlack ctlModernBlack1;
         private System.Windows.Forms.Panel panel1;
-        private Code.Elements.CButton cButton1;
         private System.Windows.Forms.PictureBox BeatmapIcon;
         private System.Windows.Forms.Label BeatmapTitle;
         private System.Windows.Forms.Label BeatmapArtist;
