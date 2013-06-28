@@ -97,11 +97,13 @@
             // BeatmapIcon
             // 
             this.BeatmapIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BeatmapIcon.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BeatmapIcon.Location = new System.Drawing.Point(651, 3);
             this.BeatmapIcon.Name = "BeatmapIcon";
             this.BeatmapIcon.Size = new System.Drawing.Size(200, 150);
             this.BeatmapIcon.TabIndex = 0;
             this.BeatmapIcon.TabStop = false;
+            this.BeatmapIcon.Click += new System.EventHandler(this.BeatmapIcon_Click);
             // 
             // BeatmapDetails
             // 

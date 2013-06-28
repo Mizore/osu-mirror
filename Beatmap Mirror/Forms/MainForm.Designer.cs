@@ -29,18 +29,22 @@ namespace Beatmap_Mirror.Forms
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.ctlModernBlack1 = new jSkin.ctlModernBlack();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cDetailView1 = new Beatmap_Mirror.Code.Elements.CDetailView();
+            this.cDetailView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cButton1 = new Beatmap_Mirror.Code.Elements.CButton();
             this.label3 = new System.Windows.Forms.Label();
-            this.cTextBox1 = new Beatmap_Mirror.Code.Elements.CTextBox();
+            this.tDifficulty = new Beatmap_Mirror.Code.Elements.CTextBox();
             this.tSizeMax = new Beatmap_Mirror.Code.Elements.CNumberBox();
             this.tSizeMin = new Beatmap_Mirror.Code.Elements.CNumberBox();
             this.tTags = new Beatmap_Mirror.Code.Elements.CTextBox();
@@ -58,6 +62,11 @@ namespace Beatmap_Mirror.Forms
             this.lArtist = new System.Windows.Forms.Label();
             this.lTitle = new System.Windows.Forms.Label();
             this.lFileName = new System.Windows.Forms.Label();
+            this.SearchContext = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.viewDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.downloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.downloadMP3sToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ctlModernBlack1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -65,6 +74,7 @@ namespace Beatmap_Mirror.Forms
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.SearchContext.SuspendLayout();
             this.SuspendLayout();
             // 
             // ctlModernBlack1
@@ -113,17 +123,40 @@ namespace Beatmap_Mirror.Forms
             // 
             // cDetailView1
             // 
+            this.cDetailView1.AccessibleRole = System.Windows.Forms.AccessibleRole.List;
             this.cDetailView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cDetailView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
             this.cDetailView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cDetailView1.FullRowSelect = true;
             this.cDetailView1.GridLines = true;
+            this.cDetailView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.cDetailView1.Location = new System.Drawing.Point(3, 16);
             this.cDetailView1.Name = "cDetailView1";
+            this.cDetailView1.ShowGroups = false;
             this.cDetailView1.Size = new System.Drawing.Size(719, 306);
             this.cDetailView1.TabIndex = 0;
             this.cDetailView1.Text = "cDetailView1";
             this.cDetailView1.UseCompatibleStateImageBehavior = false;
             this.cDetailView1.View = System.Windows.Forms.View.Details;
+            this.cDetailView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.cDetailView1_MouseClick);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Ranked ID";
+            this.columnHeader1.Width = 81;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Title";
+            this.columnHeader2.Width = 473;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Size";
+            this.columnHeader3.Width = 87;
             // 
             // panel4
             // 
@@ -157,7 +190,7 @@ namespace Beatmap_Mirror.Forms
             // 
             this.groupBox1.Controls.Add(this.cButton1);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.cTextBox1);
+            this.groupBox1.Controls.Add(this.tDifficulty);
             this.groupBox1.Controls.Add(this.tSizeMax);
             this.groupBox1.Controls.Add(this.tSizeMin);
             this.groupBox1.Controls.Add(this.tTags);
@@ -201,12 +234,12 @@ namespace Beatmap_Mirror.Forms
             this.label3.TabIndex = 33;
             this.label3.Text = "Difficulty";
             // 
-            // cTextBox1
+            // tDifficulty
             // 
-            this.cTextBox1.Location = new System.Drawing.Point(74, 74);
-            this.cTextBox1.Name = "cTextBox1";
-            this.cTextBox1.Size = new System.Drawing.Size(184, 18);
-            this.cTextBox1.TabIndex = 3;
+            this.tDifficulty.Location = new System.Drawing.Point(74, 74);
+            this.tDifficulty.Name = "tDifficulty";
+            this.tDifficulty.Size = new System.Drawing.Size(184, 18);
+            this.tDifficulty.TabIndex = 3;
             // 
             // tSizeMax
             // 
@@ -345,6 +378,39 @@ namespace Beatmap_Mirror.Forms
             this.lFileName.TabIndex = 0;
             this.lFileName.Text = "File name";
             // 
+            // SearchContext
+            // 
+            this.SearchContext.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewDetailsToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.downloadToolStripMenuItem,
+            this.downloadMP3sToolStripMenuItem});
+            this.SearchContext.Name = "SearchContext";
+            this.SearchContext.Size = new System.Drawing.Size(184, 98);
+            // 
+            // viewDetailsToolStripMenuItem
+            // 
+            this.viewDetailsToolStripMenuItem.Name = "viewDetailsToolStripMenuItem";
+            this.viewDetailsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.viewDetailsToolStripMenuItem.Text = "View details";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(180, 6);
+            // 
+            // downloadToolStripMenuItem
+            // 
+            this.downloadToolStripMenuItem.Name = "downloadToolStripMenuItem";
+            this.downloadToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.downloadToolStripMenuItem.Text = "Download beatmaps";
+            // 
+            // downloadMP3sToolStripMenuItem
+            // 
+            this.downloadMP3sToolStripMenuItem.Name = "downloadMP3sToolStripMenuItem";
+            this.downloadMP3sToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.downloadMP3sToolStripMenuItem.Text = "Download MP3s";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -364,6 +430,7 @@ namespace Beatmap_Mirror.Forms
             this.panel2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.SearchContext.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -393,12 +460,20 @@ namespace Beatmap_Mirror.Forms
         private CNumberBox tSizeMin;
         private CNumberBox tSizeMax;
         private System.Windows.Forms.Label label3;
-        private CTextBox cTextBox1;
+        private CTextBox tDifficulty;
         private CButton cButton1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.GroupBox groupBox2;
-        private CDetailView cDetailView1;
+        private System.Windows.Forms.ListView cDetailView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ContextMenuStrip SearchContext;
+        private System.Windows.Forms.ToolStripMenuItem viewDetailsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem downloadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem downloadMP3sToolStripMenuItem;
 
     }
 }

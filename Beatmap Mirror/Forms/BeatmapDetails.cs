@@ -40,18 +40,23 @@ namespace Beatmap_Mirror.Forms
                 ApiRequestBeatmapDetail details = ApiBase.Create<ApiRequestBeatmapDetail>(beatmap.ToString());
                 this.BeatMap = details.GetData<ApiBeatmap>().Beatmap;
 
-                this.Invoke((Action)(() =>
-                {
-                    this.ShowData();
-                }));
+                this.ShowData();
             });
         }
 
         private void ShowData()
         {
+            this.Invoke((Action)(() =>
+            {
+                this.BeatmapTitle.Text = this.BeatMap.Title;
+                this.BeatmapIcon.Load(string.Format("{0}beatmaps/{1}/preview/image/custom/200x150", Configuration.ApiLocation, this.BeatMap.Ranked_ID));
 
-            this.BeatmapTitle.Text = this.BeatMap.Title;
-            this.BeatmapIcon.Load(string.Format("{0}beatmaps/{1}/preview/image/custom/200x150", Configuration.ApiLocation, this.BeatMap.Ranked_ID));
+            }));
+        }
+
+        private void BeatmapIcon_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

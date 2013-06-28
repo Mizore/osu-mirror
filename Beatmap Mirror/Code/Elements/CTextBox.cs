@@ -26,6 +26,13 @@ namespace Beatmap_Mirror.Code.Elements
                     e.SuppressKeyPress = true;
                     e.Handled = true;
                 }
+                else
+                    this.Text = this._TextBox.Text;
+            };
+
+            this._TextBox.TextChanged += (object sender, EventArgs e) =>
+            {
+                this.Text = this._TextBox.Text;
             };
 
             this._TextBox.GotFocus += (object sender, EventArgs e) =>
