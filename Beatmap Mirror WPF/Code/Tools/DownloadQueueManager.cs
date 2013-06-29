@@ -2,23 +2,43 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 
 namespace Beatmap_Mirror.Code.Tools
 {
     public static class DownloadQueueManager
     {
-        private static string BeatmapDownloadLocation;
-        private static string MP3DownloadLocation;
-
         private static List<DownloadQueueEntry> Queue = new List<DownloadQueueEntry>();
+        private static Thread DownloaderThread;
 
         public static void AddToQueue(int BeatmapId, DownloadType Type)
         {
-            if (string.IsNullOrEmpty(BeatmapDownloadLocation) || string.IsNullOrEmpty(MP3DownloadLocation))
+            if (string.IsNullOrEmpty(Configuration.BeatmapDownloadLocation) || string.IsNullOrEmpty(Configuration.Mp3DownloadLocation))
             {
                 MessageBox.Show("Please first select download locations in settings pannel at the bottom of the window.", "Welp", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
+            }
+
+            Queue.Add(new DownloadQueueEntry(BeatmapId));
+
+            if (DownloaderThread == null)
+            {
+                DownloaderThread = new Thread(new ThreadStart(DownloadQueue));
+                DownloaderThread.Start();
+            }
+        }
+
+        private static void DownloadQueue()
+        {
+            while (true)
+            {
+                DownloadQueueEntry ent = Queue.First();
+                Queue.Remove(ent);
+
+
+
+                Thread.Sleep(10);
             }
         }
 

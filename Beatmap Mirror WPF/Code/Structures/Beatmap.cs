@@ -36,6 +36,7 @@ namespace Beatmap_Mirror.Code.Structures
         [JsonProperty(PropertyName = "versions")]
         public List<BeatmapDifficulty> Difficulties { get; set; }
 
+        [JsonIgnore]
         public string SizeFormatted
         {
             get

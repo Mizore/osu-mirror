@@ -15,21 +15,16 @@
 
     <Grid>
         <DockPanel>
-            <TabControl VerticalAlignment="Bottom" Height="181" DockPanel.Dock="Bottom">
-                <TabItem Header="Download queue">
-                    <Grid Background="White"/>
-                </TabItem>
-                <TabItem Header="Settings">
-                    <Grid Background="White">
-                        <TextBlock HorizontalAlignment="Left" Margin="30,12,0,0" TextWrapping="Wrap" Text="Beatmap download location " VerticalAlignment="Top"/>
-                        <TextBlock HorizontalAlignment="Left" Margin="56,59,0,0" TextWrapping="Wrap" Text="Mp3 download location" VerticalAlignment="Top"/>
-                        <TextBox x:Name="BeatmapLocation" HorizontalAlignment="Left" Height="18" Margin="187,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="301"/>
-                        <TextBox x:Name="MP3Location" HorizontalAlignment="Left" Height="18" Margin="187,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="301"/>
-                        <Button x:Name="BeatmapBrowse" Content="Browse" HorizontalAlignment="Left" Margin="493,10,0,0" VerticalAlignment="Top" Width="75" Click="BeatmapBrowse_Click"/>
-                        <Button x:Name="MP3Browse" Content="Browse" HorizontalAlignment="Left" Margin="493,57,0,0" VerticalAlignment="Top" Width="75" Click="MP3Browse_Click"/>
-                    </Grid>
-                </TabItem>
-            </TabControl>
+            <GroupBox VerticalAlignment="Bottom" Height="90" DockPanel.Dock="Bottom" Header="Settings">
+                <Grid Height="70" Margin="0,0,-12,-2">
+                    <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Beatmap download location" VerticalAlignment="Top"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="33,44,0,0" TextWrapping="Wrap" Text="MP3 download location" VerticalAlignment="Top"/>
+                    <TextBox x:Name="BeatmapLocation" Height="18" Margin="163,10,100,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <Button x:Name="BeatmapBrowse" Content="Browse" HorizontalAlignment="Right" Margin="0,9,18,0" VerticalAlignment="Top" Width="75" Click="BeatmapBrowse_Click"/>
+                    <TextBox x:Name="MP3Location" Height="18" Margin="164,42,100,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <Button x:Name="MP3Browse" Content="Browse" HorizontalAlignment="Right" Margin="0,41,18,0" VerticalAlignment="Top" Width="75" Click="MP3Browse_Click"/>
+                </Grid>
+            </GroupBox>
             <GroupBox Header="Search filters" Height="160" DockPanel.Dock="Top" VerticalAlignment="Top">
                 <Grid Height="150" VerticalAlignment="Top" Margin="0,0,-12,-12">
                     <Label Content="Title" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
