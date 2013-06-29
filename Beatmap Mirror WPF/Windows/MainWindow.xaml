@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Elements="clr-namespace:Beatmap_Mirror_WPF.Code.Elements" x:Class="Beatmap_Mirror_WPF.Windows.MainWindow"
-        Title="Beatmap mirror" Height="607" Width="665" Background="White">
+        Title="Beatmap mirror" Height="718" Width="695" Background="White" MinWidth="650" MinHeight="490">
     <Grid>
         <DockPanel>
             <TabControl VerticalAlignment="Bottom" Height="181" DockPanel.Dock="Bottom">
@@ -22,14 +22,14 @@
                     <Label Content="Size more than" HorizontalAlignment="Right" Margin="0,10,275,0" VerticalAlignment="Top"/>
                     <Label Content="and less than" HorizontalAlignment="Right" Margin="0,10,107,0" VerticalAlignment="Top"/>
                     <Label Content="Beatmap version" HorizontalAlignment="Right" Margin="0,41,275,0" VerticalAlignment="Top"/>
-                    <TextBox HorizontalAlignment="Left" Height="18" Margin="71,13,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="194"/>
-                    <TextBox HorizontalAlignment="Left" Height="18" Margin="71,45,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="194"/>
-                    <TextBox HorizontalAlignment="Left" Height="18" Margin="71,76,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="194"/>
-                    <TextBox HorizontalAlignment="Left" Height="18" Margin="71,107,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="194"/>
+                    <TextBox HorizontalAlignment="Left" Height="18" Margin="71,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox HorizontalAlignment="Left" Height="18" Margin="71,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox HorizontalAlignment="Left" Height="18" Margin="71,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
+                    <TextBox HorizontalAlignment="Left" Height="18" Margin="71,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194"/>
                     <Elements:CNumBox HorizontalAlignment="Right" Margin="0,13,192,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="78"/>
                     <Elements:CNumBox HorizontalAlignment="Right" Margin="0,13,24,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="78"/>
                     <Elements:CNumBox HorizontalAlignment="Right" Margin="0,45,192,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="78"/>
-                    <Button Content="Button" HorizontalAlignment="Right" Margin="0,106,24,0" VerticalAlignment="Top" Width="75" Background="White" BorderBrush="#FFABADB3"/>
+                    <Button Content="Button" HorizontalAlignment="Right" Margin="0,106,24,0" VerticalAlignment="Top" Width="75" Background="White" BorderBrush="#FFABADB3" Click="Button_Click"/>
                 </Grid>
             </GroupBox>
             <GroupBox Header="Results" DockPanel.Dock="Bottom"/>

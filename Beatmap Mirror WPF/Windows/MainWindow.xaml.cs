@@ -23,5 +23,10 @@ namespace Beatmap_Mirror_WPF.Windows
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

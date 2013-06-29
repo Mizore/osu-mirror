@@ -21,7 +21,12 @@ namespace Beatmap_Mirror_WPF
         public App()
         {
 #if DEBUG
-            AllocConsole();
+            // Lets create debug console, useful for printing out data into it.
+            // It will obviously be non-visible in Relese mode.
+            if (AllocConsole())
+                Console.WriteLine("Console creation:: OK");
+            else
+                MessageBox.Show("Console creation failed!!!", "OH NOES", MessageBoxButton.OK);
 #endif
         }
     }
