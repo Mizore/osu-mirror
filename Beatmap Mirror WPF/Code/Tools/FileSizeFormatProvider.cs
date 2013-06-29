@@ -63,7 +63,7 @@ namespace Beatmap_Mirror_WPF.Code.Tools
                 suffix = " B";
             }
 
-            string precision = format.Substring(3);
+            string precision = format.Substring(2);
             if (String.IsNullOrEmpty(precision)) precision = "2";
             return String.Format("{0:N" + precision + "}{1}", size, suffix);
 

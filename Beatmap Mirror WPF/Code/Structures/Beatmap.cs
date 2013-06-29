@@ -40,7 +40,7 @@ namespace Beatmap_Mirror.Code.Structures
         {
             get
             {
-                return string.Format(new FileSizeFormatProvider(), "{0:fs}", this.Size);
+                return string.Format(new FileSizeFormatProvider(), "{0:fs3}", this.Size);
             }
         }
     }
