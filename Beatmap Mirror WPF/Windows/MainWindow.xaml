@@ -7,8 +7,8 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary
-                   Source="/Themes/Generic.xaml" />
+                <ResourceDictionary Source="/Themes/Generic.xaml" />
+                <ResourceDictionary Source="/Resources/Resources.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -46,17 +46,35 @@
                 <ListView x:Name="SearchResults">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Ranked_ID}" Header="ID" Width="60" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Title}" Header="Title" Width="500" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Path=Size}" Header="Size" Width="80" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Ranked_ID}" Header="ID" Width="60" />
+                            <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Title" Width="500" />
+                            <GridViewColumn Header="Size" Width="80">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Size}" Width="Auto" TextAlignment="Right" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                         </GridView>
                     </ListView.View>
                     <ListView.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Details" />
+                            <MenuItem Header="Details">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource ImageInformation}" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                             <Separator />
-                            <MenuItem Header="Download beatmaps" />
-                            <MenuItem Header="Download MP3s" Background="Transparent" />
+                            <MenuItem Header="Download beatmaps">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource ImageBrickLink}" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Download MP3s">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource ImageBulletFeed}" />
+                                </MenuItem.Icon>
+                            </MenuItem>
                         </ContextMenu>
                     </ListView.ContextMenu>
                 </ListView>

@@ -306,7 +306,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Icons\" />
-    <Folder Include="Resources\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.csproj" />
@@ -318,6 +317,12 @@
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.Silverlight.csproj" />
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.WindowsPhone.csproj" />
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.WinRT.csproj" />
+    <Resource Include="Resources\Images\bullet_feed.png" />
+    <Resource Include="Resources\Images\brick.png" />
+    <Resource Include="Resources\Images\brick_go.png" />
+    <Resource Include="Resources\Images\brick_link.png" />
+    <Resource Include="Resources\Images\box.png" />
+    <Resource Include="Resources\Images\information.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
