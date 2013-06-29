@@ -256,7 +256,11 @@
     <Compile Include="Code\Structures\BeatmapType.cs" />
     <Compile Include="Code\Tools\CommandParser.cs" />
     <Compile Include="Code\Tools\DownloadQueueManager.cs" />
+    <Compile Include="Code\Tools\FileSizeFormatProvider.cs" />
     <Compile Include="Code\Tools\Threaded.cs" />
+    <Compile Include="Windows\BeatmapDetails.xaml.cs">
+      <DependentUpon>BeatmapDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -298,6 +302,10 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\BeatmapDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\MainWindow.xaml">
       <SubType>Designer</SubType>

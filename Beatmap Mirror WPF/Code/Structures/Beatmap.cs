@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Beatmap_Mirror_WPF.Code.Tools;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,5 +35,13 @@ namespace Beatmap_Mirror.Code.Structures
 
         [JsonProperty(PropertyName = "versions")]
         public List<BeatmapDifficulty> Difficulties { get; set; }
+
+        public string SizeFormatted
+        {
+            get
+            {
+                return string.Format(new FileSizeFormatProvider(), "{0:fs}", this.Size);
+            }
+        }
     }
 }

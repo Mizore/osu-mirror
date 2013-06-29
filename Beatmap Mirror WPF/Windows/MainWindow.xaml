@@ -51,7 +51,7 @@
                             <GridViewColumn Header="Size" Width="80">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Size}" Width="Auto" TextAlignment="Right" />
+                                        <TextBlock Text="{Binding SizeFormatted}" Width="Auto" TextAlignment="Right" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -59,18 +59,18 @@
                     </ListView.View>
                     <ListView.ContextMenu>
                         <ContextMenu>
-                            <MenuItem Header="Details">
+                            <MenuItem x:Name="MenuItemDetails" Header="Details" Checked="MenuItemDetails_Checked">
                                 <MenuItem.Icon>
                                     <Image Source="{StaticResource ImageInformation}" />
                                 </MenuItem.Icon>
                             </MenuItem>
                             <Separator />
-                            <MenuItem Header="Download beatmaps">
+                            <MenuItem x:Name="MenuItemDownloadBeatmap" Header="Download beatmaps" Checked="MenuItemDownloadBeatmap_Checked">
                                 <MenuItem.Icon>
                                     <Image Source="{StaticResource ImageBrickLink}" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Download MP3s">
+                            <MenuItem x:Name="MenuItemDownloadMP3" Header="Download MP3s" Checked="MenuItemDownloadMP3_Checked">
                                 <MenuItem.Icon>
                                     <Image Source="{StaticResource ImageBulletFeed}" />
                                 </MenuItem.Icon>

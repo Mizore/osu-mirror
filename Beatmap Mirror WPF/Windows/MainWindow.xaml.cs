@@ -62,5 +62,20 @@ namespace Beatmap_Mirror_WPF.Windows
                 this.SearchResults.Items.Add(bm);
             }
         }
+
+        private void MenuItemDetails_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItemDownloadBeatmap_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void MenuItemDownloadMP3_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

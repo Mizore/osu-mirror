@@ -15,9 +15,8 @@ namespace Beatmap_Mirror.Code.Tools
         public static void AddToQueue(int BeatmapId, DownloadType Type)
         {
             if (string.IsNullOrEmpty(BeatmapDownloadLocation) || string.IsNullOrEmpty(MP3DownloadLocation))
-            {
+                return;
 
-            }
         }
 
         public enum DownloadType
