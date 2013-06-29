@@ -1,6 +1,8 @@
-﻿using Beatmap_Mirror.Code.Api;
+﻿using Beatmap_Mirror.Code;
+using Beatmap_Mirror.Code.Api;
 using Beatmap_Mirror.Code.Api.Requests;
 using Beatmap_Mirror.Code.Structures;
+using Beatmap_Mirror.Code.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -75,12 +78,18 @@ namespace Beatmap_Mirror_WPF.Windows
 
         private void MenuItemDownloadBeatmap_Click(object sender, RoutedEventArgs e)
         {
+            foreach (Beatmap bm in this.SearchResults.SelectedItems)
+                DownloadQueueManager.AddToQueue(bm.Ranked_ID, DownloadQueueManager.DownloadType.Beatmap);
 
+            this.SearchResults.SelectedItem = null;
         }
 
         private void MenuItemDownloadMP3_Click(object sender, RoutedEventArgs e)
         {
+            foreach (Beatmap bm in this.SearchResults.SelectedItems)
+                DownloadQueueManager.AddToQueue(bm.Ranked_ID, DownloadQueueManager.DownloadType.MP3);
 
+            this.SearchResults.SelectedItem = null;
         }
 
         private void SearchResults_ContextMenuOpening(object sender, ContextMenuEventArgs e)
@@ -89,6 +98,30 @@ namespace Beatmap_Mirror_WPF.Windows
                 this.MenuItemDetails.IsEnabled = false;
             else
                 this.MenuItemDetails.IsEnabled = true;
+        }
+
+        private void BeatmapBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+
+            DialogResult result = dialog.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                Configuration.BeatmapDownloadLocation = dialog.SelectedPath;
+                this.BeatmapLocation.Text = dialog.SelectedPath;
+            }
+        }
+
+        private void MP3Browse_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+
+            DialogResult result = dialog.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+            {
+                Configuration.Mp3DownloadLocation = dialog.SelectedPath;
+                this.MP3Location.Text = dialog.SelectedPath;
+            }
         }
     }
 }

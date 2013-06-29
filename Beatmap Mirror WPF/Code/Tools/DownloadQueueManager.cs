@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
 
 namespace Beatmap_Mirror.Code.Tools
 {
@@ -15,8 +16,10 @@ namespace Beatmap_Mirror.Code.Tools
         public static void AddToQueue(int BeatmapId, DownloadType Type)
         {
             if (string.IsNullOrEmpty(BeatmapDownloadLocation) || string.IsNullOrEmpty(MP3DownloadLocation))
+            {
+                MessageBox.Show("Please first select download locations in settings pannel at the bottom of the window.", "Welp", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
-
+            }
         }
 
         public enum DownloadType
