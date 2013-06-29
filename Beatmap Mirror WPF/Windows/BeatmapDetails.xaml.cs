@@ -1,4 +1,5 @@
-﻿using Beatmap_Mirror.Code.Api;
+﻿using Beatmap_Mirror.Code;
+using Beatmap_Mirror.Code.Api;
 using Beatmap_Mirror.Code.Api.Requests;
 using Beatmap_Mirror.Code.Structures;
 using Beatmap_Mirror.Code.Tools;
@@ -15,6 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Beatmap_Mirror_WPF.Windows
 {
@@ -23,6 +25,8 @@ namespace Beatmap_Mirror_WPF.Windows
     /// </summary>
     public partial class BeatmapDetails : Window
     {
+        private int? nullable;
+
         private Beatmap Beatmap { get; set; }
 
         public BeatmapDetails(int BeatmapID)
@@ -39,13 +43,21 @@ namespace Beatmap_Mirror_WPF.Windows
                 ApiRequestBeatmapDetail bm = ApiBase.Create<ApiRequestBeatmapDetail>(Beatmap.ToString());
                 this.Beatmap = bm.GetData<ApiBeatmap>().Beatmap;
 
-
+                Dispatcher.Invoke(DispatcherPriority.Normal, new Action(this.DisplayData));
             });
         }
 
         private void DisplayData()
         {
+            this.BeatmapTitle.Text = this.Beatmap.Title;
+            this.BeatmapSize.Text = this.Beatmap.SizeFormatted;
 
+            this.ButtonImage.ImageSource = new BitmapImage(new Uri(string.Format("{0}beatmaps/{1}/preview/image/custom/200x150", Configuration.ApiLocation, this.Beatmap.Ranked_ID)));
+        }
+
+        private void ImageButton_Click(object sender, RoutedEventArgs e)
+        {
+            new ImageViewer(string.Format("{0}beatmaps/{1}/preview/image/full", Configuration.ApiLocation, this.Beatmap.Ranked_ID)).ShowDialog();
         }
     }
 }

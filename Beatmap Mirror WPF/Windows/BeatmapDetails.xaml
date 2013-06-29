@@ -1,12 +1,27 @@
 ﻿<Window x:Class="Beatmap_Mirror_WPF.Windows.BeatmapDetails"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="BeatmapDetails" Height="401" Width="667">
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="BeatmapDetails" Height="401" Width="667" ResizeMode="NoResize">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/Generic.xaml" />
+                <ResourceDictionary Source="/Resources/Resources.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
-        <Image x:Name="BeatmapIcon" HorizontalAlignment="Right" Height="152" Margin="0,10,10,0" VerticalAlignment="Top" Width="200"/>
-        <TextBlock x:Name="BeatmapTitle" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="26" FontWeight="Bold" FontStyle="Italic"/>
-        <TextBlock HorizontalAlignment="Left" Margin="29,50,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="18"/>
-        <TextBlock x:Name="BeatmapSize" HorizontalAlignment="Right" Margin="0,141,215,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" FontSize="16" FontWeight="Bold"/>
+        <TextBlock x:Name="BeatmapTitle" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26" FontWeight="Bold" FontStyle="Italic" Width="434" MinWidth="434" Height="126"/>
+        <TextBlock x:Name="BeatmapSize" HorizontalAlignment="Right" TextAlignment="Right" Margin="0,141,217,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="16" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" Width="180"/>
+        <Button Content="Download Beatmap" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="130"/>
+        <Button Content="Download MP3" HorizontalAlignment="Right" Margin="0,0,182,10" VerticalAlignment="Bottom" Width="124"/>
+        <Button x:Name="ImageButton" Content=" " HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="200" Height="150" BorderBrush="#FFD6D6D6" Foreground="{x:Null}" BorderThickness="1" IsHitTestVisible="True" Click="ImageButton_Click" IsTabStop="False" >
+            <Button.Background>
+                <ImageBrush x:Name="ButtonImage"/>
+            </Button.Background>
+        </Button>
 
     </Grid>
 </Window>

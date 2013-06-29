@@ -63,19 +63,32 @@ namespace Beatmap_Mirror_WPF.Windows
             }
         }
 
-        private void MenuItemDetails_Checked(object sender, RoutedEventArgs e)
+        private void MenuItemDetails_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("bm details");
+            foreach (Beatmap bm in this.SearchResults.SelectedItems)
+            {
+                Console.WriteLine(bm.Ranked_ID);
+                new BeatmapDetails(bm.Ranked_ID).Show();
+            }
+        }
+
+        private void MenuItemDownloadBeatmap_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void MenuItemDownloadBeatmap_Checked(object sender, RoutedEventArgs e)
+        private void MenuItemDownloadMP3_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void MenuItemDownloadMP3_Checked(object sender, RoutedEventArgs e)
+        private void SearchResults_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
-
+            if (this.SearchResults.SelectedItems.Count > 1)
+                this.MenuItemDetails.IsEnabled = false;
+            else
+                this.MenuItemDetails.IsEnabled = true;
         }
     }
 }

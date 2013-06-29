@@ -13,7 +13,7 @@ namespace Beatmap_Mirror.Code.Structures
         public int ID { get; set; }
 
         [JsonProperty(PropertyName = "ranked_id")]
-        public int? Ranked_ID { get; set; }
+        public int Ranked_ID { get; set; }
 
         [JsonProperty(PropertyName = "name")]
         public string Name { get; set; }

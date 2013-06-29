@@ -261,6 +261,9 @@
     <Compile Include="Windows\BeatmapDetails.xaml.cs">
       <DependentUpon>BeatmapDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ImageViewer.xaml.cs">
+      <DependentUpon>ImageViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -304,6 +307,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\BeatmapDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ImageViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

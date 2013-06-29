@@ -43,7 +43,7 @@
                 </Grid>
             </GroupBox>
             <GroupBox Header="Results" DockPanel.Dock="Bottom">
-                <ListView x:Name="SearchResults">
+                <ListView x:Name="SearchResults" ContextMenuOpening="SearchResults_ContextMenuOpening">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding Ranked_ID}" Header="ID" Width="60" />
@@ -59,18 +59,18 @@
                     </ListView.View>
                     <ListView.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="MenuItemDetails" Header="Details" Checked="MenuItemDetails_Checked">
+                            <MenuItem x:Name="MenuItemDetails" Header="Details" Click="MenuItemDetails_Click">
                                 <MenuItem.Icon>
                                     <Image Source="{StaticResource ImageInformation}" />
                                 </MenuItem.Icon>
                             </MenuItem>
                             <Separator />
-                            <MenuItem x:Name="MenuItemDownloadBeatmap" Header="Download beatmaps" Checked="MenuItemDownloadBeatmap_Checked">
+                            <MenuItem x:Name="MenuItemDownloadBeatmap" Header="Download beatmaps" Click="MenuItemDownloadBeatmap_Click">
                                 <MenuItem.Icon>
                                     <Image Source="{StaticResource ImageBrickLink}" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem x:Name="MenuItemDownloadMP3" Header="Download MP3s" Checked="MenuItemDownloadMP3_Checked">
+                            <MenuItem x:Name="MenuItemDownloadMP3" Header="Download MP3s" Click="MenuItemDownloadMP3_Click">
                                 <MenuItem.Icon>
                                     <Image Source="{StaticResource ImageBulletFeed}" />
                                 </MenuItem.Icon>
