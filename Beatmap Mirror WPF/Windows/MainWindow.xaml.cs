@@ -123,32 +123,5 @@ namespace Beatmap_Mirror_WPF.Windows
                 this.MP3Location.Text = dialog.SelectedPath;
             }
         }
-
-
-        /*
-        private void MP3Browse_Click(object sender, RoutedEventArgs e)
-        {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-
-            DialogResult result = dialog.ShowDialog();
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                Configuration.Mp3DownloadLocation = dialog.SelectedPath;
-                this.MP3Location.Text = dialog.SelectedPath;
-            }
-        }
-
-        private void BeatmapBrowse_Click_1(object sender, RoutedEventArgs e)
-        {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-
-            DialogResult result = dialog.ShowDialog();
-            if (result == System.Windows.Forms.DialogResult.OK)
-            {
-                Configuration.BeatmapDownloadLocation = dialog.SelectedPath;
-                this.BeatmapLocation.Text = dialog.SelectedPath;
-            }
-        }\
-        */
     }
 }

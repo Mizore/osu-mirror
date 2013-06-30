@@ -72,6 +72,9 @@
     <Compile Include="Code\Api\Requests\ApiRequestSearch.cs" />
     <Compile Include="Code\Configuration.cs" />
     <Compile Include="Code\Elements\CNumBox.cs" />
+    <Compile Include="Code\Elements\QueueItem.xaml.cs">
+      <DependentUpon>QueueItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Code\Newtonsoft.Json\Bson\BsonBinaryType.cs" />
     <Compile Include="Code\Newtonsoft.Json\Bson\BsonBinaryWriter.cs" />
     <Compile Include="Code\Newtonsoft.Json\Bson\BsonObjectId.cs" />
@@ -261,6 +264,9 @@
     <Compile Include="Windows\BeatmapDetails.xaml.cs">
       <DependentUpon>BeatmapDetails.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\DownloadQueue.xaml.cs">
+      <DependentUpon>DownloadQueue.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\ImageViewer.xaml.cs">
       <DependentUpon>ImageViewer.xaml</DependentUpon>
     </Compile>
@@ -298,6 +304,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Code\Elements\QueueItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Resources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -307,6 +317,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\BeatmapDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DownloadQueue.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Beatmap_Mirror_WPF.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,19 @@ namespace Beatmap_Mirror.Code.Tools
         private static List<DownloadQueueEntry> Queue = new List<DownloadQueueEntry>();
         private static Thread DownloaderThread;
 
+        public delegate void EInt(int BeatmapID);
+        public static event EInt QueuedFile;
+
+        private static DownloadQueue dqForm;
+
         public static void AddToQueue(int BeatmapId, DownloadType Type)
         {
+            if (dqForm == null)
+            {
+                dqForm = new DownloadQueue();
+                dqForm.Show();
+            }
+
             if (string.IsNullOrEmpty(Configuration.BeatmapDownloadLocation) || string.IsNullOrEmpty(Configuration.Mp3DownloadLocation))
             {
                 MessageBox.Show("Please first select download locations in settings pannel at the bottom of the window.", "Welp", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -22,6 +34,9 @@ namespace Beatmap_Mirror.Code.Tools
 
             Queue.Add(new DownloadQueueEntry(BeatmapId));
 
+            try { QueuedFile(BeatmapId); }
+            catch { }
+
             if (DownloaderThread == null)
             {
                 DownloaderThread = new Thread(new ThreadStart(DownloadQueue));
@@ -29,14 +44,20 @@ namespace Beatmap_Mirror.Code.Tools
             }
         }
 
+        public static int[] GetQueue()
+        {
+            return Queue.Select(item => item.RankedBeatmapID).ToArray();
+        }
+
         private static void DownloadQueue()
         {
             while (true)
             {
-                DownloadQueueEntry ent = Queue.First();
-                Queue.Remove(ent);
-
-
+                if (Queue.Count > 0)
+                {
+                    DownloadQueueEntry ent = Queue.First();
+                    Queue.Remove(ent);
+                }
 
                 Thread.Sleep(10);
             }

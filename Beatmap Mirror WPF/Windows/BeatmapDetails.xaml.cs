@@ -25,8 +25,6 @@ namespace Beatmap_Mirror_WPF.Windows
     /// </summary>
     public partial class BeatmapDetails : Window
     {
-        private int? nullable;
-
         private Beatmap Beatmap { get; set; }
 
         public BeatmapDetails(int BeatmapID)

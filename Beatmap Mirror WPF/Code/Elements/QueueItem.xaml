@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Beatmap_Mirror_WPF.Code.Elements.QueueItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="51" d:DesignWidth="300" Width="Auto" Margin="0,0,0,0">
+    <Border BorderBrush="#FFABADB3" BorderThickness="0,0,0,1">
+        <Grid>
+            <Image x:Name="TImage" HorizontalAlignment="Left" Source="{Binding Image, Mode=OneWay}" Stretch="None" Width="80" Height="50" VerticalAlignment="Top"/>
+            <TextBlock x:Name="TTitle" Margin="85,10,10,0" Text="{Binding Title, Mode=OneWay}" VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBlock x:Name="TDetails" Margin="85,26,10,0" Text="{Binding BottomString, Mode=OneWay}" VerticalAlignment="Top" TextAlignment="Right"/>
+        </Grid>
+    </Border>
+</UserControl>
