@@ -68,7 +68,11 @@ namespace Beatmap_Mirror.Code.Api
                 wc.Proxy = null;
                 wc.Headers.Add(HttpRequestHeader.UserAgent, "Osu!Mirror");
 
-                return wc.DownloadString(string.Format("{0}{1}", Configuration.ApiLocation, this.BuildQuery()));
+                try
+                {
+                    return wc.DownloadString(string.Format("{0}{1}", Configuration.ApiLocation, this.BuildQuery()));
+                }
+                catch { return null; }
             }
             else if (this.RequestMethod == ApiRequestMethod.Download)
             {
@@ -105,7 +109,11 @@ namespace Beatmap_Mirror.Code.Api
 
         public T GetData<T>()
         {
-            return ApiRequestParser.Parse<T>(this.SendRequest());
+            string data = this.SendRequest();
+            if (data == null)
+                return default(T);
+
+            return ApiRequestParser.Parse<T>(data);
         }
 
         protected virtual string BuildQuery()

@@ -60,6 +60,9 @@ namespace Beatmap_Mirror_WPF.Windows
 
             this.SearchResults.Items.Clear();
 
+            if (data == null)
+                return;
+
             foreach (Beatmap bm in data.Beatmaps)
             {
                 this.SearchResults.Items.Add(bm);
