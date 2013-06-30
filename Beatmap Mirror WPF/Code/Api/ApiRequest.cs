@@ -97,9 +97,11 @@ namespace Beatmap_Mirror.Code.Api
                                 EOnDownloadUpdate(total);
                         }
 
-                        if (EOnDownloadComplete != null)
-                            EOnDownloadComplete(ms.GetBuffer());
+                        byte[] trimmed = new byte[total];
+                        Array.Copy(ms.GetBuffer(), trimmed, total);
 
+                        if (EOnDownloadComplete != null)
+                            EOnDownloadComplete(trimmed);
                     }
                 }
             }
