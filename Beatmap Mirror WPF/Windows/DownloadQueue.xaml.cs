@@ -5,6 +5,7 @@ using Beatmap_Mirror.Code.Structures;
 using Beatmap_Mirror.Code.Tools;
 using Beatmap_Mirror_WPF.Code.Elements;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -31,132 +32,69 @@ namespace Beatmap_Mirror_WPF.Windows
     public partial class DownloadQueue : Window
     {
         private Dictionary<int, QueueItem> Queue = new Dictionary<int, QueueItem>();
-        private List<int> Pending = new List<int>();
+        private BlockingCollection<int> Pending = new BlockingCollection<int>();
 
         private object Lock = new object();
 
         public DownloadQueue()
         {
             InitializeComponent();
-
-            DownloadQueueManager.QueuedFile += (int BeatmapID) =>
+            
+            DownloadQueueManager.QueuedFile += (Beatmap map) =>
             {
                 QueueItem qi = new QueueItem();
+                qi.Beatmap = map;
 
-                this.Queue.Add(BeatmapID, qi);
+                this.Queue.Add(map.Ranked_ID, qi);
 
                 this.QueuedList.Children.Add(qi);
-                this.Pending.Add(BeatmapID);
+                this.Pending.Add(map.Ranked_ID);
             };
 
-            DownloadQueueManager.FileUpdate += (int BeatmapID, int downloaded) =>
+            DownloadQueueManager.FileUpdate += (Beatmap map, int downloaded) =>
             {
-                this.Queue[BeatmapID].Downloaded = downloaded;
-                this.Queue[BeatmapID].UpdateData();
+                this.Queue[map.Ranked_ID].Downloaded = downloaded;
+                this.Queue[map.Ranked_ID].UpdateProgress();
             };
 
-            DownloadQueueManager.DownloadFinished += (int BeatmapID) =>
+            DownloadQueueManager.DownloadFinished += (Beatmap map) =>
             {
-                lock (this.Lock)
+                Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
-                    Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
-                    {
-                        QueueItem i = this.Queue[BeatmapID];
-                        var index = 0;
-                        foreach (QueueItem r in this.QueuedList.Children)
-                        {
-                            if (r.Beatmap == BeatmapID)
-                                break;
-                            else
-                                index++;
-
-                        }
-
-                        this.QueuedList.Children.RemoveAt(index);
-                        this.Queue.Remove(BeatmapID);
-                    }));
-                }
+                    this.QueuedList.Children.Remove(this.Queue[map.Ranked_ID]);
+                    this.Queue.Remove(map.Ranked_ID);
+                }));
             };
-
-            this.LoadQueue();
-            this.StartWorker();
+            
+            new Thread(new ThreadStart(Worker)).Start();
         }
 
-        private void Worker(object sender, DoWorkEventArgs e)
+        private void Worker()
         {
             while (true)
             {
-                if (this.Pending.Count != 0)
+                int tgrab = this.Pending.Take();
+
+
+                byte[] bdata;
+                using (WebClient r = new WebClient())
+                    bdata = r.DownloadData(new Uri(string.Format("{0}beatmaps/{1}/preview/image/custom/80x50/crop", Configuration.ApiLocation, tgrab)));
+
+                BitmapImage bmp = new BitmapImage();
+                bmp.BeginInit();
+                bmp.StreamSource = new MemoryStream(bdata);
+                bmp.EndInit();
+
+                bmp.Freeze();
+
+                if (this.Queue.ContainsKey(tgrab))
                 {
-                    int f = this.Pending.First();
-                    this.Pending.Remove(f);
-
-                    ApiRequestBeatmapDetail d = ApiBase.Create<ApiRequestBeatmapDetail>(f.ToString());
-                    ApiBeatmap data = d.GetData<ApiBeatmap>();
-
-                    byte[] bdata;
-                    using (WebClient r = new WebClient())
+                    Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                     {
-                        bdata = r.DownloadData(new Uri(string.Format("{0}beatmaps/{1}/preview/image/custom/80x50/crop", Configuration.ApiLocation, data.Beatmap.Ranked_ID)));
-                    }
-
-                    BitmapImage bmp = new BitmapImage();
-                    bmp.BeginInit();
-                    bmp.StreamSource = new MemoryStream(bdata);
-                    bmp.EndInit();
-
-                    bmp.Freeze();
-
-                    if (this.Queue.ContainsKey(f))
-                    {
-                        Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
-                        {
-                            this.Queue[f].Beatmap = data.Beatmap.Ranked_ID;
-                            this.Queue[f].Title = data.Beatmap.Title;
-                            this.Queue[f].Size = data.Beatmap.Size;
-                            this.Queue[f].Image = bmp;
-                            this.Queue[f].UpdateData();
-                        }));
-                    }
-                    else
-                    {
-                        Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
-                        {
-                            QueueItem qi = new QueueItem();
-                            qi.Beatmap = data.Beatmap.Ranked_ID;
-                            qi.Title = data.Beatmap.Title;
-                            qi.Size = data.Beatmap.Size;
-                            qi.Image = bmp;
-
-                            this.Queue.Add(f, qi);
-                            this.QueuedList.Children.Add(qi);
-                        }));
-                    }
+                        this.Queue[tgrab].Image = bmp;
+                        this.Queue[tgrab].UpdateImage();
+                    }));
                 }
-
-                Thread.Sleep(1);
-            }
-        }
-
-        private void StartWorker()
-        {
-            BackgroundWorker bw = new BackgroundWorker();
-            bw.DoWork += new DoWorkEventHandler(this.Worker);
-
-            bw.RunWorkerAsync();
-        }
-
-        private void LoadQueue()
-        {
-            int[] p = DownloadQueueManager.GetQueue();
-            foreach(int i in p)
-            {
-                QueueItem qi = new QueueItem();
-
-                this.Queue.Add(i, qi);
-
-                this.QueuedList.Children.Add(qi);
-                this.Pending.Add(i);
             }
         }
     }

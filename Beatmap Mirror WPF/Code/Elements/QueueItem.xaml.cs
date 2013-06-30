@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Beatmap_Mirror.Code.Structures;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,27 +22,31 @@ namespace Beatmap_Mirror_WPF.Code.Elements
     /// </summary>
     public partial class QueueItem : UserControl
     {
-        public int Beatmap { get; set; }
-        public int Size { get; set; }
         public int Downloaded { get; set; }
-        public string Title { get; set; }
+        public Beatmap Beatmap { get; set; }
         public BitmapSource Image { get; set; }
-        public string BottomString { get; set; }
 
         public QueueItem()
         {
             InitializeComponent();
 
-            this.Image = new BitmapImage();
             this.DataContext = this;
         }
 
-        public void UpdateData()
+        public void UpdateProgress()
         {
-            this.TTitle.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { this.TTitle.Text = this.Title; }));
-            this.TImage.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { this.TImage.Source = this.Image; }));
-            if (this.Size != 0)
-                this.TProgress.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { this.TProgress.Value = Math.Floor((double)this.Downloaded / (double)this.Size * 100.0); }));
+            this.TProgress.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+            {
+                this.TProgress.Value = Math.Floor((double)this.Downloaded / (double)this.Beatmap.Size * 100.0);
+            }));
+        }
+
+        public void UpdateImage()
+        {
+            this.TImage.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+            {
+                this.TImage.Source = this.Image;
+            }));
         }
     }
 }

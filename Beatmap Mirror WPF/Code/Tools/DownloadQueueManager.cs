@@ -3,6 +3,7 @@ using Beatmap_Mirror.Code.Api.Requests;
 using Beatmap_Mirror.Code.Structures;
 using Beatmap_Mirror_WPF.Windows;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,18 +16,18 @@ namespace Beatmap_Mirror.Code.Tools
 {
     public static class DownloadQueueManager
     {
-        private static List<DownloadQueueEntry> Queue = new List<DownloadQueueEntry>();
-        private static Thread DownloaderThread;
+        private static BlockingCollection<Beatmap> Queue = new BlockingCollection<Beatmap>();
+        private static Thread[] DownloaderThread;
 
-        public delegate void EInt(int BeatmapID);
-        public delegate void EMap(int BeatmapID, int downloaded);
-        public static event EInt QueuedFile;
-        public static event EInt DownloadFinished;
-        public static event EMap FileUpdate;
+        public delegate void EMap(Beatmap bm);
+        public delegate void EMapP(Beatmap bm, int downlaoded);
+        public static event EMap QueuedFile;
+        public static event EMap DownloadFinished;
+        public static event EMapP FileUpdate;
 
         private static DownloadQueue dqForm;
 
-        public static void AddToQueue(int BeatmapId, DownloadType Type)
+        public static void AddToQueue(Beatmap bm, DownloadType Type)
         {
             if (dqForm == null)
             {
@@ -40,57 +41,58 @@ namespace Beatmap_Mirror.Code.Tools
                 return;
             }
 
-            Queue.Add(new DownloadQueueEntry(BeatmapId));
-
-            try { QueuedFile(BeatmapId); }
-            catch { }
+            Queue.Add(bm);
+            if (QueuedFile != null)
+                QueuedFile(bm);
 
             if (DownloaderThread == null)
             {
-                DownloaderThread = new Thread(new ThreadStart(DownloadQueue));
-                DownloaderThread.Start();
+                DownloaderThread = new Thread[4];
+
+                DownloaderThread[0] = new Thread(new ThreadStart(DownloadQueue));
+                DownloaderThread[0].Start();
+
+                DownloaderThread[1] = new Thread(new ThreadStart(DownloadQueue));
+                DownloaderThread[1].Start();
+
+                DownloaderThread[2] = new Thread(new ThreadStart(DownloadQueue));
+                DownloaderThread[2].Start();
+
+                DownloaderThread[3] = new Thread(new ThreadStart(DownloadQueue));
+                DownloaderThread[3].Start();
             }
         }
 
-        public static int[] GetQueue()
+        public static Beatmap[] GetQueue()
         {
-            return Queue.Select(item => item.RankedBeatmapID).ToArray();
+            return Queue.ToArray();
         }
 
         private static void DownloadQueue()
         {
-            Thread.Sleep(1000);
-
+            Beatmap map;
             while (true)
             {
-                if (Queue.Count > 0)
+                map = Queue.Take();
+
+                Console.WriteLine(map.Name);
+
+                ApiRequestBeatmapDownload Download = ApiBase.Create<ApiRequestBeatmapDownload>(map.Ranked_ID.ToString());
+                Download.EOnDownloadUpdate += (long Downloaded) =>
                 {
-                    DownloadQueueEntry ent = Queue.First();
-                    if (ent.Gathered == false)
-                    {
-                        Thread.Sleep(500);
-                        continue;
-                    }
+                    if (FileUpdate != null)
+                        FileUpdate(map, (int)Downloaded);
+                };
 
-                    Queue.Remove(ent);
+                Download.EOnDownloadComplete += (byte[] Buffer) =>
+                {
+                    File.WriteAllBytes(string.Format("{0}\\{1}.{2}", Configuration.BeatmapDownloadLocation, map.Name, map.Type.ToString()), Buffer);
 
-                    ApiRequestBeatmapDownload down = ApiBase.Create<ApiRequestBeatmapDownload>(ent.RankedBeatmapID.ToString());
-                    down.EOnDownloadComplete += (byte[] Buffer) =>
-                    {
-                        File.WriteAllBytes(string.Format("{0}\\{1}.{2}", Configuration.BeatmapDownloadLocation, ent.Name, ent.Ext), Buffer);
-                        try { DownloadFinished(ent.RankedBeatmapID); }
-                        catch { }
-                    };
+                    if (DownloadFinished != null)
+                        DownloadFinished(map);
+                };
 
-                    down.EOnDownloadUpdate += (long Downloaded, long Total) =>
-                    {
-                        try { FileUpdate(ent.RankedBeatmapID, (int)Downloaded); }
-                        catch { }
-                    };
-                    down.SendRequest();
-                }
-
-                Thread.Sleep(10);
+                Download.SendRequest();
             }
         }
 
@@ -98,52 +100,6 @@ namespace Beatmap_Mirror.Code.Tools
         {
             Beatmap,
             MP3
-        }
-    }
-
-    public class DownloadQueueEntry
-    {
-        public int RankedBeatmapID { get; private set; }
-        public int Size { get; private set; }
-        public int Downloaded { get; private set; }
-        public string Name { get; private set; }
-        public string Ext { get; private set; }
-        public DownloadStatus Status { get; private set; }
-
-        public bool Gathered { get; set; }
-
-        public DownloadQueueEntry(int Beatmap)
-        {
-            this.RankedBeatmapID = Beatmap;
-            this.Gathered = false;
-            this.GatherData();
-        }
-
-        public void GatherData()
-        {
-            Threaded.Add(() =>
-            {
-                ApiRequestBeatmapDetail d = ApiBase.Create<ApiRequestBeatmapDetail>(this.RankedBeatmapID.ToString());
-                ApiBeatmap Detail = d.GetData<ApiBeatmap>();
-
-                this.Size = Detail.Beatmap.Size;
-                this.Name = Detail.Beatmap.Name;
-                this.Ext = Detail.Beatmap.Type.ToString();
-
-                this.Gathered = true;
-            });
-        }
-
-        public void UpdateStatus()
-        {
-            //TODO
-        }
-
-        public enum DownloadStatus
-        {
-            Queued,
-            Downloading,
-            Finished
         }
     }
 }

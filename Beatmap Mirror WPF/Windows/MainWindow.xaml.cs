@@ -79,7 +79,7 @@ namespace Beatmap_Mirror_WPF.Windows
         private void MenuItemDownloadBeatmap_Click(object sender, RoutedEventArgs e)
         {
             foreach (Beatmap bm in this.SearchResults.SelectedItems)
-                DownloadQueueManager.AddToQueue(bm.Ranked_ID, DownloadQueueManager.DownloadType.Beatmap);
+                DownloadQueueManager.AddToQueue(bm, DownloadQueueManager.DownloadType.Beatmap);
 
             this.SearchResults.SelectedItem = null;
         }
@@ -87,7 +87,7 @@ namespace Beatmap_Mirror_WPF.Windows
         private void MenuItemDownloadMP3_Click(object sender, RoutedEventArgs e)
         {
             foreach (Beatmap bm in this.SearchResults.SelectedItems)
-                DownloadQueueManager.AddToQueue(bm.Ranked_ID, DownloadQueueManager.DownloadType.MP3);
+                DownloadQueueManager.AddToQueue(bm, DownloadQueueManager.DownloadType.MP3);
 
             this.SearchResults.SelectedItem = null;
         }

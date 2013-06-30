@@ -39,7 +39,7 @@ namespace Beatmap_Mirror.Code.Api
 
         protected string[] Parameters { get; set; }
 
-        public delegate void DDownloadProgress(long Downloaded, long Total);
+        public delegate void DDownloadProgress(long Downloaded);
         public delegate void DDownloadComplete(byte[] Buffer);
 
         public event DDownloadProgress EOnDownloadUpdate;
@@ -62,38 +62,42 @@ namespace Beatmap_Mirror.Code.Api
 
         public string SendRequest()
         {
-            WebClient wc = new WebClient();
-            wc.Proxy = null;
-            wc.Headers.Add(HttpRequestHeader.UserAgent, "Osu!Mirror");
-
             if (this.RequestMethod == ApiRequestMethod.Text)
             {
+                WebClient wc = new WebClient();
+                wc.Proxy = null;
+                wc.Headers.Add(HttpRequestHeader.UserAgent, "Osu!Mirror");
+
                 return wc.DownloadString(string.Format("{0}{1}", Configuration.ApiLocation, this.BuildQuery()));
             }
             else if (this.RequestMethod == ApiRequestMethod.Download)
             {
                 MemoryStream ms = new MemoryStream();
 
-                wc.DownloadDataCompleted += (object sender, DownloadDataCompletedEventArgs e) =>
+                HttpWebRequest r = (HttpWebRequest)WebRequest.Create(string.Format("{0}{1}", Configuration.ApiLocation, string.Format(this.Request, this.Parameters)));
+                r.Method = "GET";
+                using (WebResponse response = r.GetResponse())
                 {
-                    try { EOnDownloadComplete(e.Result); }
-                    catch { }
-                };
+                    using (Stream s = response.GetResponseStream())
+                    {
+                        int total = 0;
+                        int i = 0;
+                        byte[] buff = new byte[1024 * 4]; // 4kb buffer
 
-                wc.DownloadProgressChanged += (object sender, DownloadProgressChangedEventArgs e) =>
-                {
-                    try { EOnDownloadUpdate(e.BytesReceived, e.TotalBytesToReceive); }
-                    catch { }
-                };
+                        while ((i = s.Read(buff, 0, buff.Length)) > 0)
+                        {
+                            total += i;
+                            ms.Write(buff, 0, i);
 
-                wc.DownloadDataAsync(new Uri(string.Format("{0}{1}", Configuration.ApiLocation, string.Format(this.Request, this.Parameters))));
-                
-                while (wc.IsBusy)
-                    Thread.Sleep(10);
-                //byte[] data = wc.DownloadData(new Uri(string.Format("{0}{1}", Configuration.ApiLocation, string.Format(this.Request, this.Parameters))));
+                            if (EOnDownloadUpdate != null)
+                                EOnDownloadUpdate(total);
+                        }
 
-                //try { EOnDownloadComplete(data); }
-                //catch { }
+                        if (EOnDownloadComplete != null)
+                            EOnDownloadComplete(ms.GetBuffer());
+
+                    }
+                }
             }
 
             return null;
