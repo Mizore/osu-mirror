@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Beatmap_Mirror.Code;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -20,6 +21,7 @@ namespace Beatmap_Mirror_WPF
 
         public App()
         {
+            Configuration.Innit();
 #if DEBUG
             // Lets create debug console, useful for printing out data into it.
             // It will obviously be non-visible in Relese mode.

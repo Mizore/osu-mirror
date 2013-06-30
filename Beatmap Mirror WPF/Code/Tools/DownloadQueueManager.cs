@@ -4,7 +4,9 @@ using Beatmap_Mirror.Code.Structures;
 using Beatmap_Mirror_WPF.Windows;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -19,6 +21,7 @@ namespace Beatmap_Mirror.Code.Tools
         public delegate void EInt(int BeatmapID);
         public delegate void EMap(int BeatmapID, int downloaded);
         public static event EInt QueuedFile;
+        public static event EInt DownloadFinished;
         public static event EMap FileUpdate;
 
         private static DownloadQueue dqForm;
@@ -56,16 +59,35 @@ namespace Beatmap_Mirror.Code.Tools
 
         private static void DownloadQueue()
         {
+            Thread.Sleep(1000);
+
             while (true)
             {
                 if (Queue.Count > 0)
                 {
                     DownloadQueueEntry ent = Queue.First();
+                    if (ent.Gathered == false)
+                    {
+                        Thread.Sleep(500);
+                        continue;
+                    }
+
                     Queue.Remove(ent);
 
-                    //try { FileUpdate(ent.RankedBeatmapID, r.Next(0, ent.Size)); }
-                    //catch { }
+                    ApiRequestBeatmapDownload down = ApiBase.Create<ApiRequestBeatmapDownload>(ent.RankedBeatmapID.ToString());
+                    down.EOnDownloadComplete += (byte[] Buffer) =>
+                    {
+                        File.WriteAllBytes(string.Format("{0}\\{1}.{2}", Configuration.BeatmapDownloadLocation, ent.Name, ent.Ext), Buffer);
+                        try { DownloadFinished(ent.RankedBeatmapID); }
+                        catch { }
+                    };
 
+                    down.EOnDownloadUpdate += (long Downloaded, long Total) =>
+                    {
+                        try { FileUpdate(ent.RankedBeatmapID, (int)Downloaded); }
+                        catch { }
+                    };
+                    down.SendRequest();
                 }
 
                 Thread.Sleep(10);
@@ -84,21 +106,32 @@ namespace Beatmap_Mirror.Code.Tools
         public int RankedBeatmapID { get; private set; }
         public int Size { get; private set; }
         public int Downloaded { get; private set; }
+        public string Name { get; private set; }
+        public string Ext { get; private set; }
         public DownloadStatus Status { get; private set; }
+
+        public bool Gathered { get; set; }
 
         public DownloadQueueEntry(int Beatmap)
         {
             this.RankedBeatmapID = Beatmap;
-
+            this.Gathered = false;
             this.GatherData();
         }
 
         public void GatherData()
         {
-            ApiRequestBeatmapDetail d = ApiBase.Create<ApiRequestBeatmapDetail>(this.RankedBeatmapID.ToString());
-            ApiBeatmap Detail = d.GetData<ApiBeatmap>();
+            Threaded.Add(() =>
+            {
+                ApiRequestBeatmapDetail d = ApiBase.Create<ApiRequestBeatmapDetail>(this.RankedBeatmapID.ToString());
+                ApiBeatmap Detail = d.GetData<ApiBeatmap>();
 
-            this.Size = Detail.Beatmap.Size;
+                this.Size = Detail.Beatmap.Size;
+                this.Name = Detail.Beatmap.Name;
+                this.Ext = Detail.Beatmap.Type.ToString();
+
+                this.Gathered = true;
+            });
         }
 
         public void UpdateStatus()

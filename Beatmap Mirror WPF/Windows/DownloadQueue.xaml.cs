@@ -33,6 +33,8 @@ namespace Beatmap_Mirror_WPF.Windows
         private Dictionary<int, QueueItem> Queue = new Dictionary<int, QueueItem>();
         private List<int> Pending = new List<int>();
 
+        private object Lock = new object();
+
         public DownloadQueue()
         {
             InitializeComponent();
@@ -51,6 +53,29 @@ namespace Beatmap_Mirror_WPF.Windows
             {
                 this.Queue[BeatmapID].Downloaded = downloaded;
                 this.Queue[BeatmapID].UpdateData();
+            };
+
+            DownloadQueueManager.DownloadFinished += (int BeatmapID) =>
+            {
+                lock (this.Lock)
+                {
+                    Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                    {
+                        QueueItem i = this.Queue[BeatmapID];
+                        var index = 0;
+                        foreach (QueueItem r in this.QueuedList.Children)
+                        {
+                            if (r.Beatmap == BeatmapID)
+                                break;
+                            else
+                                index++;
+
+                        }
+
+                        this.QueuedList.Children.RemoveAt(index);
+                        this.Queue.Remove(BeatmapID);
+                    }));
+                }
             };
 
             this.LoadQueue();
@@ -86,6 +111,7 @@ namespace Beatmap_Mirror_WPF.Windows
                     {
                         Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                         {
+                            this.Queue[f].Beatmap = data.Beatmap.Ranked_ID;
                             this.Queue[f].Title = data.Beatmap.Title;
                             this.Queue[f].Size = data.Beatmap.Size;
                             this.Queue[f].Image = bmp;
@@ -97,6 +123,7 @@ namespace Beatmap_Mirror_WPF.Windows
                         Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                         {
                             QueueItem qi = new QueueItem();
+                            qi.Beatmap = data.Beatmap.Ranked_ID;
                             qi.Title = data.Beatmap.Title;
                             qi.Size = data.Beatmap.Size;
                             qi.Image = bmp;
@@ -107,7 +134,7 @@ namespace Beatmap_Mirror_WPF.Windows
                     }
                 }
 
-                Thread.Sleep(100);
+                Thread.Sleep(1);
             }
         }
 

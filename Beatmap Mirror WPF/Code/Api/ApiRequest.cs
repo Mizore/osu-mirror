@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace Beatmap_Mirror.Code.Api
 {
@@ -86,6 +87,13 @@ namespace Beatmap_Mirror.Code.Api
                 };
 
                 wc.DownloadDataAsync(new Uri(string.Format("{0}{1}", Configuration.ApiLocation, string.Format(this.Request, this.Parameters))));
+                
+                while (wc.IsBusy)
+                    Thread.Sleep(10);
+                //byte[] data = wc.DownloadData(new Uri(string.Format("{0}{1}", Configuration.ApiLocation, string.Format(this.Request, this.Parameters))));
+
+                //try { EOnDownloadComplete(data); }
+                //catch { }
             }
 
             return null;

@@ -21,6 +21,7 @@ namespace Beatmap_Mirror_WPF.Code.Elements
     /// </summary>
     public partial class QueueItem : UserControl
     {
+        public int Beatmap { get; set; }
         public int Size { get; set; }
         public int Downloaded { get; set; }
         public string Title { get; set; }
