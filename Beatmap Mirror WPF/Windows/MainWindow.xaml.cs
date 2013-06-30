@@ -3,6 +3,7 @@ using Beatmap_Mirror.Code.Api;
 using Beatmap_Mirror.Code.Api.Requests;
 using Beatmap_Mirror.Code.Structures;
 using Beatmap_Mirror.Code.Tools;
+using Beatmap_Mirror_WPF.Code.Tools;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -29,6 +30,20 @@ namespace Beatmap_Mirror_WPF.Windows
         public MainWindow()
         {
             InitializeComponent();
+
+            string temp = RegistryHelper.GetKey("BeatmapLocation");
+            if (temp != null)
+            {
+                Configuration.BeatmapDownloadLocation = temp;
+                this.BeatmapLocation.Text = temp;
+            }
+
+            temp = RegistryHelper.GetKey("MP3Location");
+            if (temp != null)
+            {
+                Configuration.Mp3DownloadLocation = temp;
+                this.MP3Location.Text = temp;
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -113,6 +128,7 @@ namespace Beatmap_Mirror_WPF.Windows
             {
                 Configuration.BeatmapDownloadLocation = dialog.SelectedPath;
                 this.BeatmapLocation.Text = dialog.SelectedPath;
+                RegistryHelper.SetKey("BeatmapLocation", dialog.SelectedPath);
             }
         }
 
@@ -125,6 +141,7 @@ namespace Beatmap_Mirror_WPF.Windows
             {
                 Configuration.Mp3DownloadLocation = dialog.SelectedPath;
                 this.MP3Location.Text = dialog.SelectedPath;
+                RegistryHelper.SetKey("MP3Location", dialog.SelectedPath);
             }
         }
 

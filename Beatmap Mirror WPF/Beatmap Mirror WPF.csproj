@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\Build\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -28,7 +28,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Build\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -260,6 +260,7 @@
     <Compile Include="Code\Tools\CommandParser.cs" />
     <Compile Include="Code\Tools\DownloadQueueManager.cs" />
     <Compile Include="Code\Tools\FileSizeFormatProvider.cs" />
+    <Compile Include="Code\Tools\Registry.cs" />
     <Compile Include="Code\Tools\Threaded.cs" />
     <Compile Include="Windows\BeatmapDetails.xaml.cs">
       <DependentUpon>BeatmapDetails.xaml</DependentUpon>
