@@ -33,12 +33,22 @@ namespace Beatmap_Mirror.Code.Tools
             {
                 dqForm = new DownloadQueue();
                 dqForm.Show();
-            }
 
-            if (string.IsNullOrEmpty(Configuration.BeatmapDownloadLocation) || string.IsNullOrEmpty(Configuration.Mp3DownloadLocation))
+                dqForm.Closed += (object sender, EventArgs e) =>
+                {
+                    dqForm = null;
+                };
+            }
+            else if (dqForm.Visibility != Visibility.Visible)
+                dqForm.Show();
+
+            if (Type == DownloadType.Beatmap)
             {
-                MessageBox.Show("Please first select download locations in settings pannel at the bottom of the window.", "Welp", MessageBoxButton.OK, MessageBoxImage.Information);
-                return;
+                if (string.IsNullOrEmpty(Configuration.BeatmapDownloadLocation))
+                {
+                    MessageBox.Show("Please first select download locations in settings pannel at the bottom of the window.", "Welp", MessageBoxButton.OK, MessageBoxImage.Information);
+                    return;
+                }
             }
 
             Queue.Add(bm);

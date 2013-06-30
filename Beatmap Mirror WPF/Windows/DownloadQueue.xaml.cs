@@ -97,5 +97,13 @@ namespace Beatmap_Mirror_WPF.Windows
                 }
             }
         }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            if (this.Queue.Count == 0)
+                this.Hide();
+
+            e.Cancel = true;
+        }
     }
 }

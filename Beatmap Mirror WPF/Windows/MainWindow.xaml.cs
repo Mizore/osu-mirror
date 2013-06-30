@@ -5,6 +5,7 @@ using Beatmap_Mirror.Code.Structures;
 using Beatmap_Mirror.Code.Tools;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -125,6 +126,14 @@ namespace Beatmap_Mirror_WPF.Windows
                 Configuration.Mp3DownloadLocation = dialog.SelectedPath;
                 this.MP3Location.Text = dialog.SelectedPath;
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (System.Windows.MessageBox.Show("You sure you want to quit?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+                e.Cancel = true;
+            else
+                Process.GetCurrentProcess().Kill();
         }
     }
 }
