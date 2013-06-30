@@ -47,6 +47,12 @@ namespace Beatmap_Mirror_WPF.Windows
                 this.Pending.Add(BeatmapID);
             };
 
+            DownloadQueueManager.FileUpdate += (int BeatmapID, int downloaded) =>
+            {
+                this.Queue[BeatmapID].Downloaded = downloaded;
+                this.Queue[BeatmapID].UpdateData();
+            };
+
             this.LoadQueue();
             this.StartWorker();
         }

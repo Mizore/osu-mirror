@@ -9,7 +9,7 @@
         <Grid>
             <Image x:Name="TImage" HorizontalAlignment="Left" Source="{Binding Image, Mode=OneWay}" Stretch="None" Width="80" Height="50" VerticalAlignment="Top"/>
             <TextBlock x:Name="TTitle" Margin="85,10,10,0" Text="{Binding Title, Mode=OneWay}" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBlock x:Name="TDetails" Margin="85,26,10,0" Text="{Binding BottomString, Mode=OneWay}" VerticalAlignment="Top" TextAlignment="Right"/>
+            <ProgressBar x:Name="TProgress" Height="50" Margin="0,0" VerticalAlignment="Bottom" Value="{Binding PValue}" BorderBrush="{x:Null}" Foreground="#2306B025" Background="{x:Null}" BorderThickness="0" Panel.ZIndex="10"/>
         </Grid>
     </Border>
 </UserControl>

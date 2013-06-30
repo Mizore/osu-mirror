@@ -38,8 +38,9 @@ namespace Beatmap_Mirror_WPF.Code.Elements
         public void UpdateData()
         {
             this.TTitle.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { this.TTitle.Text = this.Title; }));
-            this.TDetails.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => {  }));
             this.TImage.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { this.TImage.Source = this.Image; }));
+            if (this.Size != 0)
+                this.TProgress.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() => { this.TProgress.Value = Math.Floor((double)this.Downloaded / (double)this.Size * 100.0); }));
         }
     }
 }
