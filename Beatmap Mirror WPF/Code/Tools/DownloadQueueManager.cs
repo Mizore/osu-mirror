@@ -96,7 +96,7 @@ namespace Beatmap_Mirror.Code.Tools
 
                 Download.EOnDownloadComplete += (byte[] Buffer) =>
                 {
-                    File.WriteAllBytes(string.Format("{0}\\{1}.{2}", Configuration.BeatmapDownloadLocation, map.Name, map.Type.ToString()), Buffer);
+                    File.WriteAllBytes(string.Format("{0}\\{1}.{2}", Configuration.BeatmapDownloadLocation, map.Name, map.Type.ToString().ToLower()), Buffer);
 
                     if (DownloadFinished != null)
                         DownloadFinished(map);
