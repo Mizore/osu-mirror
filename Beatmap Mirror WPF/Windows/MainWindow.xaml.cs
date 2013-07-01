@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,6 +21,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Beatmap_Mirror_WPF.Windows
 {
@@ -59,44 +61,51 @@ namespace Beatmap_Mirror_WPF.Windows
 
         private void PerformBeatmapSearch()
         {
-            List<string> Filters = new List<string>();
-
-            if (!string.IsNullOrWhiteSpace(this.SearchTitle.Text))
-                Filters.Add(string.Format("maps.title.like.{0}", this.SearchTitle.Text));
-
-            if (!string.IsNullOrWhiteSpace(this.SearchCreator.Text))
-                Filters.Add(string.Format("metadata.m-creator.like.{0}", this.SearchCreator.Text));
-
-            if (!string.IsNullOrWhiteSpace(this.SearchSource.Text))
-                Filters.Add(string.Format("metadata.m_source.like.{0}", this.SearchSource.Text));
-
-            if (!string.IsNullOrWhiteSpace(this.SearchTags.Text))
-                Filters.Add(string.Format("metadata.m_tags.like.{0}", this.SearchTags.Text));
-
-            if (this.SearchSizeMin.Value > 0)
-                Filters.Add(string.Format("maps.size.gteq.{0}", this.SearchSizeMin.Value));
-
-            if (this.SearchSizeMax.Value > 0)
-                Filters.Add(string.Format("maps.size.lteq.{0}", this.SearchSizeMax.Value));
-
-            if (this.SearchVersion.Value > 0)
-                Filters.Add(string.Format("metadata.version.eq.{0}", this.SearchVersion.Value));
-
-            ApiRequestSearch search = ApiBase.Create<ApiRequestSearch>(Filters.ToArray());
-            ApiSearch data = search.GetData<ApiSearch>();
-
-            this.SearchResults.Items.Clear();
-            this.RawSearchResultList.Clear();
-
-            this.RawSearchResultList.AddRange(data.Beatmaps);
-
-            if (data == null)
-                return;
-
-            foreach (Beatmap bm in data.Beatmaps)
+            ThreadPool.QueueUserWorkItem(new WaitCallback((object ob) =>
             {
-                this.SearchResults.Items.Add(bm);
-            }
+                List<string> Filters = new List<string>();
+
+                Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                {
+                    if (!string.IsNullOrWhiteSpace(this.SearchTitle.Text))
+                        Filters.Add(string.Format("maps.title.like.{0}", this.SearchTitle.Text));
+
+                    if (!string.IsNullOrWhiteSpace(this.SearchCreator.Text))
+                        Filters.Add(string.Format("metadata.m-creator.like.{0}", this.SearchCreator.Text));
+
+                    if (!string.IsNullOrWhiteSpace(this.SearchSource.Text))
+                        Filters.Add(string.Format("metadata.m_source.like.{0}", this.SearchSource.Text));
+
+                    if (!string.IsNullOrWhiteSpace(this.SearchTags.Text))
+                        Filters.Add(string.Format("metadata.m_tags.like.{0}", this.SearchTags.Text));
+
+                    if (this.SearchSizeMin.Value > 0)
+                        Filters.Add(string.Format("maps.size.gteq.{0}", this.SearchSizeMin.Value));
+
+                    if (this.SearchSizeMax.Value > 0)
+                        Filters.Add(string.Format("maps.size.lteq.{0}", this.SearchSizeMax.Value));
+
+                    if (this.SearchVersion.Value > 0)
+                        Filters.Add(string.Format("metadata.version.eq.{0}", this.SearchVersion.Value));
+                }));
+
+                ApiRequestSearch search = ApiBase.Create<ApiRequestSearch>(Filters.ToArray());
+                ApiSearch data = search.GetData<ApiSearch>();
+
+                Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                {
+                    this.SearchResults.Items.Clear();
+                    this.RawSearchResultList.Clear();
+
+                    this.RawSearchResultList.AddRange(data.Beatmaps);
+
+                    if (data == null)
+                        return;
+
+                    foreach (Beatmap bm in data.Beatmaps)
+                        this.SearchResults.Items.Add(bm);
+                }));
+            }));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
