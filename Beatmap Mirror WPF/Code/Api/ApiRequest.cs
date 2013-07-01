@@ -70,15 +70,20 @@ namespace Beatmap_Mirror.Code.Api
 
                 try
                 {
-                    return wc.DownloadString(string.Format("{0}{1}", Configuration.ApiLocation, this.BuildQuery()));
+                    string location = string.Format("{0}{1}", Configuration.ApiLocation, this.BuildQuery());
+                    Console.WriteLine("Api: {0}", location);
+
+                    return wc.DownloadString(location);
                 }
                 catch { return null; }
             }
             else if (this.RequestMethod == ApiRequestMethod.Download)
             {
                 MemoryStream ms = new MemoryStream();
+                string location = string.Format("{0}{1}", Configuration.ApiLocation, string.Format(this.Request, this.Parameters));
+                Console.WriteLine("Api DL: {0}", location);
 
-                HttpWebRequest r = (HttpWebRequest)WebRequest.Create(string.Format("{0}{1}", Configuration.ApiLocation, string.Format(this.Request, this.Parameters)));
+                HttpWebRequest r = (HttpWebRequest)WebRequest.Create(location);
                 r.Method = "GET";
                 using (WebResponse response = r.GetResponse())
                 {
