@@ -35,7 +35,14 @@ namespace Beatmap_Mirror_WPF.Windows
         {
             InitializeComponent();
 
-            string temp = RegistryHelper.GetKey("BeatmapLocation");
+            string temp = RegistryHelper.GetKey("ParrarelDownloads");
+            if (temp != null)
+                Configuration.ParrarelDownloads = int.Parse(temp);
+            else
+                RegistryHelper.SetKey("ParrarelDownloads", "2");
+
+
+            temp = RegistryHelper.GetKey("BeatmapLocation");
             if (temp != null)
             {
                 Configuration.BeatmapDownloadLocation = temp;
@@ -94,12 +101,8 @@ namespace Beatmap_Mirror_WPF.Windows
 
         private void MenuItemDetails_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine("bm details");
             foreach (Beatmap bm in this.SearchResults.SelectedItems)
-            {
-                Console.WriteLine(bm.Ranked_ID);
                 new BeatmapDetails(bm.Ranked_ID).Show();
-            }
         }
 
         private void MenuItemDownloadBeatmap_Click(object sender, RoutedEventArgs e)

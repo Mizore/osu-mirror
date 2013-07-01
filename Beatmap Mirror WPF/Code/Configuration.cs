@@ -15,6 +15,8 @@ namespace Beatmap_Mirror.Code
         public static string BeatmapDownloadLocation = null;
         public static string Mp3DownloadLocation = null;
 
+        public static int ParrarelDownloads = 2;
+
         public static void Innit()
         {
             ServicePointManager.DefaultConnectionLimit = int.MaxValue;

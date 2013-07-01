@@ -29,10 +29,9 @@ namespace Beatmap_Mirror_WPF.Code.Tools
             Key = Registry.CurrentUser.OpenSubKey("SOFTWARE", true);
             RegistryKey k = Key.OpenSubKey("OsuMirror", true);
             if (k == null)
-            {
                 Key.CreateSubKey("OsuMirror");
-                Key = Key.OpenSubKey("OsuMirror", true);
-            }
+
+            Key = Key.OpenSubKey("OsuMirror", true);
         }
     }
 }

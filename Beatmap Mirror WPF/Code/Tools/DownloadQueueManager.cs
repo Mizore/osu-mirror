@@ -1,6 +1,7 @@
 ﻿using Beatmap_Mirror.Code.Api;
 using Beatmap_Mirror.Code.Api.Requests;
 using Beatmap_Mirror.Code.Structures;
+using Beatmap_Mirror_WPF.Code.Api.Requests;
 using Beatmap_Mirror_WPF.Windows;
 using System;
 using System.Collections.Concurrent;
@@ -16,7 +17,7 @@ namespace Beatmap_Mirror.Code.Tools
 {
     public static class DownloadQueueManager
     {
-        private static BlockingCollection<Beatmap> Queue = new BlockingCollection<Beatmap>();
+        private static BlockingCollection<QueueDownload> Queue = new BlockingCollection<QueueDownload>();
         private static Thread[] DownloaderThread;
 
         public delegate void EMap(Beatmap bm);
@@ -42,67 +43,84 @@ namespace Beatmap_Mirror.Code.Tools
             else if (dqForm.Visibility != Visibility.Visible)
                 dqForm.Show();
 
-            if (Type == DownloadType.Beatmap)
+            if ((Type == DownloadType.Beatmap && string.IsNullOrEmpty(Configuration.BeatmapDownloadLocation)) || (Type == DownloadType.MP3 && string.IsNullOrEmpty(Configuration.Mp3DownloadLocation)))
             {
-                if (string.IsNullOrEmpty(Configuration.BeatmapDownloadLocation))
-                {
-                    MessageBox.Show("Please first select download locations in settings pannel at the bottom of the window.", "Welp", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
+                MessageBox.Show("Please first select download locations in settings pannel at the bottom of the window.", "Welp", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
             }
 
-            Queue.Add(bm);
+            Queue.Add(new QueueDownload()
+            {
+                Beatmap = bm,
+                DownloadType = Type
+            });
+
             if (QueuedFile != null)
                 QueuedFile(bm);
 
             if (DownloaderThread == null)
             {
-                DownloaderThread = new Thread[4];
+                DownloaderThread = new Thread[Configuration.ParrarelDownloads];
 
-                DownloaderThread[0] = new Thread(new ThreadStart(DownloadQueue));
-                DownloaderThread[0].Start();
-
-                DownloaderThread[1] = new Thread(new ThreadStart(DownloadQueue));
-                DownloaderThread[1].Start();
-
-                DownloaderThread[2] = new Thread(new ThreadStart(DownloadQueue));
-                DownloaderThread[2].Start();
-
-                DownloaderThread[3] = new Thread(new ThreadStart(DownloadQueue));
-                DownloaderThread[3].Start();
+                for (int i = 0; i < DownloaderThread.Length; i++)
+                {
+                    DownloaderThread[i] = new Thread(new ThreadStart(DownloadQueue));
+                    DownloaderThread[i].Start();
+                }
             }
         }
 
         public static Beatmap[] GetQueue()
         {
-            return Queue.ToArray();
+            return Queue.Select(e => e.Beatmap).ToArray();
         }
 
         private static void DownloadQueue()
         {
-            Beatmap map;
+            QueueDownload qitem;
             while (true)
             {
-                map = Queue.Take();
+                qitem = Queue.Take();
 
-                Console.WriteLine(map.Name);
-
-                ApiRequestBeatmapDownload Download = ApiBase.Create<ApiRequestBeatmapDownload>(map.Ranked_ID.ToString());
-                Download.EOnDownloadUpdate += (long Downloaded) =>
+                if (qitem.DownloadType == DownloadType.Beatmap)
                 {
-                    if (FileUpdate != null)
-                        FileUpdate(map, (int)Downloaded);
-                };
+                    ApiRequestBeatmapDownload Download = ApiBase.Create<ApiRequestBeatmapDownload>(qitem.Beatmap.Ranked_ID.ToString());
+                    Download.EOnDownloadUpdate += (long Downloaded) =>
+                    {
+                        if (FileUpdate != null)
+                            FileUpdate(qitem.Beatmap, (int)Downloaded);
+                    };
 
-                Download.EOnDownloadComplete += (byte[] Buffer) =>
+                    Download.EOnDownloadComplete += (byte[] Buffer) =>
+                    {
+                        File.WriteAllBytes(string.Format("{0}\\{1}.{2}", Configuration.BeatmapDownloadLocation, qitem.Beatmap.Name, qitem.Beatmap.Type.ToString().ToLower()), Buffer);
+
+                        if (DownloadFinished != null)
+                            DownloadFinished(qitem.Beatmap);
+                    };
+
+                    Download.SendRequest();
+                }
+                else if (qitem.DownloadType == DownloadType.MP3)
                 {
-                    File.WriteAllBytes(string.Format("{0}\\{1}.{2}", Configuration.BeatmapDownloadLocation, map.Name, map.Type.ToString().ToLower()), Buffer);
+                    ApiRequestBeatmapDownloadMP3 MP3Download = ApiBase.Create<ApiRequestBeatmapDownloadMP3>(qitem.Beatmap.Ranked_ID.ToString());
 
-                    if (DownloadFinished != null)
-                        DownloadFinished(map);
-                };
+                    MP3Download.EOnDownloadUpdate += (long Downloaded) =>
+                    {
+                        if (FileUpdate != null)
+                            FileUpdate(qitem.Beatmap, (int)Downloaded);
+                    };
 
-                Download.SendRequest();
+                    MP3Download.EOnDownloadComplete += (byte[] Buffer) =>
+                    {
+                        File.WriteAllBytes(string.Format("{0}\\{1}.mp3", Configuration.Mp3DownloadLocation, qitem.Beatmap.Name), Buffer);
+
+                        if (DownloadFinished != null)
+                            DownloadFinished(qitem.Beatmap);
+                    };
+
+                    MP3Download.SendRequest();
+                }
             }
         }
 
@@ -110,6 +128,12 @@ namespace Beatmap_Mirror.Code.Tools
         {
             Beatmap,
             MP3
+        }
+
+        public class QueueDownload
+        {
+            public Beatmap Beatmap { get; set; }
+            public DownloadType DownloadType { get; set; }
         }
     }
 }

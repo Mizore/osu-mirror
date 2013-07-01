@@ -68,6 +68,7 @@
     <Compile Include="Code\Api\ApiRequestParser.cs" />
     <Compile Include="Code\Api\Requests\ApiRequestBeatmapDetail.cs" />
     <Compile Include="Code\Api\Requests\ApiRequestBeatmapDownload.cs" />
+    <Compile Include="Code\Api\Requests\ApiRequestBeatmapDownloadMP3.cs" />
     <Compile Include="Code\Api\Requests\ApiRequestBeatmaps.cs" />
     <Compile Include="Code\Api\Requests\ApiRequestSearch.cs" />
     <Compile Include="Code\Configuration.cs" />
