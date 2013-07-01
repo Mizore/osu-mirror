@@ -57,7 +57,7 @@ namespace Beatmap_Mirror_WPF.Windows
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void PerformBeatmapSearch()
         {
             List<string> Filters = new List<string>();
 
@@ -73,10 +73,10 @@ namespace Beatmap_Mirror_WPF.Windows
             if (!string.IsNullOrWhiteSpace(this.SearchTags.Text))
                 Filters.Add(string.Format("metadata.m_tags.like.{0}", this.SearchTags.Text));
 
-            if(this.SearchSizeMin.Value > 0)
+            if (this.SearchSizeMin.Value > 0)
                 Filters.Add(string.Format("maps.size.gteq.{0}", this.SearchSizeMin.Value));
 
-            if(this.SearchSizeMax.Value > 0)
+            if (this.SearchSizeMax.Value > 0)
                 Filters.Add(string.Format("maps.size.lteq.{0}", this.SearchSizeMax.Value));
 
             if (this.SearchVersion.Value > 0)
@@ -97,6 +97,11 @@ namespace Beatmap_Mirror_WPF.Windows
             {
                 this.SearchResults.Items.Add(bm);
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.PerformBeatmapSearch();
         }
 
         private void MenuItemDetails_Click(object sender, RoutedEventArgs e)
@@ -214,6 +219,48 @@ namespace Beatmap_Mirror_WPF.Windows
                 foreach (Beatmap bm in this.RawSearchResultList)
                     this.SearchResults.Items.Add(bm);
             }
+        }
+
+        private void SearchTitle_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+                this.PerformBeatmapSearch();
+        }
+
+        private void SearchCreator_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                this.PerformBeatmapSearch();
+        }
+
+        private void SearchSource_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                this.PerformBeatmapSearch();
+        }
+
+        private void SearchTags_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                this.PerformBeatmapSearch();
+        }
+
+        private void SearchSizeMin_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                this.PerformBeatmapSearch();
+        }
+
+        private void SearchSizeMax_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                this.PerformBeatmapSearch();
+        }
+
+        private void SearchVersion_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                this.PerformBeatmapSearch();
         }
     }
 }
