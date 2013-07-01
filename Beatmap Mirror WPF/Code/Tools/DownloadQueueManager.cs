@@ -113,7 +113,7 @@ namespace Beatmap_Mirror.Code.Tools
 
                     MP3Download.EOnDownloadComplete += (byte[] Buffer) =>
                     {
-                        File.WriteAllBytes(string.Format("{0}\\{1}.mp3", Configuration.Mp3DownloadLocation, qitem.Beatmap.Name), Buffer);
+                        File.WriteAllBytes(string.Format("{0}\\{1}.mp3", Configuration.Mp3DownloadLocation, qitem.Beatmap.Title), Buffer);
 
                         if (DownloadFinished != null)
                             DownloadFinished(qitem.Beatmap);
