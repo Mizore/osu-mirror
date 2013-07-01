@@ -45,7 +45,7 @@
                 </Grid>
             </GroupBox>
             <GroupBox Header="Results" DockPanel.Dock="Bottom">
-                <ListView x:Name="SearchResults" ContextMenuOpening="SearchResults_ContextMenuOpening">
+                <ListView x:Name="SearchResults" ContextMenuOpening="SearchResults_ContextMenuOpening" GridViewColumnHeader.Click="SearchResults_Click">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn DisplayMemberBinding="{Binding Ranked_ID}" Header="ID" Width="60" />

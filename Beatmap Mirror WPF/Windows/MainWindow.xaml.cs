@@ -6,6 +6,7 @@ using Beatmap_Mirror.Code.Tools;
 using Beatmap_Mirror_WPF.Code.Tools;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,9 @@ namespace Beatmap_Mirror_WPF.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
+        private ListSortDirection LastSort = ListSortDirection.Ascending;
+        private List<Beatmap> RawSearchResultList = new List<Beatmap>();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -75,6 +79,9 @@ namespace Beatmap_Mirror_WPF.Windows
             ApiSearch data = search.GetData<ApiSearch>();
 
             this.SearchResults.Items.Clear();
+            this.RawSearchResultList.Clear();
+
+            this.RawSearchResultList.AddRange(data.Beatmaps);
 
             if (data == null)
                 return;
@@ -151,6 +158,59 @@ namespace Beatmap_Mirror_WPF.Windows
                 e.Cancel = true;
             else
                 Process.GetCurrentProcess().Kill();
+        }
+
+        private void SearchResults_Click(object sender, RoutedEventArgs e)
+        {
+            GridViewColumnHeader c = e.OriginalSource as GridViewColumnHeader;
+
+            if (c != null)
+            {
+                if (this.LastSort == ListSortDirection.Ascending)
+                    this.LastSort = ListSortDirection.Descending;
+                else
+                    this.LastSort = ListSortDirection.Ascending;
+              
+                switch(c.Column.Header.ToString())
+                {
+                    case "ID":
+                        this.RawSearchResultList.Sort(delegate(Beatmap a, Beatmap b)
+                        {
+                            int xdiff = this.LastSort == ListSortDirection.Ascending ? a.Ranked_ID.CompareTo(b.Ranked_ID) : b.Ranked_ID.CompareTo(a.Ranked_ID);
+                            if (xdiff != 0) 
+                                return xdiff;
+
+                            return 0;
+                        });
+                        break;
+
+                    case "Title":
+                        this.RawSearchResultList.Sort(delegate(Beatmap a, Beatmap b)
+                        {
+                            int xdiff = this.LastSort == ListSortDirection.Ascending ? a.Title.CompareTo(b.Title) : b.Title.CompareTo(a.Title);
+                            if (xdiff != 0) 
+                                return xdiff;
+
+                            return 0;
+                        });
+                        break;
+
+                    case "Size":
+                        this.RawSearchResultList.Sort(delegate(Beatmap a, Beatmap b)
+                        {
+                            int xdiff = this.LastSort == ListSortDirection.Ascending ? a.Size.CompareTo(b.Size) : b.Size.CompareTo(a.Size);
+                            if (xdiff != 0)
+                                return xdiff;
+
+                            return 0;
+                        });
+                        break;
+                }
+
+                this.SearchResults.Items.Clear();
+                foreach (Beatmap bm in this.RawSearchResultList)
+                    this.SearchResults.Items.Add(bm);
+            }
         }
     }
 }
