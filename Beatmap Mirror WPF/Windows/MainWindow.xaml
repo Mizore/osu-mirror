@@ -45,21 +45,19 @@
                 </Grid>
             </GroupBox>
             <GroupBox Header="Results" DockPanel.Dock="Bottom">
-                <ListView x:Name="SearchResults" ContextMenuOpening="SearchResults_ContextMenuOpening">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding Ranked_ID}" Header="ID" Width="60" />
-                            <GridViewColumn DisplayMemberBinding="{Binding Title}" Header="Title" Width="500" />
-                            <GridViewColumn Header="Size" Width="80">
-                                <GridViewColumn.CellTemplate>
+                <DataGrid x:Name="SearchResults" ContextMenuOpening="SearchResults_ContextMenuOpening">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Ranked_ID}" Header="ID" Width="60"/>
+                        <DataGridTextColumn Binding="{Binding Title}" Header="Title" Width="*" />
+                        <DataGridTemplateColumn Header="Size" Width="80">
+                                <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding SizeFormatted}" Width="Auto" TextAlignment="Right" />
                                     </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-                        </GridView>
-                    </ListView.View>
-                    <ListView.ContextMenu>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                    <DataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem x:Name="MenuItemDetails" Header="Details" Click="MenuItemDetails_Click">
                                 <MenuItem.Icon>
@@ -78,8 +76,8 @@
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>
-                    </ListView.ContextMenu>
-                </ListView>
+                    </DataGrid.ContextMenu>
+                </DataGrid>
             </GroupBox>
         </DockPanel>
     </Grid>
