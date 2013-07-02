@@ -78,7 +78,7 @@ namespace Beatmap_Mirror_WPF.Windows
 
                 byte[] bdata;
                 using (WebClient r = new WebClient())
-                    bdata = r.DownloadData(new Uri(string.Format("{0}beatmaps/{1}/preview/image/custom/80x50/crop", Configuration.ApiLocation, tgrab)));
+                    bdata = r.DownloadData(new Uri(string.Format("{0}beatmaps/{1}/content/image/custom/80x50/crop", Configuration.ApiLocation, tgrab)));
 
                 BitmapImage bmp = new BitmapImage();
                 bmp.BeginInit();

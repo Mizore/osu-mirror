@@ -50,12 +50,12 @@ namespace Beatmap_Mirror_WPF.Windows
             this.BeatmapTitle.Text = this.Beatmap.Title;
             this.BeatmapSize.Text = this.Beatmap.SizeFormatted;
 
-            this.ButtonImage.ImageSource = new BitmapImage(new Uri(string.Format("{0}beatmaps/{1}/preview/image/custom/200x150", Configuration.ApiLocation, this.Beatmap.Ranked_ID)));
+            this.ButtonImage.ImageSource = new BitmapImage(new Uri(string.Format("{0}beatmaps/{1}/content/image/custom/200x150/crop", Configuration.ApiLocation, this.Beatmap.Ranked_ID)));
         }
 
         private void ImageButton_Click(object sender, RoutedEventArgs e)
         {
-            new ImageViewer(string.Format("{0}beatmaps/{1}/preview/image/full", Configuration.ApiLocation, this.Beatmap.Ranked_ID)).ShowDialog();
+            new ImageViewer(string.Format("{0}beatmaps/{1}/content/image/full", Configuration.ApiLocation, this.Beatmap.Ranked_ID)).ShowDialog();
         }
     }
 }
