@@ -97,10 +97,10 @@ namespace Beatmap_Mirror_WPF.Windows
                     this.SearchResults.Items.Clear();
                     this.RawSearchResultList.Clear();
 
-                    this.RawSearchResultList.AddRange(data.Beatmaps);
-
                     if (data == null)
                         return;
+
+                    this.RawSearchResultList.AddRange(data.Beatmaps);
 
                     foreach (Beatmap bm in data.Beatmaps)
                         this.SearchResults.Items.Add(bm);
