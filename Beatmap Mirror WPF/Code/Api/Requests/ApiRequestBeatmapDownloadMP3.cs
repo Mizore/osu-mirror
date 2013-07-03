@@ -11,7 +11,7 @@ namespace Beatmap_Mirror_WPF.Code.Api.Requests
     {
         public ApiRequestBeatmapDownloadMP3()
         {
-            base.Request = "beatmaps/{0}/preview/mp3/full";
+            base.Request = "beatmaps/{0}/content/mp3/full";
             base.RequestMethod = ApiRequestMethod.Download;
         }
     }
