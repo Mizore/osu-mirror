@@ -91,7 +91,7 @@ namespace Beatmap_Mirror.Code.Api
                     {
                         int total = 0;
                         int i = 0;
-                        byte[] buff = new byte[1024 * 4]; // 4kb buffer
+                        byte[] buff = new byte[1024 * 64];
 
                         while ((i = s.Read(buff, 0, buff.Length)) > 0)
                         {
