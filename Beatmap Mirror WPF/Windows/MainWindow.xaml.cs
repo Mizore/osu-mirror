@@ -92,13 +92,13 @@ namespace Beatmap_Mirror_WPF.Windows
                 ApiRequestSearch search = ApiBase.Create<ApiRequestSearch>(Filters.ToArray());
                 ApiSearch data = search.GetData<ApiSearch>();
 
+                if (data == null)
+                    return;
+
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
                     this.SearchResults.Items.Clear();
                     this.RawSearchResultList.Clear();
-
-                    if (data == null)
-                        return;
 
                     this.RawSearchResultList.AddRange(data.Beatmaps);
 
