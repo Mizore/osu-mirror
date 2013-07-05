@@ -87,6 +87,10 @@ namespace Beatmap_Mirror_WPF.Windows
 
                     if (this.SearchVersion.Value > 0)
                         Filters.Add(string.Format("metadata.version.eq.{0}", this.SearchVersion.Value));
+
+
+                    this.SearchResults.Items.Clear();
+                    this.RawSearchResultList.Clear();
                 }));
 
                 ApiRequestSearch search = ApiBase.Create<ApiRequestSearch>(Filters.ToArray());
@@ -97,9 +101,6 @@ namespace Beatmap_Mirror_WPF.Windows
 
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
-                    this.SearchResults.Items.Clear();
-                    this.RawSearchResultList.Clear();
-
                     this.RawSearchResultList.AddRange(data.Beatmaps);
 
                     foreach (Beatmap bm in data.Beatmaps)
