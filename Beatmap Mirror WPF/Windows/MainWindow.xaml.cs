@@ -139,9 +139,15 @@ namespace Beatmap_Mirror_WPF.Windows
         private void SearchResults_ContextMenuOpening(object sender, ContextMenuEventArgs e)
         {
             if (this.SearchResults.SelectedItems.Count > 1)
+            {
+                //this.MenuItemFullDetails.IsEnabled = false;
                 this.MenuItemDetails.IsEnabled = false;
+            }
             else
+            {
+                //this.MenuItemFullDetails.IsEnabled = true;
                 this.MenuItemDetails.IsEnabled = true;
+            }
         }
 
         private void BeatmapBrowse_Click(object sender, RoutedEventArgs e)
@@ -271,6 +277,16 @@ namespace Beatmap_Mirror_WPF.Windows
         {
             if (e.Key == Key.Enter)
                 this.PerformBeatmapSearch();
+        }
+
+        private void MenuItemFullDetails_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.SearchResults.SelectedItems.Count > 1)
+                if (System.Windows.MessageBox.Show("This will open multiple browser tabs, are you sure?", "You sure?", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes)
+                    return;
+
+            foreach(Beatmap map in this.SearchResults.SelectedItems)
+                Process.Start("http://osu.ppy.sh/s/" + map.Ranked_ID);
         }
     }
 }

@@ -4,5 +4,6 @@
     <BitmapImage x:Key="ImageInformation" UriSource="Images/information.png" />
     <BitmapImage x:Key="ImageBulletFeed" UriSource="Images/bullet_feed.png" />
     <BitmapImage x:Key="ImageBrickLink" UriSource="Images/brick_link.png" />
+    <BitmapImage x:Key="ImageBrickGo" UriSource="Images/brick_go.png" />
 
 </ResourceDictionary>

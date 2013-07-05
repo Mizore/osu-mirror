@@ -61,6 +61,12 @@
                     </ListView.View>
                     <ListView.ContextMenu>
                         <ContextMenu>
+                            <MenuItem x:Name="MenuItemFullDetails" Header="View on osu.ppy.sh" Click="MenuItemFullDetails_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource ImageBrickGo}" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
                             <MenuItem x:Name="MenuItemDetails" Header="Details" Click="MenuItemDetails_Click">
                                 <MenuItem.Icon>
                                     <Image Source="{StaticResource ImageInformation}" />
