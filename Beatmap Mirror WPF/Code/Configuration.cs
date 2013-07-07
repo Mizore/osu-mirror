@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Beatmap_Mirror_WPF.Code.Tools;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -20,6 +21,22 @@ namespace Beatmap_Mirror.Code
         public static void Innit()
         {
             ServicePointManager.DefaultConnectionLimit = int.MaxValue;
+
+
+            string temp = RegistryHelper.GetKey("ParrarelDownloads");
+            if (temp != null)
+                Configuration.ParrarelDownloads = int.Parse(temp);
+            else
+                RegistryHelper.SetKey("ParrarelDownloads", "2");
+
+
+            temp = RegistryHelper.GetKey("BeatmapLocation");
+            if (temp != null)
+                Configuration.BeatmapDownloadLocation = temp;
+
+            temp = RegistryHelper.GetKey("MP3Location");
+            if (temp != null)
+                Configuration.Mp3DownloadLocation = temp;
         }
     }
 }

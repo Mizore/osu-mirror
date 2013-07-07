@@ -45,7 +45,7 @@ namespace Beatmap_Mirror.Code.Tools
 
             if ((Type == DownloadType.Beatmap && string.IsNullOrEmpty(Configuration.BeatmapDownloadLocation)) || (Type == DownloadType.MP3 && string.IsNullOrEmpty(Configuration.Mp3DownloadLocation)))
             {
-                MessageBox.Show("Please first select download locations in settings pannel at the bottom of the window.", "Welp", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Please first select download locations in settings pannel at the bottom of the window.\n\n Goto: File -> Settings", "Welp", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
 

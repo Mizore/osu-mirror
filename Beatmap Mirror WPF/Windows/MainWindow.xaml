@@ -52,16 +52,6 @@
             </MenuItem>
         </Menu>
         <DockPanel Margin="0,20,0,0">
-            <GroupBox VerticalAlignment="Bottom" Height="90" DockPanel.Dock="Bottom" Header="Settings">
-                <Grid Height="70" Margin="0,0,-12,-2">
-                    <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Beatmap download location" VerticalAlignment="Top"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="33,43,0,0" TextWrapping="Wrap" Text="MP3 download location" VerticalAlignment="Top"/>
-                    <TextBox x:Name="BeatmapLocation" Height="18" Margin="164,10,100,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="BeatmapLocation_TextChanged"/>
-                    <Button x:Name="BeatmapBrowse" Content="Browse" HorizontalAlignment="Right" Margin="0,9,18,0" VerticalAlignment="Top" Width="75" Click="BeatmapBrowse_Click"/>
-                    <TextBox x:Name="MP3Location" Height="18" Margin="164,42,100,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="MP3Location_TextChanged"/>
-                    <Button x:Name="MP3Browse" Content="Browse" HorizontalAlignment="Right" Margin="0,41,18,0" VerticalAlignment="Top" Width="75" Click="MP3Browse_Click"/>
-                </Grid>
-            </GroupBox>
             <GroupBox Header="Search filters" Height="160" DockPanel.Dock="Top" VerticalAlignment="Top">
                 <Grid Height="150" VerticalAlignment="Top" Margin="0,0,-12,-12">
                     <Label Content="Title" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -71,10 +61,10 @@
                     <Label Content="Size more than" HorizontalAlignment="Right" Margin="0,10,275,0" VerticalAlignment="Top"/>
                     <Label Content="and less than" HorizontalAlignment="Right" Margin="0,10,107,0" VerticalAlignment="Top"/>
                     <Label Content="Beatmap version" HorizontalAlignment="Right" Margin="0,41,275,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="SearchTitle" HorizontalAlignment="Left" Height="18" Margin="71,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Background="White" KeyDown="SearchTitle_KeyDown"/>
-                    <TextBox x:Name="SearchCreator" HorizontalAlignment="Left" Height="18" Margin="71,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" KeyDown="SearchCreator_KeyDown"/>
-                    <TextBox x:Name="SearchSource" HorizontalAlignment="Left" Height="18" Margin="71,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" KeyDown="SearchSource_KeyDown"/>
-                    <TextBox x:Name="SearchTags" HorizontalAlignment="Left" Height="18" Margin="71,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" KeyDown="SearchTags_KeyDown"/>
+                    <TextBox x:Name="SearchTitle" HorizontalAlignment="Left" Margin="71,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Background="White" KeyDown="SearchTitle_KeyDown" Height="19"/>
+                    <TextBox x:Name="SearchCreator" HorizontalAlignment="Left" Height="19" Margin="71,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" KeyDown="SearchCreator_KeyDown"/>
+                    <TextBox x:Name="SearchSource" HorizontalAlignment="Left" Height="19" Margin="71,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" KeyDown="SearchSource_KeyDown"/>
+                    <TextBox x:Name="SearchTags" HorizontalAlignment="Left" Height="19" Margin="71,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" KeyDown="SearchTags_KeyDown"/>
                     <Elements:CNumBox x:Name="SearchSizeMin" HorizontalAlignment="Right" Margin="0,13,192,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="78" KeyDown="SearchSizeMin_KeyDown"/>
                     <Elements:CNumBox x:Name="SearchSizeMax" HorizontalAlignment="Right" Margin="0,13,24,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="78" KeyDown="SearchSizeMax_KeyDown"/>
                     <Elements:CNumBox x:Name="SearchVersion" HorizontalAlignment="Right" Margin="0,45,192,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="78" KeyDown="SearchVersion_KeyDown"/>

@@ -33,30 +33,11 @@ namespace Beatmap_Mirror_WPF.Windows
         private ListSortDirection LastSort = ListSortDirection.Ascending;
         private List<Beatmap> RawSearchResultList = new List<Beatmap>();
 
+        private Settings SettingsWindow;
+
         public MainWindow()
         {
             InitializeComponent();
-
-            string temp = RegistryHelper.GetKey("ParrarelDownloads");
-            if (temp != null)
-                Configuration.ParrarelDownloads = int.Parse(temp);
-            else
-                RegistryHelper.SetKey("ParrarelDownloads", "2");
-
-
-            temp = RegistryHelper.GetKey("BeatmapLocation");
-            if (temp != null)
-            {
-                Configuration.BeatmapDownloadLocation = temp;
-                this.BeatmapLocation.Text = temp;
-            }
-
-            temp = RegistryHelper.GetKey("MP3Location");
-            if (temp != null)
-            {
-                Configuration.Mp3DownloadLocation = temp;
-                this.MP3Location.Text = temp;
-            }
         }
 
         private void PerformBeatmapSearch()
@@ -148,24 +129,6 @@ namespace Beatmap_Mirror_WPF.Windows
                 //this.MenuItemFullDetails.IsEnabled = true;
                 this.MenuItemDetails.IsEnabled = true;
             }
-        }
-
-        private void BeatmapBrowse_Click(object sender, RoutedEventArgs e)
-        {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-
-            DialogResult result = dialog.ShowDialog();
-            if (result == System.Windows.Forms.DialogResult.OK)
-                this.BeatmapLocation.Text = dialog.SelectedPath;
-        }
-
-        private void MP3Browse_Click(object sender, RoutedEventArgs e)
-        {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-
-            DialogResult result = dialog.ShowDialog();
-            if (result == System.Windows.Forms.DialogResult.OK)
-                this.MP3Location.Text = dialog.SelectedPath;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -281,22 +244,12 @@ namespace Beatmap_Mirror_WPF.Windows
                 Process.Start("http://osu.ppy.sh/s/" + map.Ranked_ID);
         }
 
-        private void BeatmapLocation_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Configuration.BeatmapDownloadLocation = BeatmapLocation.Text;
-            RegistryHelper.SetKey("BeatmapLocation", BeatmapLocation.Text);
-        }
-
-        private void MP3Location_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            Configuration.Mp3DownloadLocation = MP3Location.Text;
-            RegistryHelper.SetKey("MP3Location", MP3Location.Text);
-        }
-
         private void Menu_ApplicationSettings_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
-            //new Settings().Show();
+            if (this.SettingsWindow == null)
+                this.SettingsWindow = new Settings();
+
+            this.SettingsWindow.Show();
         }
 
         private void Menu_Exit_Click(object sender, RoutedEventArgs e)

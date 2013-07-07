@@ -62,7 +62,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="#FFABADB3" />
         <Setter Property="BorderThickness" Value="1,1,1,1" />
-        <Setter Property="Height" Value="18" />
+        <Setter Property="Height" Value="19" />
         
         <Setter Property="Template">
             <Setter.Value>
