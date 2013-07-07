@@ -22,7 +22,7 @@
         <TextBlock Grid.Row="2" Grid.Column="0" Text="Concurrent downloads:" Margin="7,3"/>
 
         <TextBox x:Name="BeatmapLocation" Grid.Row="0" Grid.Column="1" Width="300" Margin="4,3" TextChanged="BeatmapLocation_TextChanged"/>
-        <TextBox x:Name="MP3Location" Grid.Row="1" Grid.Column="1" Width="300" Margin="4,3" TargetUpdated="MP3Location_TargetUpdated"/>
+        <TextBox x:Name="MP3Location" Grid.Row="1" Grid.Column="1" Width="300" Margin="4,3" TextChanged="MP3Location_TextChanged"/>
         <Grid Grid.Row="2" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />

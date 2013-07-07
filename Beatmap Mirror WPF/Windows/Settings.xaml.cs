@@ -45,7 +45,7 @@ namespace Beatmap_Mirror_WPF.Windows
             RegistryHelper.SetKey("BeatmapLocation", BeatmapLocation.Text);
         }
 
-        private void MP3Location_TargetUpdated(object sender, DataTransferEventArgs e)
+        private void MP3Location_TextChanged(object sender, TextChangedEventArgs e)
         {
             Configuration.Mp3DownloadLocation = MP3Location.Text;
             RegistryHelper.SetKey("MP3Location", MP3Location.Text);
