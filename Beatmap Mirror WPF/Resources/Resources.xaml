@@ -5,5 +5,11 @@
     <BitmapImage x:Key="ImageBulletFeed" UriSource="Images/bullet_feed.png" />
     <BitmapImage x:Key="ImageBrickLink" UriSource="Images/brick_link.png" />
     <BitmapImage x:Key="ImageBrickGo" UriSource="Images/brick_go.png" />
+    <BitmapImage x:Key="ImageDoorOut" UriSource="Images/door_out.png" />
+    <BitmapImage x:Key="ImageCog" UriSource="Images/cog.png" />
+    <BitmapImage x:Key="ImageHelp" UriSource="Images/help.png" />
+    <BitmapImage x:Key="ImageApplicationForm" UriSource="Images/application_form.png" />
+    <BitmapImage x:Key="ImageDatabase" UriSource="Images/database.png" />
+    <BitmapImage x:Key="ImageDatabaseLink" UriSource="Images/database_link.png" />
 
 </ResourceDictionary>

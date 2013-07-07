@@ -16,15 +16,39 @@
     <Grid>
         <Menu VerticalAlignment="Top" Height="18" Background="White">
             <MenuItem Header="File">
-                <MenuItem x:Name="Menu_ApplicationSettings" Header="Application _settings" Click="Menu_ApplicationSettings_Click"/>
+                <MenuItem x:Name="Menu_ApplicationSettings" Header="Application _settings" Click="Menu_ApplicationSettings_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImageCog}" />
+                    </MenuItem.Icon>
+                </MenuItem>
                 <Separator/>
-                <MenuItem x:Name="Menu_Exit" Header="_Exit" Click="Menu_Exit_Click"/>
+                <MenuItem x:Name="Menu_Exit" Header="_Exit" Click="Menu_Exit_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImageDoorOut}" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="_Help">
-                <MenuItem x:Name="Menu_AboutApp" Header="About Beatmap Mirror" Click="Menu_AboutApp_Click"/>
-                <MenuItem x:Name="Menu_OsuThread" Header="Osu! forum thread" Click="Menu_OsuThread_Click"/>
-                <MenuItem x:Name="Menu_GithubRepo" Header="Github repository" Click="Menu_GithubRepo_Click"/>
-                <MenuItem x:Name="Menu_APIDoc" Header="API documentations" Click="Menu_APIDoc_Click"/>
+                <MenuItem x:Name="Menu_AboutApp" Header="About Beatmap Mirror" Click="Menu_AboutApp_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImageHelp}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="Menu_OsuThread" Header="Osu! forum thread" Click="Menu_OsuThread_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImageApplicationForm}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="Menu_GithubRepo" Header="Github repository" Click="Menu_GithubRepo_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImageDatabase}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="Menu_APIDoc" Header="API documentations" Click="Menu_APIDoc_Click">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource ImageDatabaseLink}" />
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <DockPanel Margin="0 18 0 0">

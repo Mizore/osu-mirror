@@ -348,6 +348,12 @@
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.Silverlight.csproj" />
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.WindowsPhone.csproj" />
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.WinRT.csproj" />
+    <Resource Include="Resources\Images\database_link.png" />
+    <Resource Include="Resources\Images\database.png" />
+    <Resource Include="Resources\Images\application_form.png" />
+    <Resource Include="Resources\Images\help.png" />
+    <Resource Include="Resources\Images\cog.png" />
+    <Resource Include="Resources\Images\door_out.png" />
     <Resource Include="Resources\Images\bullet_feed.png" />
     <Resource Include="Resources\Images\brick.png" />
     <Resource Include="Resources\Images\brick_go.png" />
