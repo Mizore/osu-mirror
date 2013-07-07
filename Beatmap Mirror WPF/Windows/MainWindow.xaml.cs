@@ -292,5 +292,37 @@ namespace Beatmap_Mirror_WPF.Windows
             Configuration.Mp3DownloadLocation = MP3Location.Text;
             RegistryHelper.SetKey("MP3Location", MP3Location.Text);
         }
+
+        private void Menu_ApplicationSettings_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO
+            //new Settings().Show();
+        }
+
+        private void Menu_Exit_Click(object sender, RoutedEventArgs e)
+        {
+            Process.GetCurrentProcess().Kill();
+        }
+
+        private void Menu_AboutApp_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO
+            //new About().Show();
+        }
+
+        private void Menu_OsuThread_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://osu.ppy.sh/forum/t/137156");
+        }
+
+        private void Menu_GithubRepo_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/Mizore/osu-mirror");
+        }
+
+        private void Menu_APIDoc_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start(Configuration.ApiLocation);
+        }
     }
 }

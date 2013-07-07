@@ -14,7 +14,20 @@
     </Window.Resources>
 
     <Grid>
-        <DockPanel>
+        <Menu VerticalAlignment="Top" Height="18" Background="White">
+            <MenuItem Header="File">
+                <MenuItem x:Name="Menu_ApplicationSettings" Header="Application _settings" Click="Menu_ApplicationSettings_Click"/>
+                <Separator/>
+                <MenuItem x:Name="Menu_Exit" Header="_Exit" Click="Menu_Exit_Click"/>
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem x:Name="Menu_AboutApp" Header="About Beatmap Mirror" Click="Menu_AboutApp_Click"/>
+                <MenuItem x:Name="Menu_OsuThread" Header="Osu! forum thread" Click="Menu_OsuThread_Click"/>
+                <MenuItem x:Name="Menu_GithubRepo" Header="Github repository" Click="Menu_GithubRepo_Click"/>
+                <MenuItem x:Name="Menu_APIDoc" Header="API documentations" Click="Menu_APIDoc_Click"/>
+            </MenuItem>
+        </Menu>
+        <DockPanel Margin="0 18 0 0">
             <GroupBox VerticalAlignment="Bottom" Height="90" DockPanel.Dock="Bottom" Header="Settings">
                 <Grid Height="70" Margin="0,0,-12,-2">
                     <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Beatmap download location" VerticalAlignment="Top"/>
