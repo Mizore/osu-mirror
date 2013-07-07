@@ -14,7 +14,7 @@
     </Window.Resources>
 
     <Grid>
-        <Menu VerticalAlignment="Top" Height="18" Background="White">
+        <Menu VerticalAlignment="Top" Height="18" Background="White" Margin="2,2,2,0">
             <MenuItem Header="File">
                 <MenuItem x:Name="Menu_ApplicationSettings" Header="Application _settings" Click="Menu_ApplicationSettings_Click">
                     <MenuItem.Icon>
@@ -51,7 +51,7 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <DockPanel Margin="0 18 0 0">
+        <DockPanel Margin="0,20,0,0">
             <GroupBox VerticalAlignment="Bottom" Height="90" DockPanel.Dock="Bottom" Header="Settings">
                 <Grid Height="70" Margin="0,0,-12,-2">
                     <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Beatmap download location" VerticalAlignment="Top"/>
