@@ -19,9 +19,9 @@
                 <Grid Height="70" Margin="0,0,-12,-2">
                     <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Beatmap download location" VerticalAlignment="Top"/>
                     <TextBlock HorizontalAlignment="Left" Margin="33,43,0,0" TextWrapping="Wrap" Text="MP3 download location" VerticalAlignment="Top"/>
-                    <TextBox x:Name="BeatmapLocation" Height="18" Margin="164,10,100,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <TextBox x:Name="BeatmapLocation" Height="18" Margin="164,10,100,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="BeatmapLocation_TextChanged"/>
                     <Button x:Name="BeatmapBrowse" Content="Browse" HorizontalAlignment="Right" Margin="0,9,18,0" VerticalAlignment="Top" Width="75" Click="BeatmapBrowse_Click"/>
-                    <TextBox x:Name="MP3Location" Height="18" Margin="164,42,100,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <TextBox x:Name="MP3Location" Height="18" Margin="164,42,100,0" TextWrapping="Wrap" VerticalAlignment="Top" TextChanged="MP3Location_TextChanged"/>
                     <Button x:Name="MP3Browse" Content="Browse" HorizontalAlignment="Right" Margin="0,41,18,0" VerticalAlignment="Top" Width="75" Click="MP3Browse_Click"/>
                 </Grid>
             </GroupBox>
