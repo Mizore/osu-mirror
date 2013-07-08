@@ -34,6 +34,7 @@ namespace Beatmap_Mirror_WPF.Windows
         private List<Beatmap> RawSearchResultList = new List<Beatmap>();
 
         private Settings SettingsWindow;
+        private About AboutWindow;
 
         public MainWindow()
         {
@@ -259,8 +260,10 @@ namespace Beatmap_Mirror_WPF.Windows
 
         private void Menu_AboutApp_Click(object sender, RoutedEventArgs e)
         {
-            //TODO
-            //new About().Show();
+            if (this.AboutWindow == null)
+                this.AboutWindow = new About();
+
+            this.AboutWindow.Show();
         }
 
         private void Menu_OsuThread_Click(object sender, RoutedEventArgs e)
