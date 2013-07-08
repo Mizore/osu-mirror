@@ -31,8 +31,9 @@ namespace Beatmap_Mirror_WPF.Code.Elements
         {
             this.DataContext = this;
             this.Text = string.Empty;
+            this.IsTabStop = false;
 
-            Regex numberOnlyRegex = new Regex("^[0-9]*$");
+            Regex numberOnlyRegex = new Regex("^[0-9]+$");
 
             this.PreviewTextInput += (object sender, TextCompositionEventArgs e) =>
             {
