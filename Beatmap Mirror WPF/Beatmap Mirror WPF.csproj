@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Icons\icon_1024.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -263,6 +266,9 @@
     <Compile Include="Code\Tools\FileSizeFormatProvider.cs" />
     <Compile Include="Code\Tools\Registry.cs" />
     <Compile Include="Code\Tools\Threaded.cs" />
+    <Compile Include="Windows\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\BeatmapDetails.xaml.cs">
       <DependentUpon>BeatmapDetails.xaml</DependentUpon>
     </Compile>
@@ -321,6 +327,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Windows\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\BeatmapDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -342,9 +352,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Icons\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.csproj" />
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.Net20.csproj" />
@@ -355,6 +363,7 @@
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.Silverlight.csproj" />
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.WindowsPhone.csproj" />
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.WinRT.csproj" />
+    <Resource Include="Resources\Icons\icon_1024.ico" />
     <Resource Include="Resources\Images\database_link.png" />
     <Resource Include="Resources\Images\database.png" />
     <Resource Include="Resources\Images\application_form.png" />
