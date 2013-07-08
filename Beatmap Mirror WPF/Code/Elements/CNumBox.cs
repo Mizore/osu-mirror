@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -31,9 +32,11 @@ namespace Beatmap_Mirror_WPF.Code.Elements
             this.DataContext = this;
             this.Text = string.Empty;
 
-            this.PreviewKeyDown += (object sender, KeyEventArgs e) =>
+            Regex numberOnlyRegex = new Regex("^[0-9]*$");
+
+            this.PreviewTextInput += (object sender, TextCompositionEventArgs e) =>
             {
-                if (!char.IsDigit((char)KeyInterop.VirtualKeyFromKey(e.Key)) & e.Key != Key.Back)
+                if (!numberOnlyRegex.IsMatch(e.Text))
                     e.Handled = true;
             };
 
