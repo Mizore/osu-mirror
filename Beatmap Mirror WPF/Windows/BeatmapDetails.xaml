@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Beatmap_Mirror_WPF.Windows.BeatmapDetails"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="BeatmapDetails" Height="401" Width="667" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    Title="Beatmap details" Height="401" Width="667" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>
