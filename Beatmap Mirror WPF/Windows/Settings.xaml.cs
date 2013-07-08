@@ -2,6 +2,7 @@
 using Beatmap_Mirror_WPF.Code.Tools;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace Beatmap_Mirror_WPF.Windows
         {
             InitializeComponent();
 
+            OsuLocation.Text = RegistryHelper.GetKey("OsuLocation");
             BeatmapLocation.Text = RegistryHelper.GetKey("BeatmapLocation");
             MP3Location.Text = RegistryHelper.GetKey("MP3Location");
 
@@ -73,6 +75,32 @@ namespace Beatmap_Mirror_WPF.Windows
             DialogResult result = dialog.ShowDialog();
             if (result == System.Windows.Forms.DialogResult.OK)
                 this.MP3Location.Text = dialog.SelectedPath;
+        }
+
+        private void OsuBrowse_Click(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+
+            DialogResult result = dialog.ShowDialog();
+            if (result == System.Windows.Forms.DialogResult.OK)
+                this.OsuLocation.Text = dialog.SelectedPath;
+        }
+
+        private void OsuLocation_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (OsuLocation.Text == "")
+                return;
+
+            if (!File.Exists(string.Format("{0}\\osu!.exe", OsuLocation.Text)))
+            {
+                System.Windows.MessageBox.Show("It appears that your selected directory does not contain Osu!.exe file.\nPlease try again.", "Whoops", MessageBoxButton.OK, MessageBoxImage.Warning);
+                OsuLocation.Text = "";
+                return;
+            }
+
+
+            Configuration.Mp3DownloadLocation = OsuLocation.Text;
+            RegistryHelper.SetKey("OsuLocation", OsuLocation.Text);
         }
     }
 }

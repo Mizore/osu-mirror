@@ -15,6 +15,7 @@ namespace Beatmap_Mirror.Code
 
         public static string BeatmapDownloadLocation = null;
         public static string Mp3DownloadLocation = null;
+        public static string OsuLocation = null;
 
         public static int ParrarelDownloads = 2;
 
@@ -37,6 +38,10 @@ namespace Beatmap_Mirror.Code
             temp = RegistryHelper.GetKey("MP3Location");
             if (temp != null)
                 Configuration.Mp3DownloadLocation = temp;
+
+            temp = RegistryHelper.GetKey("OsuLocation");
+            if (temp != null)
+                Configuration.OsuLocation = temp;
         }
     }
 }
