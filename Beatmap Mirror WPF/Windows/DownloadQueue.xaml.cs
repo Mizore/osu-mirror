@@ -53,8 +53,11 @@ namespace Beatmap_Mirror_WPF.Windows
 
             DownloadQueueManager.FileUpdate += (Beatmap map, int downloaded) =>
             {
-                this.Queue[map.Ranked_ID].Downloaded = downloaded;
-                this.Queue[map.Ranked_ID].UpdateProgress();
+                if (this.Queue.ContainsKey(map.Ranked_ID))
+                {
+                    this.Queue[map.Ranked_ID].Downloaded = downloaded;
+                    this.Queue[map.Ranked_ID].UpdateProgress();
+                }
             };
 
             DownloadQueueManager.DownloadFinished += (Beatmap map) =>

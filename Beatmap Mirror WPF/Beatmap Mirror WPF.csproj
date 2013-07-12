@@ -264,6 +264,7 @@
     <Compile Include="Code\Tools\CommandParser.cs" />
     <Compile Include="Code\Tools\DownloadQueueManager.cs" />
     <Compile Include="Code\Tools\FileSizeFormatProvider.cs" />
+    <Compile Include="Code\Tools\Helpers.cs" />
     <Compile Include="Code\Tools\Registry.cs" />
     <Compile Include="Code\Tools\Threaded.cs" />
     <Compile Include="Windows\About.xaml.cs">

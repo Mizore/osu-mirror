@@ -2,6 +2,7 @@
 using Beatmap_Mirror.Code.Api.Requests;
 using Beatmap_Mirror.Code.Structures;
 using Beatmap_Mirror_WPF.Code.Api.Requests;
+using Beatmap_Mirror_WPF.Code.Tools;
 using Beatmap_Mirror_WPF.Windows;
 using System;
 using System.Collections.Concurrent;
@@ -113,7 +114,7 @@ namespace Beatmap_Mirror.Code.Tools
 
                     MP3Download.EOnDownloadComplete += (byte[] Buffer) =>
                     {
-                        File.WriteAllBytes(string.Format("{0}\\{1}.mp3", Configuration.Mp3DownloadLocation, qitem.Beatmap.Title), Buffer);
+                        File.WriteAllBytes(string.Format("{0}\\{1}.mp3", Configuration.Mp3DownloadLocation, Helpers.CleanFileName(qitem.Beatmap.Title)), Buffer);
 
                         if (DownloadFinished != null)
                             DownloadFinished(qitem.Beatmap);
