@@ -28,6 +28,8 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="Tools">
+                </MenuItem>
             <MenuItem Header="_Help">
                 <MenuItem x:Name="Menu_AboutApp" Header="About Beatmap Mirror" Click="Menu_AboutApp_Click">
                     <MenuItem.Icon>

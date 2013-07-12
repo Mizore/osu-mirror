@@ -66,7 +66,7 @@ namespace Beatmap_Mirror.Code.Api
             {
                 WebClient wc = new WebClient();
                 wc.Proxy = null;
-                wc.Headers.Add(HttpRequestHeader.UserAgent, "Osu!Mirror");
+                wc.Headers.Add("User-Agent", "Osu!Mirror");
 
                 try
                 {
@@ -85,6 +85,8 @@ namespace Beatmap_Mirror.Code.Api
 
                 HttpWebRequest r = (HttpWebRequest)WebRequest.Create(location);
                 r.Method = "GET";
+                r.UserAgent = "Osu!Mirror";
+
                 using (WebResponse response = r.GetResponse())
                 {
                     using (Stream s = response.GetResponseStream())
