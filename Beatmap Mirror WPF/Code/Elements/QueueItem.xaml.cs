@@ -37,6 +37,15 @@ namespace Beatmap_Mirror_WPF.Code.Elements
         {
             this.TProgress.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
             {
+                if (this.Downloaded == this.Beatmap.Size)
+                    this.TProgress.Foreground = new SolidColorBrush(new Color()
+                    {
+                        R = 86,
+                        G = 105,
+                        B = 206,
+                        A = 30
+                    });
+
                 this.TProgress.Value = Math.Floor((double)this.Downloaded / (double)this.Beatmap.Size * 100.0);
             }));
         }

@@ -20,6 +20,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -64,8 +65,19 @@ namespace Beatmap_Mirror_WPF.Windows
             {
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
-                    this.QueuedList.Children.Remove(this.Queue[map.Ranked_ID]);
-                    this.Queue.Remove(map.Ranked_ID);
+                    DoubleAnimation anim = new DoubleAnimation();
+                    anim.Duration = new Duration(new TimeSpan(0, 0, 0, 0, 500));
+                    anim.FillBehavior = FillBehavior.HoldEnd;
+                    anim.From = 51.0;
+                    anim.To = 0.0;
+
+                    anim.Completed += (object sender, EventArgs e) =>
+                    {
+                        this.QueuedList.Children.Remove(this.Queue[map.Ranked_ID]);
+                        this.Queue.Remove(map.Ranked_ID);
+                    };
+
+                    this.Queue[map.Ranked_ID].BeginAnimation(QueueItem.HeightProperty, anim);
                 }));
             };
             
