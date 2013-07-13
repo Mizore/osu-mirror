@@ -63,10 +63,30 @@
         <Setter Property="BorderBrush" Value="#FFABADB3" />
         <Setter Property="BorderThickness" Value="1,1,1,1" />
         <Setter Property="Height" Value="19" />
-        
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type element:CNumBox}">
+                    <TextBox x:Name="cTextBox"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Width="Auto"
+                        Height="{TemplateBinding Height}"
+                        Text="{Binding Text, Mode=TwoWay}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type element:CDoubleBox}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="#FFABADB3" />
+        <Setter Property="BorderThickness" Value="1,1,1,1" />
+        <Setter Property="Height" Value="19" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type element:CDoubleBox}">
                     <TextBox x:Name="cTextBox"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"

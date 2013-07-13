@@ -75,6 +75,7 @@
     <Compile Include="Code\Api\Requests\ApiRequestBeatmaps.cs" />
     <Compile Include="Code\Api\Requests\ApiRequestSearch.cs" />
     <Compile Include="Code\Configuration.cs" />
+    <Compile Include="Code\Elements\CDoubleBox.cs" />
     <Compile Include="Code\Elements\CNumBox.cs" />
     <Compile Include="Code\Elements\QueueItem.xaml.cs">
       <DependentUpon>QueueItem.xaml</DependentUpon>

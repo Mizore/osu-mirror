@@ -6,38 +6,32 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Beatmap_Mirror_WPF.Code.Elements
 {
-    public class CNumBox : TextBox
+    public class CDoubleBox : TextBox
     {
-        static CNumBox()
+        static CDoubleBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(
-                typeof(CNumBox),
-                new FrameworkPropertyMetadata(typeof(CNumBox)));
+                typeof(CDoubleBox),
+                new FrameworkPropertyMetadata(typeof(CDoubleBox)));
         }
 
-        public int Value { get; set; }
+        public double Value { get; set; }
 
-        public CNumBox()
+        public CDoubleBox()
         {
             this.DataContext = this;
             this.Text = string.Empty;
             this.IsTabStop = false;
 
-            Regex numberOnlyRegex = new Regex(@"^[0-9]+$");
+            Regex numberOnlyRegex = new Regex(@"^[0-9]+\.?([0-9]+)?$");
 
             this.PreviewTextInput += (object sender, TextCompositionEventArgs e) =>
             {
-                if (!numberOnlyRegex.IsMatch(e.Text))
+                if (!numberOnlyRegex.IsMatch((e.OriginalSource as TextBox).Text + e.Text))
                     e.Handled = true;
             };
 
@@ -48,13 +42,13 @@ namespace Beatmap_Mirror_WPF.Code.Elements
 
             this.TextChanged += (object sender, TextChangedEventArgs e) =>
             {
-                try { this.Value = int.Parse((e.OriginalSource as TextBox).Text); }
+                try { this.Value = double.Parse((e.OriginalSource as TextBox).Text); }
                 catch { this.Value = 0; }
             };
 
             this.LostFocus += (object sender, RoutedEventArgs e) =>
             {
-                try { this.Value = int.Parse(base.Text); }
+                try { this.Value = double.Parse(base.Text); }
                 catch { this.Value = 0; }
 
                 base.Text = string.Format("{0:#,##0}", this.Value);
