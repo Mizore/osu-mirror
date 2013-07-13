@@ -94,7 +94,7 @@ namespace Beatmap_Mirror.Code.Tools
 
                     Download.EOnDownloadComplete += (byte[] Buffer) =>
                     {
-                        File.WriteAllBytes(string.Format("{0}\\{1}.{2}", Configuration.BeatmapDownloadLocation, qitem.Beatmap.Name, qitem.Beatmap.Type.ToString().ToLower()), Buffer);
+                        File.WriteAllBytes(string.Format("{0}\\{1}.{2}", Configuration.BeatmapDownloadLocation, Helpers.CleanFileName(qitem.Beatmap.Name), qitem.Beatmap.Type.ToString().ToLower()), Buffer);
 
                         if (DownloadFinished != null)
                             DownloadFinished(qitem.Beatmap);
