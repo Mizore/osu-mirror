@@ -62,10 +62,10 @@ namespace Beatmap_Mirror_WPF.Windows
                         Filters.Add(string.Format("metadata.m_tags.like.{0}", this.SearchTags.Text));
 
                     if (this.SearchSizeMin.Value > 0)
-                        Filters.Add(string.Format("maps.size.gteq.{0}", (this.SearchSizeMin.Value * 1024.0 * 1024.0)));
+                        Filters.Add(string.Format("maps.size.gteq.{0}", (int)(this.SearchSizeMin.Value * 1024.0 * 1024.0)));
 
                     if (this.SearchSizeMax.Value > 0)
-                        Filters.Add(string.Format("maps.size.lteq.{0}", (this.SearchSizeMax.Value * 1024.0 * 1024.0)));
+                        Filters.Add(string.Format("maps.size.lteq.{0}", (int)(this.SearchSizeMax.Value * 1024.0 * 1024.0)));
 
                     if (this.SearchVersion.Value > 0)
                         Filters.Add(string.Format("metadata.version.eq.{0}", this.SearchVersion.Value));
