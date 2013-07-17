@@ -17,6 +17,8 @@ namespace Beatmap_Mirror.Code
         public static string Mp3DownloadLocation = null;
         public static string OsuLocation = null;
 
+        public static bool AskBeforeClose = true;
+
         public static int ParrarelDownloads = 2;
 
         public static void Innit()
@@ -42,6 +44,13 @@ namespace Beatmap_Mirror.Code
             temp = RegistryHelper.GetKey("OsuLocation");
             if (temp != null)
                 Configuration.OsuLocation = temp;
+
+            temp = RegistryHelper.GetKey("AskOnClose");
+            if (temp != null)
+                Configuration.AskBeforeClose = bool.Parse(temp);
+            else
+                RegistryHelper.SetKey("AskOnClose", "True");
+
         }
     }
 }

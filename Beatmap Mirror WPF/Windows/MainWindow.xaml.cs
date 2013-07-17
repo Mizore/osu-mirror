@@ -134,6 +134,12 @@ namespace Beatmap_Mirror_WPF.Windows
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (!Configuration.AskBeforeClose)
+            {
+                Process.GetCurrentProcess().Kill();
+                return;
+            }
+
             if (System.Windows.MessageBox.Show("You sure you want to quit?", "Are you sure?", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                 e.Cancel = true;
             else

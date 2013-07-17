@@ -31,6 +31,8 @@ namespace Beatmap_Mirror_WPF.Windows
             BeatmapLocation.Text = RegistryHelper.GetKey("BeatmapLocation");
             MP3Location.Text = RegistryHelper.GetKey("MP3Location");
 
+            CloseAskBox.IsChecked = bool.Parse(RegistryHelper.GetKey("AskOnClose"));
+
             ParrarelDownloadCount.Value = int.Parse(RegistryHelper.GetKey("ParrarelDownloads"));
             ParrarelDownloadCount.Text = ParrarelDownloadCount.Value.ToString();
         }
@@ -101,6 +103,12 @@ namespace Beatmap_Mirror_WPF.Windows
 
             Configuration.Mp3DownloadLocation = OsuLocation.Text;
             RegistryHelper.SetKey("OsuLocation", OsuLocation.Text);
+        }
+
+        private void CloseAskBox_Click(object sender, RoutedEventArgs e)
+        {
+            Configuration.AskBeforeClose = (e.OriginalSource as System.Windows.Controls.CheckBox).IsChecked == true;
+            RegistryHelper.SetKey("AskOnClose", Configuration.AskBeforeClose.ToString());
         }
     }
 }

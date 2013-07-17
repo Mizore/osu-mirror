@@ -65,11 +65,13 @@ namespace Beatmap_Mirror_WPF.Windows
             {
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
-                    DoubleAnimation anim = new DoubleAnimation();
-                    anim.Duration = new Duration(new TimeSpan(0, 0, 0, 0, 500));
-                    anim.FillBehavior = FillBehavior.HoldEnd;
-                    anim.From = 51.0;
-                    anim.To = 0.0;
+                    DoubleAnimation anim = new DoubleAnimation()
+                    {
+                        Duration = new Duration(new TimeSpan(0, 0, 0, 0, 500)),
+                        FillBehavior = FillBehavior.HoldEnd,
+                        From = 51.0,
+                        To = 0.0
+                    };
 
                     anim.Completed += (object sender, EventArgs e) =>
                     {
@@ -78,6 +80,13 @@ namespace Beatmap_Mirror_WPF.Windows
                     };
 
                     this.Queue[map.Ranked_ID].BeginAnimation(QueueItem.HeightProperty, anim);
+                    this.Queue[map.Ranked_ID].BeginAnimation(QueueItem.OpacityProperty, new DoubleAnimation()
+                    {
+                        Duration = new Duration(new TimeSpan(0, 0, 0, 0, 500)),
+                        FillBehavior = FillBehavior.HoldEnd,
+                        From = 1,
+                        To = 0,
+                    });
                 }));
             };
             
