@@ -35,6 +35,8 @@ namespace Beatmap_Mirror_WPF.Windows
 
         private Settings SettingsWindow;
         private About AboutWindow;
+        private DownloadQueue dqForm;
+
 
         public MainWindow()
         {
@@ -102,8 +104,29 @@ namespace Beatmap_Mirror_WPF.Windows
                 new BeatmapDetails(bm.Ranked_ID).Show();
         }
 
+        private void ShowDownloadQueue()
+        {
+            if (this.dqForm == null)
+            {
+                this.dqForm = new DownloadQueue();
+                this.dqForm.Show();
+
+                this.dqForm.Closed += (object sender, EventArgs e) =>
+                {
+                    this.dqForm = null;
+                };
+            }
+            else if (this.dqForm.Visibility != Visibility.Visible)
+                this.dqForm.Show();
+
+            if (!this.dqForm.IsFocused)
+                this.dqForm.Focus();
+        }
+
         private void MenuItemDownloadBeatmap_Click(object sender, RoutedEventArgs e)
         {
+            this.ShowDownloadQueue();
+
             foreach (Beatmap bm in this.SearchResults.SelectedItems)
                 DownloadQueueManager.AddToQueue(bm, DownloadQueueManager.DownloadType.Beatmap);
 
@@ -112,6 +135,8 @@ namespace Beatmap_Mirror_WPF.Windows
 
         private void MenuItemDownloadMP3_Click(object sender, RoutedEventArgs e)
         {
+            this.ShowDownloadQueue();
+
             foreach (Beatmap bm in this.SearchResults.SelectedItems)
                 DownloadQueueManager.AddToQueue(bm, DownloadQueueManager.DownloadType.MP3);
 

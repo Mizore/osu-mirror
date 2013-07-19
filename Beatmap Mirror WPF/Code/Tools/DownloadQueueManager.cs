@@ -27,22 +27,8 @@ namespace Beatmap_Mirror.Code.Tools
         public static event EMap DownloadFinished;
         public static event EMapP FileUpdate;
 
-        private static DownloadQueue dqForm;
-
         public static void AddToQueue(Beatmap bm, DownloadType Type)
         {
-            if (dqForm == null)
-            {
-                dqForm = new DownloadQueue();
-                dqForm.Show();
-
-                dqForm.Closed += (object sender, EventArgs e) =>
-                {
-                    dqForm = null;
-                };
-            }
-            else if (dqForm.Visibility != Visibility.Visible)
-                dqForm.Show();
 
             if ((Type == DownloadType.Beatmap && string.IsNullOrEmpty(Configuration.BeatmapDownloadLocation)) || (Type == DownloadType.MP3 && string.IsNullOrEmpty(Configuration.Mp3DownloadLocation)))
             {
