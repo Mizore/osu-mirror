@@ -55,7 +55,7 @@ namespace Beatmap_Mirror_WPF.Windows
                         Filters.Add(string.Format("maps.title.like.{0}", this.SearchTitle.Text));
 
                     if (!string.IsNullOrWhiteSpace(this.SearchCreator.Text))
-                        Filters.Add(string.Format("metadata.m-creator.like.{0}", this.SearchCreator.Text));
+                        Filters.Add(string.Format("metadata.m_creator.like.{0}", this.SearchCreator.Text));
 
                     if (!string.IsNullOrWhiteSpace(this.SearchSource.Text))
                         Filters.Add(string.Format("metadata.m_source.like.{0}", this.SearchSource.Text));
