@@ -12,8 +12,12 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-
+    
     <Grid>
+        <Grid x:Name="Overlay" Background="#7FFFFFFF" Panel.ZIndex="1" Visibility="Hidden">
+            <TextBlock Text="Searching..." FontWeight="Bold" FontSize="36" TextAlignment="Center" FontStyle="Italic" TextDecorations="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+        
         <Menu VerticalAlignment="Top" Height="18" Background="White" Margin="2,2,2,0">
             <MenuItem Header="File">
                 <MenuItem x:Name="Menu_ApplicationSettings" Header="Application _settings" Click="Menu_ApplicationSettings_Click">

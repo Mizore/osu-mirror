@@ -19,6 +19,7 @@ using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
@@ -51,6 +52,15 @@ namespace Beatmap_Mirror_WPF.Windows
 
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
+                    this.Overlay.BeginAnimation(Grid.OpacityProperty, new DoubleAnimation()
+                    {
+                        Duration = new Duration(new TimeSpan(0, 0, 0, 0, 500)),
+                        FillBehavior = FillBehavior.HoldEnd,
+                        From = 0.0,
+                        To = 1.0
+                    });
+                    this.Overlay.Visibility = Visibility.Visible;
+
                     if (!string.IsNullOrWhiteSpace(this.SearchTitle.Text))
                         Filters.Add(string.Format("maps.title.like.{0}", this.SearchTitle.Text));
 
@@ -80,11 +90,27 @@ namespace Beatmap_Mirror_WPF.Windows
                 ApiRequestSearch search = ApiBase.Create<ApiRequestSearch>(Filters.ToArray());
                 ApiSearch data = search.GetData<ApiSearch>();
 
-                if (data == null)
-                    return;
 
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
+                    DoubleAnimation anim = new DoubleAnimation()
+                    {
+                        Duration = new Duration(new TimeSpan(0, 0, 0, 0, 500)),
+                        FillBehavior = FillBehavior.HoldEnd,
+                        From = 1.0,
+                        To = 0.0
+                    };
+
+                    anim.Completed += (object sender, EventArgs e) =>
+                    {
+                        this.Overlay.Visibility = Visibility.Hidden;
+                    };
+
+                    this.Overlay.BeginAnimation(Grid.OpacityProperty, anim);
+
+                    if (data == null)
+                        return;
+
                     this.RawSearchResultList.AddRange(data.Beatmaps);
 
                     foreach (Beatmap bm in data.Beatmaps)
