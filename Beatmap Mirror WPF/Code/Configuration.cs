@@ -1,8 +1,10 @@
 ﻿using Beatmap_Mirror_WPF.Code.Tools;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 
 namespace Beatmap_Mirror.Code
@@ -17,6 +19,8 @@ namespace Beatmap_Mirror.Code
         public static string Mp3DownloadLocation = null;
         public static string OsuLocation = null;
 
+        public static string VersionString = null;
+
         public static bool AskBeforeClose = true;
 
         public static int ParrarelDownloads = 2;
@@ -25,6 +29,7 @@ namespace Beatmap_Mirror.Code
         {
             ServicePointManager.DefaultConnectionLimit = int.MaxValue;
 
+            VersionString = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion;
 
             string temp = RegistryHelper.GetKey("ParrarelDownloads");
             if (temp != null)
