@@ -337,5 +337,10 @@ namespace Beatmap_Mirror_WPF.Windows
         {
             Process.Start(Configuration.ApiLocation);
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.SearchTitle.Focus();
+        }
     }
 }
