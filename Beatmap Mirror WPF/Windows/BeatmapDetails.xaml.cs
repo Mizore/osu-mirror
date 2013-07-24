@@ -39,7 +39,7 @@ namespace Beatmap_Mirror_WPF.Windows
             Threaded.Add(() =>
             {
                 ApiRequestBeatmapDetail bm = ApiBase.Create<ApiRequestBeatmapDetail>(Beatmap.ToString());
-                this.Beatmap = bm.GetData<ApiBeatmap>().Beatmap;
+                this.Beatmap = bm.GetData<Beatmap>();
 
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(this.DisplayData));
             });

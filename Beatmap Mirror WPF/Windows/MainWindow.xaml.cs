@@ -88,7 +88,7 @@ namespace Beatmap_Mirror_WPF.Windows
                 }));
 
                 ApiRequestSearch search = ApiBase.Create<ApiRequestSearch>(Filters.ToArray());
-                ApiSearch data = search.GetData<ApiSearch>();
+                List<Beatmap> data = search.GetData<List<Beatmap>>();
 
 
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
@@ -111,9 +111,9 @@ namespace Beatmap_Mirror_WPF.Windows
                     if (data == null)
                         return;
 
-                    this.RawSearchResultList.AddRange(data.Beatmaps);
+                    this.RawSearchResultList.AddRange(data);
 
-                    foreach (Beatmap bm in data.Beatmaps)
+                    foreach (Beatmap bm in data)
                         this.SearchResults.Items.Add(bm);
                 }));
             }));
