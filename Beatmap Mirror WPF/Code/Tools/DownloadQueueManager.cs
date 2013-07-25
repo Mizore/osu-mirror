@@ -106,6 +106,11 @@ namespace Beatmap_Mirror.Code.Tools
                             DownloadFinished(qitem.Beatmap);
                     };
 
+                    MP3Download.EOnContentLength += (long ContentLength) =>
+                    {
+                        qitem.Beatmap.Size = (int)ContentLength;
+                    };
+
                     MP3Download.SendRequest();
                 }
             }

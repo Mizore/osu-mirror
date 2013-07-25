@@ -39,9 +39,11 @@ namespace Beatmap_Mirror.Code.Api
 
         protected string[] Parameters { get; set; }
 
+        public delegate void DContentLength(long ContentLength);
         public delegate void DDownloadProgress(long Downloaded);
         public delegate void DDownloadComplete(byte[] Buffer);
 
+        public event DContentLength EOnContentLength;
         public event DDownloadProgress EOnDownloadUpdate;
         public event DDownloadComplete EOnDownloadComplete;
 
@@ -89,6 +91,9 @@ namespace Beatmap_Mirror.Code.Api
 
                 using (WebResponse response = r.GetResponse())
                 {
+                    if (EOnContentLength != null)
+                        EOnContentLength(response.ContentLength);
+
                     using (Stream s = response.GetResponseStream())
                     {
                         int total = 0;
