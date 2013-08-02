@@ -270,6 +270,7 @@
     <Compile Include="Code\Tools\Helpers.cs" />
     <Compile Include="Code\Tools\Registry.cs" />
     <Compile Include="Code\Tools\Threaded.cs" />
+    <Compile Include="Code\Tools\UrlShort.cs" />
     <Compile Include="Windows\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
@@ -367,6 +368,7 @@
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.Silverlight.csproj" />
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.WindowsPhone.csproj" />
     <Content Include="Code\Newtonsoft.Json\Newtonsoft.Json.WinRT.csproj" />
+    <Resource Include="Resources\Images\package_link.png" />
     <Resource Include="Resources\Icons\icon_1024.ico" />
     <Resource Include="Resources\Images\database_link.png" />
     <Resource Include="Resources\Images\database.png" />

@@ -17,7 +17,12 @@
         <Grid x:Name="Overlay" Background="#7FFFFFFF" Panel.ZIndex="1" Visibility="Hidden">
             <TextBlock Text="Searching..." FontWeight="Bold" FontSize="36" TextAlignment="Center" FontStyle="Italic" TextDecorations="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
-        
+
+
+        <Grid x:Name="ShortURLOverlay" Background="#7FFFFFFF" Panel.ZIndex="1" Visibility="Hidden">
+            <TextBlock Text="Shortening url..." FontWeight="Bold" FontSize="36" TextAlignment="Center" FontStyle="Italic" TextDecorations="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+
         <Menu VerticalAlignment="Top" Height="18" Background="White" Margin="2,2,2,0">
             <MenuItem Header="File">
                 <MenuItem x:Name="Menu_ApplicationSettings" Header="Application _settings" Click="Menu_ApplicationSettings_Click">
@@ -114,6 +119,12 @@
                             <MenuItem x:Name="MenuItemDownloadMP3" Header="Download MP3s" Click="MenuItemDownloadMP3_Click">
                                 <MenuItem.Icon>
                                     <Image Source="{StaticResource ImageBulletFeed}" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem x:Name="MenuItemDownloadLink" Header="Copy download link" Click="MenuItemDownloadLink_Click">
+                                <MenuItem.Icon>
+                                    <Image Source="{StaticResource ImagePackageLink}" />
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>

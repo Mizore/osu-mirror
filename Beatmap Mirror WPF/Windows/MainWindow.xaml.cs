@@ -9,9 +9,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -175,11 +177,13 @@ namespace Beatmap_Mirror_WPF.Windows
             {
                 //this.MenuItemFullDetails.IsEnabled = false;
                 this.MenuItemDetails.IsEnabled = false;
+                this.MenuItemDownloadLink.IsEnabled = false;
             }
             else
             {
                 //this.MenuItemFullDetails.IsEnabled = true;
                 this.MenuItemDetails.IsEnabled = true;
+                this.MenuItemDownloadLink.IsEnabled = true;
             }
         }
 
@@ -341,6 +345,50 @@ namespace Beatmap_Mirror_WPF.Windows
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             this.SearchTitle.Focus();
+        }
+
+        private void MenuItemDownloadLink_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.SearchResults.SelectedItems.Count != 1)
+                return;
+
+            Beatmap map = (Beatmap)this.SearchResults.SelectedItems[0];
+
+            this.ShortURLOverlay.BeginAnimation(Grid.OpacityProperty, new DoubleAnimation()
+            {
+                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 500)),
+                FillBehavior = FillBehavior.HoldEnd,
+                From = 0.0,
+                To = 1.0
+            });
+            this.ShortURLOverlay.Visibility = Visibility.Visible;
+
+
+            ThreadPool.QueueUserWorkItem(new WaitCallback((object ob) =>
+            {
+                string url = string.Format("{0}beatmaps/{1}/download/{2}.{3}", Configuration.ApiLocation, map.Ranked_ID, Uri.EscapeUriString(Helpers.CleanFileName(map.Name)), map.Type.ToString().ToLower());
+                string urlshort = UrlShort.Short(url);
+
+                Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                {
+                    System.Windows.Clipboard.SetText(urlshort);
+
+                    DoubleAnimation anim = new DoubleAnimation()
+                    {
+                        Duration = new Duration(new TimeSpan(0, 0, 0, 0, 500)),
+                        FillBehavior = FillBehavior.HoldEnd,
+                        From = 1.0,
+                        To = 0.0
+                    };
+
+                    anim.Completed += (object ssender, EventArgs ee) =>
+                    {
+                        this.ShortURLOverlay.Visibility = Visibility.Hidden;
+                    };
+
+                    this.ShortURLOverlay.BeginAnimation(Grid.OpacityProperty, anim);
+                }));
+            }));
         }
     }
 }

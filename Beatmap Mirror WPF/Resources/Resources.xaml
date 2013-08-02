@@ -11,5 +11,6 @@
     <BitmapImage x:Key="ImageApplicationForm" UriSource="Images/application_form.png" />
     <BitmapImage x:Key="ImageDatabase" UriSource="Images/database.png" />
     <BitmapImage x:Key="ImageDatabaseLink" UriSource="Images/database_link.png" />
+    <BitmapImage x:Key="ImagePackageLink" UriSource="Images/package_link.png" />
 
 </ResourceDictionary>
