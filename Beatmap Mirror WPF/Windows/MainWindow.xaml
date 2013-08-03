@@ -14,7 +14,7 @@
     </Window.Resources>
     
     <Grid>
-        <Grid x:Name="Overlay" Background="#7FFFFFFF" Panel.ZIndex="1" Visibility="Hidden">
+        <Grid x:Name="Overlay" Background="#7FFFFFFF" Panel.ZIndex="1" Margin="0,182,0,0" Visibility="Hidden">
             <TextBlock Text="Searching..." FontWeight="Bold" FontSize="36" TextAlignment="Center" FontStyle="Italic" TextDecorations="{x:Null}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </Grid>
 
@@ -72,10 +72,10 @@
                     <Label Content="Size more than (mb)" HorizontalAlignment="Right" Margin="0,10,275,0" VerticalAlignment="Top"/>
                     <Label Content="and less than" HorizontalAlignment="Right" Margin="0,10,107,0" VerticalAlignment="Top"/>
                     <Label Content="Beatmap version" HorizontalAlignment="Right" Margin="0,41,275,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="SearchTitle" HorizontalAlignment="Left" Margin="71,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Background="White" KeyDown="SearchTitle_KeyDown" Height="19"/>
-                    <TextBox x:Name="SearchCreator" HorizontalAlignment="Left" Height="19" Margin="71,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" KeyDown="SearchCreator_KeyDown"/>
-                    <TextBox x:Name="SearchSource" HorizontalAlignment="Left" Height="19" Margin="71,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" KeyDown="SearchSource_KeyDown"/>
-                    <TextBox x:Name="SearchTags" HorizontalAlignment="Left" Height="19" Margin="71,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" KeyDown="SearchTags_KeyDown"/>
+                    <TextBox x:Name="SearchTitle" HorizontalAlignment="Left" Margin="71,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" Background="White" KeyDown="SearchTitle_KeyDown" Height="19" KeyUp="SearchField_KeyUp"/>
+                    <TextBox x:Name="SearchCreator" HorizontalAlignment="Left" Height="19" Margin="71,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" KeyDown="SearchCreator_KeyDown" KeyUp="SearchField_KeyUp"/>
+                    <TextBox x:Name="SearchSource" HorizontalAlignment="Left" Height="19" Margin="71,76,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" KeyDown="SearchSource_KeyDown" KeyUp="SearchField_KeyUp"/>
+                    <TextBox x:Name="SearchTags" HorizontalAlignment="Left" Height="19" Margin="71,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="194" KeyDown="SearchTags_KeyDown" KeyUp="SearchField_KeyUp"/>
                     <Elements:CDoubleBox x:Name="SearchSizeMin" HorizontalAlignment="Right" Margin="0,13,192,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="78" KeyDown="SearchSizeMin_KeyDown"/>
                     <Elements:CDoubleBox x:Name="SearchSizeMax" HorizontalAlignment="Right" Margin="0,13,24,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="78" KeyDown="SearchSizeMax_KeyDown"/>
                     <Elements:CNumBox x:Name="SearchVersion" HorizontalAlignment="Right" Margin="0,45,192,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="78" KeyDown="SearchVersion_KeyDown"/>

@@ -40,10 +40,16 @@ namespace Beatmap_Mirror_WPF.Windows
         private About AboutWindow;
         private DownloadQueue dqForm;
 
+        private AutoActionRun aar;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            this.aar = new AutoActionRun(500, 10, () =>
+            {
+                this.PerformBeatmapSearch();
+            });
         }
 
         private void PerformBeatmapSearch()
@@ -119,6 +125,7 @@ namespace Beatmap_Mirror_WPF.Windows
                         this.SearchResults.Items.Add(bm);
                 }));
             }));
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -389,6 +396,12 @@ namespace Beatmap_Mirror_WPF.Windows
                     this.ShortURLOverlay.BeginAnimation(Grid.OpacityProperty, anim);
                 }));
             }));
+        }
+
+        private void SearchField_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key != Key.Tab)
+                this.aar.Trigger();
         }
     }
 }
