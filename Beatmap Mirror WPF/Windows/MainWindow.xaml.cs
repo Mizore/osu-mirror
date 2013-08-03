@@ -378,7 +378,7 @@ namespace Beatmap_Mirror_WPF.Windows
 
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
-                    System.Windows.Clipboard.SetText(urlshort);
+                    System.Windows.Clipboard.SetDataObject(urlshort);
 
                     DoubleAnimation anim = new DoubleAnimation()
                     {
