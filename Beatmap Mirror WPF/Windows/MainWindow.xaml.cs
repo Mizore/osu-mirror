@@ -130,6 +130,7 @@ namespace Beatmap_Mirror_WPF.Windows
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            this.aar.Cancel();
             this.PerformBeatmapSearch();
         }
 
@@ -261,46 +262,13 @@ namespace Beatmap_Mirror_WPF.Windows
             }
         }
 
-        private void SearchTitle_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if(e.Key == Key.Enter)
-                this.PerformBeatmapSearch();
-        }
-
-        private void SearchCreator_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void SearchField_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
+            {
+                this.aar.Cancel();
                 this.PerformBeatmapSearch();
-        }
-
-        private void SearchSource_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                this.PerformBeatmapSearch();
-        }
-
-        private void SearchTags_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                this.PerformBeatmapSearch();
-        }
-
-        private void SearchSizeMin_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                this.PerformBeatmapSearch();
-        }
-
-        private void SearchSizeMax_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                this.PerformBeatmapSearch();
-        }
-
-        private void SearchVersion_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-                this.PerformBeatmapSearch();
+            }
         }
 
         private void MenuItemFullDetails_Click(object sender, RoutedEventArgs e)
@@ -400,7 +368,7 @@ namespace Beatmap_Mirror_WPF.Windows
 
         private void SearchField_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (e.Key != Key.Tab)
+            if (e.Key != Key.Tab && e.Key != Key.Enter)
                 this.aar.Trigger();
         }
     }

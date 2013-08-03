@@ -39,5 +39,11 @@ namespace Beatmap_Mirror_WPF.Code.Tools
             this.ticks = this.delay;
             this.reset = true;
         }
+
+        public void Cancel()
+        {
+            this.ticks = -1;
+            this.reset = false;
+        }
     }
 }
