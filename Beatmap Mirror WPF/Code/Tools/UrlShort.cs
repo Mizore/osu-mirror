@@ -16,7 +16,7 @@ namespace Beatmap_Mirror_WPF.Code.Tools
             wc.Proxy = null;
             wc.Headers.Add("User-Agent", string.Format("Osu!Mirror {0}", Configuration.VersionString));
 
-            return wc.DownloadString(string.Format("http://api.waa.ai/?url={0}", url));
+            return wc.DownloadString(Uri.EscapeUriString(string.Format("http://api.waa.ai/?url={0}", url)));
         }
     }
 }

@@ -13,5 +13,10 @@ namespace Beatmap_Mirror_WPF.Code.Tools
         {
             return Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty));
         }
+
+        public static string CleanLink(string fileName)
+        {
+            return Path.GetInvalidFileNameChars().Aggregate(fileName, (current, c) => current.Replace(c.ToString(), string.Empty)).Replace("&", "%26");
+        }
     }
 }

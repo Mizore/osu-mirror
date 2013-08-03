@@ -373,7 +373,7 @@ namespace Beatmap_Mirror_WPF.Windows
 
             ThreadPool.QueueUserWorkItem(new WaitCallback((object ob) =>
             {
-                string url = string.Format("{0}beatmaps/{1}/download/{2}.{3}", Configuration.ApiLocation, map.Ranked_ID, Uri.EscapeUriString(Helpers.CleanFileName(map.Name)), map.Type.ToString().ToLower());
+                string url = string.Format("{0}beatmaps/{1}/download/{2}.{3}", Configuration.ApiLocation, map.Ranked_ID, Uri.EscapeUriString(Helpers.CleanLink(map.Name)), map.Type.ToString().ToLower());
                 string urlshort = UrlShort.Short(url);
 
                 Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
