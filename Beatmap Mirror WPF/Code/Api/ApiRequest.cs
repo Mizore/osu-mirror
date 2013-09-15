@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -42,10 +43,14 @@ namespace Beatmap_Mirror.Code.Api
         public delegate void DContentLength(long ContentLength);
         public delegate void DDownloadProgress(long Downloaded);
         public delegate void DDownloadComplete(byte[] Buffer);
+        public delegate void DDownloadFailed();
 
         public event DContentLength EOnContentLength;
         public event DDownloadProgress EOnDownloadUpdate;
         public event DDownloadComplete EOnDownloadComplete;
+        public event DDownloadFailed EOnDownloadFailed;
+
+        private Stopwatch stopwatch = new Stopwatch();
 
         public ApiRequest()
         {
@@ -81,39 +86,56 @@ namespace Beatmap_Mirror.Code.Api
             }
             else if (this.RequestMethod == ApiRequestMethod.Download)
             {
-                MemoryStream ms = new MemoryStream();
-                string location = string.Format("{0}{1}", Configuration.ApiLocation, string.Format(this.Request, this.Parameters));
-                Console.WriteLine("Api DL: {0}", location);
-
-                HttpWebRequest r = (HttpWebRequest)WebRequest.Create(location);
-                r.Method = "GET";
-                r.UserAgent = string.Format("Osu!Mirror {0}", Configuration.VersionString);
-
-                using (WebResponse response = r.GetResponse())
+                using (MemoryStream ms = new MemoryStream())
                 {
-                    if (EOnContentLength != null)
-                        EOnContentLength(response.ContentLength);
+                    string location = string.Format("{0}{1}", Configuration.ApiLocation, string.Format(this.Request, this.Parameters));
+                    Console.WriteLine("Api DL: {0}", location);
 
-                    using (Stream s = response.GetResponseStream())
+                    HttpWebRequest r = (HttpWebRequest)WebRequest.Create(location);
+                    r.Method = "GET";
+                    r.UserAgent = string.Format("Osu!Mirror {0}", Configuration.VersionString);
+
+                    try
                     {
-                        int total = 0;
-                        int i = 0;
-                        byte[] buff = new byte[1024 * 64];
-
-                        while ((i = s.Read(buff, 0, buff.Length)) > 0)
+                        using (WebResponse response = r.GetResponse())
                         {
-                            total += i;
-                            ms.Write(buff, 0, i);
+                            if (EOnContentLength != null)
+                                EOnContentLength(response.ContentLength);
 
-                            if (EOnDownloadUpdate != null)
+                            using (Stream s = response.GetResponseStream())
+                            {
+                                this.stopwatch.Start();
+
+                                int total = 0;
+                                int i = 0;
+                                byte[] buff = new byte[1024 * 4];
+
+                                while ((i = s.Read(buff, 0, buff.Length)) > 0)
+                                {
+                                    total += i;
+                                    ms.Write(buff, 0, i);
+
+                                    if (EOnDownloadUpdate != null && this.stopwatch.ElapsedMilliseconds >= 250)
+                                    {
+                                        this.stopwatch.Restart();
+                                        EOnDownloadUpdate(total);
+                                    }
+                                }
+
                                 EOnDownloadUpdate(total);
+
+                                byte[] trimmed = new byte[total];
+                                Array.Copy(ms.GetBuffer(), trimmed, total);
+
+                                if (EOnDownloadComplete != null)
+                                    EOnDownloadComplete(trimmed);
+                            }
                         }
-
-                        byte[] trimmed = new byte[total];
-                        Array.Copy(ms.GetBuffer(), trimmed, total);
-
-                        if (EOnDownloadComplete != null)
-                            EOnDownloadComplete(trimmed);
+                    }
+                    catch (WebException ex)
+                    {
+                        if (EOnDownloadFailed != null)
+                            EOnDownloadFailed();
                     }
                 }
             }

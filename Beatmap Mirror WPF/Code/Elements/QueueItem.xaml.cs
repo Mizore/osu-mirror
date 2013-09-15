@@ -26,16 +26,14 @@ namespace Beatmap_Mirror_WPF.Code.Elements
         public Beatmap Beatmap { get; set; }
         public BitmapSource Image { get; set; }
 
+        private Action UpdateAction;
+
         public QueueItem()
         {
             InitializeComponent();
 
             this.DataContext = this;
-        }
-
-        public void UpdateProgress()
-        {
-            this.TProgress.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+            this.UpdateAction = new Action(() =>
             {
                 if (this.Downloaded == this.Beatmap.Size)
                     this.TProgress.Foreground = new SolidColorBrush(new Color()
@@ -46,8 +44,26 @@ namespace Beatmap_Mirror_WPF.Code.Elements
                         A = 30
                     });
 
-                this.TProgress.Value = Math.Floor((double)this.Downloaded / (double)this.Beatmap.Size * 100.0);
-            }));
+                if (this.Beatmap.Size != 0)
+                    this.TProgress.Value = Math.Floor((double)this.Downloaded / (double)this.Beatmap.Size * 100.0);
+            });
+        }
+
+        public void UpdateProgress()
+        {
+            this.TProgress.Dispatcher.Invoke(DispatcherPriority.Normal, this.UpdateAction);
+        }
+
+        public void SetFailed()
+        {
+            this.TProgress.Value = 100;
+            this.TProgress.Foreground = new SolidColorBrush(new Color()
+            {
+                R = 255,
+                G = 0,
+                B = 0,
+                A = 30
+            });
         }
 
         public void UpdateImage()

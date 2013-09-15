@@ -25,6 +25,7 @@ namespace Beatmap_Mirror.Code.Tools
         public delegate void EMapP(Beatmap bm, int downlaoded);
         public static event EMap QueuedFile;
         public static event EMap DownloadFinished;
+        public static event EMap DownloadFailed;
         public static event EMapP FileUpdate;
 
         public static void AddToQueue(Beatmap bm, DownloadType Type)
@@ -86,6 +87,12 @@ namespace Beatmap_Mirror.Code.Tools
                             DownloadFinished(qitem.Beatmap);
                     };
 
+                    Download.EOnDownloadFailed += () =>
+                    {
+                        if (DownloadFailed != null)
+                            DownloadFailed(qitem.Beatmap);
+                    };
+
                     Download.SendRequest();
                 }
                 else if (qitem.DownloadType == DownloadType.MP3)
@@ -109,6 +116,12 @@ namespace Beatmap_Mirror.Code.Tools
                     MP3Download.EOnContentLength += (long ContentLength) =>
                     {
                         qitem.Beatmap.Size = (int)ContentLength;
+                    };
+
+                    MP3Download.EOnDownloadFailed += () =>
+                    {
+                        if (DownloadFailed != null)
+                            DownloadFailed(qitem.Beatmap);
                     };
 
                     MP3Download.SendRequest();

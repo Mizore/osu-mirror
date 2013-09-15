@@ -40,6 +40,8 @@ namespace Beatmap_Mirror_WPF.Windows
         public DownloadQueue()
         {
             InitializeComponent();
+
+            this.IsHitTestVisible = false;
             
             DownloadQueueManager.QueuedFile += (Beatmap map) =>
             {
@@ -77,7 +79,44 @@ namespace Beatmap_Mirror_WPF.Windows
                     {
                         this.QueuedList.Children.Remove(this.Queue[map.Ranked_ID]);
                         this.Queue.Remove(map.Ranked_ID);
+
+                        if (this.Queue.Count == 0)
+                            this.Hide();
                     };
+
+                    this.Queue[map.Ranked_ID].BeginAnimation(QueueItem.HeightProperty, anim);
+                    this.Queue[map.Ranked_ID].BeginAnimation(QueueItem.OpacityProperty, new DoubleAnimation()
+                    {
+                        Duration = new Duration(new TimeSpan(0, 0, 0, 0, 500)),
+                        FillBehavior = FillBehavior.HoldEnd,
+                        From = 1,
+                        To = 0,
+                    });
+                }));
+            };
+
+            DownloadQueueManager.DownloadFailed += (Beatmap map) =>
+            {
+                Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                {
+                    DoubleAnimation anim = new DoubleAnimation()
+                    {
+                        Duration = new Duration(new TimeSpan(0, 0, 0, 0, 500)),
+                        FillBehavior = FillBehavior.HoldEnd,
+                        From = 51.0,
+                        To = 0.0
+                    };
+
+                    anim.Completed += (object sender, EventArgs e) =>
+                    {
+                        this.QueuedList.Children.Remove(this.Queue[map.Ranked_ID]);
+                        this.Queue.Remove(map.Ranked_ID);
+
+                        if (this.Queue.Count == 0)
+                            this.Hide();
+                    };
+
+                    this.Queue[map.Ranked_ID].SetFailed();
 
                     this.Queue[map.Ranked_ID].BeginAnimation(QueueItem.HeightProperty, anim);
                     this.Queue[map.Ranked_ID].BeginAnimation(QueueItem.OpacityProperty, new DoubleAnimation()
@@ -99,10 +138,21 @@ namespace Beatmap_Mirror_WPF.Windows
             {
                 int tgrab = this.Pending.Take();
 
-
-                byte[] bdata;
+                byte[] bdata = new byte[0];
                 using (WebClient r = new WebClient())
-                    bdata = r.DownloadData(new Uri(string.Format("{0}beatmaps/{1}/content/image/custom/80x50/crop", Configuration.ApiLocation, tgrab)));
+                {
+                    r.Proxy = null;
+                    r.Headers.Add("User-Agent", string.Format("Osu!Mirror {0}", Configuration.VersionString));
+
+                    try
+                    {
+                        bdata = r.DownloadData(new Uri(string.Format("{0}beatmaps/{1}/content/image/custom/80x50/crop", Configuration.ApiLocation, tgrab)));
+                    }
+                    catch (WebException ex)
+                    {
+                        continue;
+                    }
+                }
 
                 BitmapImage bmp = new BitmapImage();
                 bmp.BeginInit();
@@ -110,15 +160,15 @@ namespace Beatmap_Mirror_WPF.Windows
                 bmp.EndInit();
 
                 bmp.Freeze();
-
-                if (this.Queue.ContainsKey(tgrab))
+                
+                Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
                 {
-                    Dispatcher.Invoke(DispatcherPriority.Normal, new Action(() =>
+                    if (this.Queue.ContainsKey(tgrab))
                     {
                         this.Queue[tgrab].Image = bmp;
                         this.Queue[tgrab].UpdateImage();
-                    }));
-                }
+                    }
+                }));
             }
         }
 

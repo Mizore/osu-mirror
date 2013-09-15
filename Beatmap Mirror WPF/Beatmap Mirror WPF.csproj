@@ -264,11 +264,17 @@
     <Compile Include="Code\Structures\Beatmap.cs" />
     <Compile Include="Code\Structures\BeatmapDifficulty.cs" />
     <Compile Include="Code\Structures\BeatmapType.cs" />
+    <Compile Include="Code\Structures\OsuDBBody.cs" />
+    <Compile Include="Code\Structures\OsuDBBodyEntry.cs" />
+    <Compile Include="Code\Structures\OsuDBData.cs" />
+    <Compile Include="Code\Structures\OsuDBHeader.cs" />
     <Compile Include="Code\Tools\AutoActionRun.cs" />
     <Compile Include="Code\Tools\CommandParser.cs" />
     <Compile Include="Code\Tools\DownloadQueueManager.cs" />
+    <Compile Include="Code\Tools\ExtendedBinaryReader.cs" />
     <Compile Include="Code\Tools\FileSizeFormatProvider.cs" />
     <Compile Include="Code\Tools\Helpers.cs" />
+    <Compile Include="Code\Tools\OsuDB.cs" />
     <Compile Include="Code\Tools\Registry.cs" />
     <Compile Include="Code\Tools\Threaded.cs" />
     <Compile Include="Code\Tools\UrlShort.cs" />
